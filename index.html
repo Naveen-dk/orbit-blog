@@ -303,15 +303,37 @@
       }
     }
 
-    @media (max-width: 640px) {
+    @media (max-width: 768px) {
       .navbar {
         padding: 0 16px;
+      }
+      .nav-links {
+        display: none !important;
+      }
+      .newsletter-btn {
+        display: none !important;
+      }
+      .brand-prefix {
+        display: none;
       }
       .mega-columns {
         grid-template-columns: 1fr;
       }
-      .nav-links {
-        display: none;
+      .carousel-slide {
+        width: 95% !important;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .navbar {
+        padding: 0 12px;
+      }
+      .nav-right {
+        gap: 6px;
+      }
+      .icon-btn {
+        width: 36px;
+        height: 36px;
       }
     }
 
@@ -541,10 +563,10 @@
     <div class="nav-left">
       <!-- Orbit Brand Logo -->
       <a href="#home" class="brand flex items-center gap-2">
-        <div class="w-7 h-7 rounded-full bg-gradient-to-tr from-blue-600 to-sky-400 flex items-center justify-center shadow-sm">
+        <div class="w-7 h-7 rounded-full bg-gradient-to-tr from-blue-600 to-sky-400 flex items-center justify-center shadow-sm flex-shrink-0">
           <div class="w-2.5 h-2.5 rounded-full bg-white"></div>
         </div>
-        <span class="font-normal text-[#1F1F1F]">News from</span>
+        <span class="brand-prefix font-normal text-[#1F1F1F]">News from</span>
         <span class="font-bold text-[#0B57D0]">Orbit</span>
       </a>
 
@@ -580,7 +602,7 @@
       </ul>
     </div>
 
-    <!-- Right Controls: Search, Preferences Dropdown, Newsletter CTA -->
+    <!-- Right Controls: Search, Preferences Dropdown, Newsletter CTA, Mobile Toggle -->
     <div class="nav-right">
       <!-- Search Icon -->
       <button class="icon-btn" onclick="document.getElementById('latest').scrollIntoView({behavior: 'smooth'})" aria-label="Search">
@@ -622,6 +644,19 @@
 
       <!-- Newsletter Button -->
       <a href="#waitlist" class="newsletter-btn">Newsletter</a>
+
+      <!-- Mobile Hamburger Menu Button -->
+      <button class="icon-btn md:hidden" id="mobileMenuBtn" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu">
+        <svg id="hamburgerIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+        <svg id="closeMenuIcon" class="hidden" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
     </div>
 
     <!-- Full-Width Mega Menu Dropdown Panel -->
@@ -723,6 +758,66 @@
       </div>
     </div>
   </header>
+
+  <!-- ========================================================================= -->
+  <!-- MOBILE NAVIGATION DRAWER (Slide-down Sheet for Phones & Tablets)          -->
+  <!-- ========================================================================= -->
+  <div id="mobileNavDrawer" class="hidden fixed inset-x-0 top-[64px] bottom-0 bg-white z-50 overflow-y-auto p-5 border-t border-[#DADCE0] shadow-2xl">
+    <div class="space-y-6 max-w-lg mx-auto pb-20">
+      
+      <!-- Mobile Search Bar -->
+      <div class="relative">
+        <input type="text" id="mobileSearchInput" placeholder="Search Orbit news & topics..." oninput="handleSearch(this.value)" class="w-full bg-[#F8F9FA] border border-[#DADCE0] rounded-full py-2.5 pl-10 pr-4 text-sm text-[#1F1F1F] focus:outline-none focus:border-[#0B57D0] focus:bg-white transition-all">
+        <svg class="absolute left-3.5 top-3 text-[#5F6368]" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </div>
+
+      <!-- Mobile Navigation Links -->
+      <div class="space-y-2">
+        <div class="text-xs font-semibold uppercase tracking-wider text-[#5F6368] mb-2">Explore Orbit Pillars</div>
+        <a href="topic.html?slug=innovation-ai" class="flex items-center justify-between p-3.5 rounded-xl bg-[#F8F9FA] text-[#1F1F1F] font-medium text-sm hover:bg-[#E8F0FE] hover:text-[#0B57D0] transition-colors border border-slate-100">
+          <span class="flex items-center gap-2.5">🚀 <span>Innovation & AI</span></span>
+          <span class="text-slate-400">→</span>
+        </a>
+        <a href="topic.html?slug=products-platforms" class="flex items-center justify-between p-3.5 rounded-xl bg-[#F8F9FA] text-[#1F1F1F] font-medium text-sm hover:bg-[#E8F0FE] hover:text-[#0B57D0] transition-colors border border-slate-100">
+          <span class="flex items-center gap-2.5">📱 <span>Products & Platforms</span></span>
+          <span class="text-slate-400">→</span>
+        </a>
+        <a href="topic.html?slug=company-news" class="flex items-center justify-between p-3.5 rounded-xl bg-[#F8F9FA] text-[#1F1F1F] font-medium text-sm hover:bg-[#E8F0FE] hover:text-[#0B57D0] transition-colors border border-slate-100">
+          <span class="flex items-center gap-2.5">🏢 <span>Company News</span></span>
+          <span class="text-slate-400">→</span>
+        </a>
+        <a href="#updates" onclick="toggleMobileMenu()" class="flex items-center justify-between p-3.5 rounded-xl bg-[#F8F9FA] text-[#1F1F1F] font-medium text-sm hover:bg-[#E8F0FE] hover:text-[#0B57D0] transition-colors border border-slate-100">
+          <span class="flex items-center gap-2.5">📰 <span>Latest Stories Feed</span></span>
+          <span class="text-slate-400">→</span>
+        </a>
+        <a href="#manifesto" onclick="toggleMobileMenu()" class="flex items-center justify-between p-3.5 rounded-xl bg-[#F8F9FA] text-[#1F1F1F] font-medium text-sm hover:bg-[#E8F0FE] hover:text-[#0B57D0] transition-colors border border-slate-100">
+          <span class="flex items-center gap-2.5">✨ <span>The Orbit Manifesto</span></span>
+          <span class="text-slate-400">→</span>
+        </a>
+      </div>
+
+      <!-- Popular Feature Badges -->
+      <div class="space-y-2 pt-3 border-t border-[#E0E3E7]">
+        <div class="text-xs font-semibold uppercase tracking-wider text-[#5F6368] mb-2">Featured Topics</div>
+        <div class="flex flex-wrap gap-2">
+          <a href="topic.html?slug=orbit-score" class="px-3 py-1.5 rounded-full bg-[#F0F4F9] text-xs text-[#0B57D0] font-medium hover:bg-[#E8F0FE]">Orbit Score (0-100)</a>
+          <a href="topic.html?slug=copilot-ai" class="px-3 py-1.5 rounded-full bg-[#F0F4F9] text-xs text-[#0B57D0] font-medium hover:bg-[#E8F0FE]">Orbit Copilot AI</a>
+          <a href="topic.html?slug=skillgps" class="px-3 py-1.5 rounded-full bg-[#F0F4F9] text-xs text-[#0B57D0] font-medium hover:bg-[#E8F0FE]">SkillGPS Roadmaps</a>
+          <a href="topic.html?slug=daily-checkin" class="px-3 py-1.5 rounded-full bg-[#F0F4F9] text-xs text-[#0B57D0] font-medium hover:bg-[#E8F0FE]">45-Second Daily Check-in</a>
+        </div>
+      </div>
+
+      <!-- Mobile Call to Action -->
+      <div class="pt-4 border-t border-[#E0E3E7]">
+        <a href="#waitlist" onclick="toggleMobileMenu()" class="google-pill-btn google-pill-blue w-full py-3.5 text-center text-sm font-semibold shadow-md">
+          Join Early Access
+        </a>
+      </div>
+    </div>
+  </div>
 
   <!-- Sub-Header: Movement Statement Banner -->
   <div class="bg-[#F8F9FA] border-b border-[#E0E3E7] py-2.5 px-6">
@@ -1615,7 +1710,7 @@
     <!-- ========================================================================= -->
     <!-- SECTION 7: 🔥 WAITLIST & GOOGLE FORM SECTION (Clean Light Theme)          -->
     <!-- ========================================================================= -->
-    <section id="waitlist" class="my-20 rounded-[32px] bg-gradient-to-b from-[#F0F4F9] via-[#E8F0FE] to-[#F8F9FA] p-8 md:p-14 text-center border border-[#D2E3FC] shadow-sm relative overflow-hidden">
+    <section id="waitlist" class="my-12 md:my-20 rounded-[24px] md:rounded-[32px] bg-gradient-to-b from-[#F0F4F9] via-[#E8F0FE] to-[#F8F9FA] p-4 sm:p-8 md:p-14 text-center border border-[#D2E3FC] shadow-sm relative overflow-hidden">
       <!-- Glow ambient light -->
       <div class="absolute -top-24 -left-24 w-80 h-80 bg-blue-100/50 rounded-full blur-3xl pointer-events-none"></div>
       <div class="absolute -bottom-24 -right-24 w-80 h-80 bg-sky-100/50 rounded-full blur-3xl pointer-events-none"></div>
@@ -1636,17 +1731,17 @@
         </p>
 
         <!-- Google Sheets Integration Banner -->
-        <div class="inline-flex items-center gap-2.5 bg-white border border-[#C2E7FF] px-4 py-2 rounded-full text-xs text-[#0B57D0] mb-8 shadow-xs">
-          <div class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></div>
-          <span>Connected to Google Sheets: Automatic sync for Emails, Feedback & Interest</span>
-          <a href="https://docs.google.com/spreadsheets/d/1yrLpcoCj1qljqi2OI1LTvUPy1eimPrfYQU_ACyyBkAY/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="ml-1 text-[#0B57D0] underline hover:text-blue-800 inline-flex items-center gap-1 font-semibold">
+        <div class="inline-flex flex-wrap items-center justify-center gap-2 bg-white border border-[#C2E7FF] px-4 py-2.5 rounded-2xl sm:rounded-full text-xs text-[#0B57D0] mb-8 shadow-xs max-w-full text-center">
+          <div class="w-2 h-2 rounded-full bg-emerald-500 animate-ping flex-shrink-0"></div>
+          <span class="leading-relaxed">Connected to Google Sheets: Automatic sync for Emails, Feedback & Interest</span>
+          <a href="https://docs.google.com/spreadsheets/d/1yrLpcoCj1qljqi2OI1LTvUPy1eimPrfYQU_ACyyBkAY/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="ml-1 text-[#0B57D0] underline hover:text-blue-800 inline-flex items-center gap-1 font-semibold flex-shrink-0">
             <span>View Live Sheet</span>
             <i data-lucide="external-link" class="w-3 h-3"></i>
           </a>
         </div>
 
         <!-- Mode Toggle Tabs (Interactive Orbit Form vs Embedded Google Form) -->
-        <div class="flex items-center justify-center gap-2 mb-6">
+        <div class="flex flex-wrap items-center justify-center gap-2 mb-6">
           <button type="button" id="tab-btn-native" onclick="switchFormTab('native')" class="px-5 py-2.5 rounded-full text-xs font-semibold bg-[#0B57D0] text-white transition-all shadow-sm">
             Interactive Orbit Form
           </button>
@@ -1656,7 +1751,7 @@
         </div>
 
         <!-- 1. Interactive Orbit Form (All 5 requested fields) -->
-        <div id="form-tab-native" class="bg-white border border-[#E0E3E7] p-6 md:p-8 rounded-2xl text-left max-w-lg mx-auto shadow-md transition-all text-[#1F1F1F]">
+        <div id="form-tab-native" class="bg-white border border-[#E0E3E7] p-5 sm:p-6 md:p-8 rounded-2xl text-left max-w-lg w-full mx-auto shadow-md transition-all text-[#1F1F1F]">
           <form id="home-waitlist-form" class="space-y-4">
             <!-- Field 1: Name -->
             <div>
@@ -1937,6 +2032,27 @@
         });
       });
     });
+
+    // Mobile Navigation Drawer Toggle
+    function toggleMobileMenu() {
+      const drawer = document.getElementById('mobileNavDrawer');
+      const hamIcon = document.getElementById('hamburgerIcon');
+      const closeIcon = document.getElementById('closeMenuIcon');
+      if (!drawer) return;
+      const isClosed = drawer.classList.contains('hidden');
+      if (isClosed) {
+        drawer.classList.remove('hidden');
+        if (hamIcon) hamIcon.classList.add('hidden');
+        if (closeIcon) closeIcon.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      } else {
+        drawer.classList.add('hidden');
+        if (hamIcon) hamIcon.classList.remove('hidden');
+        if (closeIcon) closeIcon.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+      lucide.createIcons();
+    }
 
     // Toast Function
     function showToast(message) {

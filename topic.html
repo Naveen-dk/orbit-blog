@@ -385,16 +385,38 @@
       }
     }
 
-    @media (max-width: 640px) {
+    @media (max-width: 768px) {
       .navbar {
         padding: 0 16px;
+      }
+      .nav-links {
+        display: none !important;
+      }
+      .newsletter-btn {
+        display: none !important;
+      }
+      .brand-prefix {
+        display: none;
       }
       .mega-columns {
         grid-template-columns: 1fr;
       }
-      .nav-links {
-        display: none;
+    }
+
+    @media (max-width: 480px) {
+      .navbar {
+        padding: 0 12px;
       }
+      .nav-right {
+        gap: 6px;
+      }
+      .icon-btn {
+        width: 36px;
+        height: 36px;
+      }
+    }
+    html, body {
+      overflow-x: hidden;
     }
   </style>
 </head>
@@ -412,10 +434,10 @@
   <header class="navbar" id="mainNavbar">
     <div class="nav-left">
       <a href="index.html" class="brand flex items-center gap-2">
-        <div class="w-7 h-7 rounded-full bg-gradient-to-tr from-blue-600 to-sky-400 flex items-center justify-center shadow-sm">
+        <div class="w-7 h-7 rounded-full bg-gradient-to-tr from-blue-600 to-sky-400 flex items-center justify-center shadow-sm flex-shrink-0">
           <div class="w-2.5 h-2.5 rounded-full bg-white"></div>
         </div>
-        <span class="font-normal text-[#1F1F1F]">News from</span>
+        <span class="brand-prefix font-normal text-[#1F1F1F]">News from</span>
         <span class="font-bold text-[#0B57D0]">Orbit</span>
       </a>
 
@@ -489,6 +511,19 @@
       </div>
 
       <a href="index.html#waitlist" class="newsletter-btn">Newsletter</a>
+
+      <!-- Mobile Hamburger Menu Button -->
+      <button class="icon-btn md:hidden" id="mobileMenuBtn" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu">
+        <svg id="hamburgerIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+        <svg id="closeMenuIcon" class="hidden" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
     </div>
 
     <!-- Mega Menu Dropdown Panel -->
@@ -529,6 +564,51 @@
     </div>
   </header>
 
+  <!-- Mobile Navigation Drawer -->
+  <div id="mobileNavDrawer" class="hidden fixed inset-x-0 top-[64px] bottom-0 bg-white z-50 overflow-y-auto p-5 border-t border-[#DADCE0] shadow-2xl">
+    <div class="space-y-6 max-w-lg mx-auto pb-20">
+      <div class="space-y-2">
+        <div class="text-xs font-semibold uppercase tracking-wider text-[#5F6368] mb-2">Explore Orbit Pillars</div>
+        <a href="topic.html?slug=innovation-ai" class="flex items-center justify-between p-3.5 rounded-xl bg-[#F8F9FA] text-[#1F1F1F] font-medium text-sm hover:bg-[#E8F0FE] hover:text-[#0B57D0] transition-colors border border-slate-100">
+          <span class="flex items-center gap-2.5">🚀 <span>Innovation & AI</span></span>
+          <span class="text-slate-400">→</span>
+        </a>
+        <a href="topic.html?slug=products-platforms" class="flex items-center justify-between p-3.5 rounded-xl bg-[#F8F9FA] text-[#1F1F1F] font-medium text-sm hover:bg-[#E8F0FE] hover:text-[#0B57D0] transition-colors border border-slate-100">
+          <span class="flex items-center gap-2.5">📱 <span>Products & Platforms</span></span>
+          <span class="text-slate-400">→</span>
+        </a>
+        <a href="topic.html?slug=company-news" class="flex items-center justify-between p-3.5 rounded-xl bg-[#F8F9FA] text-[#1F1F1F] font-medium text-sm hover:bg-[#E8F0FE] hover:text-[#0B57D0] transition-colors border border-slate-100">
+          <span class="flex items-center gap-2.5">🏢 <span>Company News</span></span>
+          <span class="text-slate-400">→</span>
+        </a>
+        <a href="index.html#updates" class="flex items-center justify-between p-3.5 rounded-xl bg-[#F8F9FA] text-[#1F1F1F] font-medium text-sm hover:bg-[#E8F0FE] hover:text-[#0B57D0] transition-colors border border-slate-100">
+          <span class="flex items-center gap-2.5">📰 <span>Latest Stories Feed</span></span>
+          <span class="text-slate-400">→</span>
+        </a>
+        <a href="index.html#manifesto" class="flex items-center justify-between p-3.5 rounded-xl bg-[#F8F9FA] text-[#1F1F1F] font-medium text-sm hover:bg-[#E8F0FE] hover:text-[#0B57D0] transition-colors border border-slate-100">
+          <span class="flex items-center gap-2.5">✨ <span>The Orbit Manifesto</span></span>
+          <span class="text-slate-400">→</span>
+        </a>
+      </div>
+
+      <div class="space-y-2 pt-3 border-t border-[#E0E3E7]">
+        <div class="text-xs font-semibold uppercase tracking-wider text-[#5F6368] mb-2">Featured Topics</div>
+        <div class="flex flex-wrap gap-2">
+          <a href="topic.html?slug=orbit-score" class="px-3 py-1.5 rounded-full bg-[#F0F4F9] text-xs text-[#0B57D0] font-medium hover:bg-[#E8F0FE]">Orbit Score (0-100)</a>
+          <a href="topic.html?slug=copilot-ai" class="px-3 py-1.5 rounded-full bg-[#F0F4F9] text-xs text-[#0B57D0] font-medium hover:bg-[#E8F0FE]">Orbit Copilot AI</a>
+          <a href="topic.html?slug=skillgps" class="px-3 py-1.5 rounded-full bg-[#F0F4F9] text-xs text-[#0B57D0] font-medium hover:bg-[#E8F0FE]">SkillGPS Roadmaps</a>
+          <a href="topic.html?slug=daily-checkin" class="px-3 py-1.5 rounded-full bg-[#F0F4F9] text-xs text-[#0B57D0] font-medium hover:bg-[#E8F0FE]">45-Second Daily Check-in</a>
+        </div>
+      </div>
+
+      <div class="pt-4 border-t border-[#E0E3E7]">
+        <a href="index.html#waitlist" class="google-pill-btn google-pill-blue w-full py-3.5 text-center text-sm font-semibold shadow-md">
+          Join Early Access
+        </a>
+      </div>
+    </div>
+  </div>
+
   <!-- ========================================================================= -->
   <!-- 2. DATA-DRIVEN DYNAMIC ROUTE TEMPLATE                                     -->
   <!-- ========================================================================= -->
@@ -567,6 +647,51 @@
         </a>
       </div>
     </header>
+
+  <!-- Mobile Navigation Drawer -->
+  <div id="mobileNavDrawer" class="hidden fixed inset-x-0 top-[64px] bottom-0 bg-white z-50 overflow-y-auto p-5 border-t border-[#DADCE0] shadow-2xl">
+    <div class="space-y-6 max-w-lg mx-auto pb-20">
+      <div class="space-y-2">
+        <div class="text-xs font-semibold uppercase tracking-wider text-[#5F6368] mb-2">Explore Orbit Pillars</div>
+        <a href="topic.html?slug=innovation-ai" class="flex items-center justify-between p-3.5 rounded-xl bg-[#F8F9FA] text-[#1F1F1F] font-medium text-sm hover:bg-[#E8F0FE] hover:text-[#0B57D0] transition-colors border border-slate-100">
+          <span class="flex items-center gap-2.5">🚀 <span>Innovation & AI</span></span>
+          <span class="text-slate-400">→</span>
+        </a>
+        <a href="topic.html?slug=products-platforms" class="flex items-center justify-between p-3.5 rounded-xl bg-[#F8F9FA] text-[#1F1F1F] font-medium text-sm hover:bg-[#E8F0FE] hover:text-[#0B57D0] transition-colors border border-slate-100">
+          <span class="flex items-center gap-2.5">📱 <span>Products & Platforms</span></span>
+          <span class="text-slate-400">→</span>
+        </a>
+        <a href="topic.html?slug=company-news" class="flex items-center justify-between p-3.5 rounded-xl bg-[#F8F9FA] text-[#1F1F1F] font-medium text-sm hover:bg-[#E8F0FE] hover:text-[#0B57D0] transition-colors border border-slate-100">
+          <span class="flex items-center gap-2.5">🏢 <span>Company News</span></span>
+          <span class="text-slate-400">→</span>
+        </a>
+        <a href="index.html#updates" class="flex items-center justify-between p-3.5 rounded-xl bg-[#F8F9FA] text-[#1F1F1F] font-medium text-sm hover:bg-[#E8F0FE] hover:text-[#0B57D0] transition-colors border border-slate-100">
+          <span class="flex items-center gap-2.5">📰 <span>Latest Stories Feed</span></span>
+          <span class="text-slate-400">→</span>
+        </a>
+        <a href="index.html#manifesto" class="flex items-center justify-between p-3.5 rounded-xl bg-[#F8F9FA] text-[#1F1F1F] font-medium text-sm hover:bg-[#E8F0FE] hover:text-[#0B57D0] transition-colors border border-slate-100">
+          <span class="flex items-center gap-2.5">✨ <span>The Orbit Manifesto</span></span>
+          <span class="text-slate-400">→</span>
+        </a>
+      </div>
+
+      <div class="space-y-2 pt-3 border-t border-[#E0E3E7]">
+        <div class="text-xs font-semibold uppercase tracking-wider text-[#5F6368] mb-2">Featured Topics</div>
+        <div class="flex flex-wrap gap-2">
+          <a href="topic.html?slug=orbit-score" class="px-3 py-1.5 rounded-full bg-[#F0F4F9] text-xs text-[#0B57D0] font-medium hover:bg-[#E8F0FE]">Orbit Score (0-100)</a>
+          <a href="topic.html?slug=copilot-ai" class="px-3 py-1.5 rounded-full bg-[#F0F4F9] text-xs text-[#0B57D0] font-medium hover:bg-[#E8F0FE]">Orbit Copilot AI</a>
+          <a href="topic.html?slug=skillgps" class="px-3 py-1.5 rounded-full bg-[#F0F4F9] text-xs text-[#0B57D0] font-medium hover:bg-[#E8F0FE]">SkillGPS Roadmaps</a>
+          <a href="topic.html?slug=daily-checkin" class="px-3 py-1.5 rounded-full bg-[#F0F4F9] text-xs text-[#0B57D0] font-medium hover:bg-[#E8F0FE]">45-Second Daily Check-in</a>
+        </div>
+      </div>
+
+      <div class="pt-4 border-t border-[#E0E3E7]">
+        <a href="index.html#waitlist" class="google-pill-btn google-pill-blue w-full py-3.5 text-center text-sm font-semibold shadow-md">
+          Join Early Access
+        </a>
+      </div>
+    </div>
+  </div>
 
     <!-- ======================================================================= -->
     <!-- 3. VARIANT A ONLY: 2-COLUMN FEATURED HERO BLOCK                         -->
@@ -1196,6 +1321,26 @@
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') closeMegaMenu();
     });
+
+    function toggleMobileMenu() {
+      const drawer = document.getElementById('mobileNavDrawer');
+      const hamIcon = document.getElementById('hamburgerIcon');
+      const closeIcon = document.getElementById('closeMenuIcon');
+      if (!drawer) return;
+      const isClosed = drawer.classList.contains('hidden');
+      if (isClosed) {
+        drawer.classList.remove('hidden');
+        if (hamIcon) hamIcon.classList.add('hidden');
+        if (closeIcon) closeIcon.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      } else {
+        drawer.classList.add('hidden');
+        if (hamIcon) hamIcon.classList.remove('hidden');
+        if (closeIcon) closeIcon.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+      lucide.createIcons();
+    }
 
     // Listen to browser navigation
     window.addEventListener('popstate', () => {
