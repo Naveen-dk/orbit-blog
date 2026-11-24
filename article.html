@@ -1,0 +1,2447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="page-head-title">Article — News from Orbit</title>
+  <meta name="description" content="A movement around personal growth, goal visibility, and measurable progress. Everything revolves around your goals.">
+  
+  <!-- Google Fonts: Google Sans / Google Sans Text / Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Google+Sans+Text:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Google Sans Text"', '"Google Sans"', 'Inter', 'sans-serif'],
+            display: ['"Google Sans"', 'sans-serif']
+          },
+          colors: {
+            google: {
+              blue: '#0B57D0',
+              hoverBlue: '#0842A0',
+              lightBlue: '#C2E7FF',
+              pastelBlue: '#E8F0FE',
+              bgCard: '#F0F4F9',
+              darkText: '#1F1F1F',
+              secondaryText: '#444746',
+              mutedText: '#72777A',
+              borderSubtle: '#E0E3E7'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    :root {
+      --ease-google: cubic-bezier(0.2, 0, 0, 1);
+      --text-primary: #202124;
+      --text-secondary: #5f6368;
+      --blue-cta: #1a73e8;
+      --blue-cta-hover: #1557b0;
+      --bg-icon: #f1f3f4;
+      --bg-icon-hover: #e8eaed;
+      --border-light: #dadce0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: #FFFFFF;
+      color: #1F1F1F;
+      font-family: 'Google Sans Text', 'Google Sans', -apple-system, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* Soft top gradient wash matching reference screenshot */
+    .article-hero-wash {
+      background: linear-gradient(180deg, #E6F4EA 0%, #E8F0FE 45%, #FFFFFF 100%);
+    }
+
+    /* Mega Menu Navbar */
+    .navbar {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      padding: 0 32px;
+      background: #ffffff;
+      border-bottom: 1px solid var(--border-light);
+      z-index: 100;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .brand {
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--text-primary);
+      text-decoration: none;
+      letter-spacing: -0.3px;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 8px;
+    }
+
+    .nav-item-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: none;
+      border: none;
+      padding: 8px 12px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-primary);
+      cursor: pointer;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background-color 0.15s;
+      font-family: inherit;
+    }
+
+    .nav-item-btn:hover {
+      background-color: var(--bg-icon);
+    }
+
+    .chevron {
+      width: 12px;
+      height: 12px;
+      transition: transform 0.2s ease;
+    }
+
+    .nav-item-btn.active .chevron {
+      transform: rotate(180deg);
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .icon-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: none;
+      background-color: var(--bg-icon);
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background-color 0.15s;
+    }
+
+    .icon-btn:hover {
+      background-color: var(--bg-icon-hover);
+    }
+
+    .newsletter-btn {
+      background-color: var(--blue-cta);
+      color: #ffffff;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 9999px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color 0.15s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .newsletter-btn:hover {
+      background-color: var(--blue-cta-hover);
+    }
+
+    /* Full-Width Mega Menu Dropdown Panel */
+    .mega-menu {
+      position: absolute;
+      top: 64px;
+      left: 0;
+      width: 100%;
+      background: #ffffff;
+      padding: 48px 64px 64px;
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.06);
+      display: none;
+      grid-template-columns: 300px 1fr;
+      gap: 48px;
+      border-bottom: 1px solid var(--border-light);
+      z-index: 99;
+      animation: megaFadeIn 0.2s ease forwards;
+    }
+
+    @keyframes megaFadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .mega-menu.open {
+      display: grid;
+    }
+
+    .mega-left h2 {
+      font-size: 32px;
+      font-weight: 400;
+      margin-bottom: 28px;
+      letter-spacing: -0.5px;
+      color: var(--text-primary);
+    }
+
+    .pill-outline-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 24px;
+      border: 1px solid var(--text-primary);
+      border-radius: 9999px;
+      color: var(--text-primary);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: background-color 0.15s;
+    }
+
+    .pill-outline-btn:hover {
+      background-color: var(--bg-icon);
+    }
+
+    .mega-columns {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+      padding-bottom: 40px;
+    }
+
+    .col-heading {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+    }
+
+    .col-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .col-list a {
+      text-decoration: none;
+      color: var(--text-primary);
+      font-size: 16px;
+      line-height: 1.4;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .col-list a:hover {
+      color: var(--blue-cta);
+    }
+
+    .learn-more-section {
+      border-top: 1px solid var(--border-light);
+      padding-top: 24px;
+    }
+
+    .learn-more-links {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+
+    .learn-more-links a {
+      font-size: 14px;
+      color: var(--text-primary);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .learn-more-links a:hover {
+      color: var(--blue-cta);
+    }
+
+    /* Google Pill Button */
+    .google-pill-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      border-radius: 9999px;
+      padding: 0.5rem 1.25rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: all 0.2s var(--ease-google);
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .google-pill-blue {
+      background: #0B57D0;
+      color: #FFFFFF;
+      border: 1px solid #0B57D0;
+    }
+    .google-pill-blue:hover {
+      background: #0842A0;
+      box-shadow: 0 2px 8px rgba(11, 87, 208, 0.3);
+    }
+
+    /* Sticky Reading Header Bar */
+    #sticky-reading-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid #E0E3E7;
+      transform: translateY(-100%);
+      transition: transform 0.3s var(--ease-google);
+    }
+    #sticky-reading-bar.visible {
+      transform: translateY(0);
+    }
+
+    .reading-progress-track {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 3px;
+      width: 100%;
+      background: transparent;
+    }
+    .reading-progress-fill {
+      height: 100%;
+      background: #0B57D0;
+      width: 0%;
+      transition: width 0.1s linear;
+    }
+
+    .circle-nav-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #F0F4F9;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #1F1F1F;
+      cursor: pointer;
+      transition: all 0.2s var(--ease-google);
+    }
+    .circle-nav-btn:hover {
+      background: #E1E6EC;
+      transform: scale(1.05);
+    }
+
+    /* Movement Callout Block */
+    .movement-quote {
+      border-left: 3px solid #0B57D0;
+      padding-left: 1.5rem;
+      margin: 2.5rem 0;
+      font-size: 1.35rem;
+      font-family: 'Google Sans', sans-serif;
+      font-weight: 500;
+      color: #1F1F1F;
+      line-height: 1.5;
+    }
+
+    /* Toast Notification */
+    #share-toast {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 9999;
+      background: #1F1F1F;
+      color: #FFFFFF;
+      padding: 0.85rem 1.5rem;
+      border-radius: 9999px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+      font-size: 0.875rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s var(--ease-google);
+      pointer-events: none;
+    }
+    #share-toast.show {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+  </style>
+</head>
+<body class="bg-white text-[#1F1F1F]">
+
+  <!-- Toast -->
+  <div id="share-toast">
+    <i data-lucide="check" class="w-4 h-4 text-emerald-400"></i>
+    <span id="toast-msg">Link copied to clipboard</span>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- 1. STICKY READING HEADER BAR                                              -->
+  <!-- ========================================================================= -->
+  <div id="sticky-reading-bar">
+    <div class="max-w-[1400px] mx-auto px-6 h-16 flex items-center justify-between">
+      
+      <!-- Left: Logo + Truncated Article Title -->
+      <div class="flex items-center gap-4 min-w-0 pr-4">
+        <a href="index.html" class="flex items-center gap-1.5 shrink-0" aria-label="Orbit Home">
+          <div class="w-7 h-7 rounded-full bg-gradient-to-tr from-blue-600 to-sky-400 flex items-center justify-center shadow-sm">
+            <div class="w-2.5 h-2.5 rounded-full bg-white"></div>
+          </div>
+        </a>
+        <h2 id="sticky-title" class="text-sm md:text-base font-display font-medium text-[#1F1F1F] truncate">
+          Why Most Goals Fail
+        </h2>
+      </div>
+
+      <!-- Right: Search + Share -->
+      <div class="flex items-center gap-3 shrink-0">
+        <button onclick="window.scrollTo({ top: 0, behavior: 'smooth' })" class="w-9 h-9 rounded-full flex items-center justify-center text-[#444746] hover:bg-[#F0F4F9] transition-colors" aria-label="Top">
+          <i data-lucide="search" class="w-4 h-4"></i>
+        </button>
+        <button onclick="shareArticle()" class="w-9 h-9 rounded-full flex items-center justify-center text-[#444746] hover:bg-[#F0F4F9] transition-colors" aria-label="Share Article">
+          <i data-lucide="share-2" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Active Blue Reading Progress Scrubber Line -->
+    <div class="reading-progress-track">
+      <div id="reading-progress-bar" class="reading-progress-fill"></div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- 2. TOP GOOGLE BLOG MEGA MENU NAVBAR                                       -->
+  <!-- ========================================================================= -->
+  <header class="navbar" id="mainNavbar">
+    <div class="nav-left">
+      <!-- Orbit Brand Logo -->
+      <a href="index.html" class="brand flex items-center gap-2">
+        <div class="w-7 h-7 rounded-full bg-gradient-to-tr from-blue-600 to-sky-400 flex items-center justify-center shadow-sm">
+          <div class="w-2.5 h-2.5 rounded-full bg-white"></div>
+        </div>
+        <span class="font-normal text-[#1F1F1F]">News from</span>
+        <span class="font-bold text-[#0B57D0]">Orbit</span>
+      </a>
+
+      <!-- Mega Menu Navigation Triggers -->
+      <ul class="nav-links">
+        <li>
+          <button class="nav-item-btn" id="innovationBtn" aria-expanded="false" onclick="toggleMegaMenu('innovation')">
+            <span>Innovation & AI</span>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+        </li>
+        <li>
+          <button class="nav-item-btn" id="productsBtn" aria-expanded="false" onclick="toggleMegaMenu('products')">
+            <span>Products & platforms</span>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+        </li>
+        <li>
+          <button class="nav-item-btn" id="companyBtn" aria-expanded="false" onclick="toggleMegaMenu('company')">
+            <span>Company news</span>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+        </li>
+        <li>
+          <a href="index.html#updates" class="nav-item-btn">Feed</a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Right Controls: Search, More Options, Newsletter CTA -->
+    <div class="nav-right">
+      <button class="icon-btn" onclick="shareArticle()" aria-label="Share">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </button>
+
+      <button class="icon-btn" onclick="toggleMegaMenu('innovation')" aria-label="More options">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+          <circle cx="12" cy="5" r="2"></circle>
+          <circle cx="12" cy="12" r="2"></circle>
+          <circle cx="12" cy="19" r="2"></circle>
+        </svg>
+      </button>
+
+      <a href="index.html#waitlist" class="newsletter-btn">Newsletter</a>
+    </div>
+
+    <!-- Full-Width Mega Menu Dropdown Panel -->
+    <div class="mega-menu" id="megaMenuPanel">
+      <div class="mega-left">
+        <h2 id="megaTitle">Innovation & AI</h2>
+        <a href="article.html?id=innovation-ai-hub" id="megaCtaBtn" class="pill-outline-btn">
+          <span id="megaCtaText">See all in Innovation & AI</span>
+          <span>→</span>
+        </a>
+      </div>
+
+      <div class="mega-right">
+        <div class="mega-columns" id="megaColumns">
+          <!-- Col 1 -->
+          <div>
+            <div class="col-heading" id="col1Heading">Models & Research</div>
+            <ul class="col-list" id="col1List"></ul>
+          </div>
+          <!-- Col 2 -->
+          <div>
+            <div class="col-heading" id="col2Heading">Products</div>
+            <ul class="col-list" id="col2List"></ul>
+          </div>
+          <!-- Col 3 -->
+          <div>
+            <div class="col-heading" id="col3Heading">Infrastructure & cloud</div>
+            <ul class="col-list" id="col3List"></ul>
+          </div>
+          <!-- Col 4 -->
+          <div>
+            <div class="col-heading" id="col4Heading">Technology</div>
+            <ul class="col-list" id="col4List"></ul>
+          </div>
+        </div>
+
+        <div class="learn-more-section">
+          <div class="col-heading">Learn more:</div>
+          <div class="learn-more-links" id="learnMoreLinks"></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================= -->
+  <!-- 3. ARTICLE HERO / HEADER                                                  -->
+  <!-- ========================================================================= -->
+  <section class="article-hero-wash pt-10 pb-12 border-b border-[#E0E3E7]/60">
+    <div class="max-w-[940px] mx-auto px-6">
+      
+      <!-- Breadcrumbs & Future Badge -->
+      <div class="flex items-center justify-between flex-wrap gap-3 mb-6">
+        <nav class="flex items-center gap-2 text-[13px] text-[#0B57D0] font-medium">
+          <a href="index.html" class="hover:underline">Home</a>
+          <span class="text-slate-400">›</span>
+          <span class="hover:underline" id="bread-category">Innovation & AI</span>
+          <span class="text-slate-400">›</span>
+          <span class="text-[#5F6368]" id="bread-subcategory">Models & Research</span>
+        </nav>
+
+        <div id="future-badge" class="hidden">
+          <span class="inline-flex items-center gap-1.5 text-[11px] font-semibold bg-blue-50 text-blue-700 border border-blue-200 px-3 py-1 rounded-full shadow-xs">
+            <span class="w-1.5 h-1.5 rounded-full bg-blue-600 animate-pulse"></span>
+            <span>Coming Soon • Part of Orbit's future vision</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- Main Display Headline -->
+      <h1 id="article-headline" class="text-3xl sm:text-4xl md:text-[50px] font-display font-medium text-[#1F1F1F] leading-[1.14] mb-8 tracking-tight">
+        Why Most Goals Fail
+      </h1>
+
+      <!-- Date, Read Time & Lead Paragraph Row -->
+      <div class="grid md:grid-cols-12 gap-6 items-baseline pb-8 border-b border-[#E0E3E7]">
+        <div class="md:col-span-3 text-[14px] text-[#5F6368]">
+          <div id="article-date" class="font-medium text-[#1F1F1F]">Nov 20, 2026</div>
+          <div id="article-readtime" class="mt-0.5">4 min read</div>
+        </div>
+
+        <div class="md:col-span-9">
+          <p id="article-deck" class="text-[17px] md:text-[19px] text-[#1F1F1F] leading-relaxed font-normal">
+            Every year millions of people set goals. Learn a skill. Build a startup. Get fit. Read more books. Yet most goals never become reality. The problem isn't motivation. The problem is visibility.
+          </p>
+        </div>
+      </div>
+
+      <!-- Author & Share Button Row -->
+      <div class="flex items-center justify-between pt-6">
+        <div>
+          <div id="article-author-name" class="text-[15px] font-medium text-[#1F1F1F]">
+            Orbit Philosophy Team
+          </div>
+          <div id="article-author-role" class="text-[13px] text-[#5F6368]">
+            Core Movement Series
+          </div>
+        </div>
+
+        <!-- Share Button -->
+        <button onclick="shareArticle()" class="inline-flex items-center gap-2 text-[14px] font-medium text-[#1F1F1F] hover:text-[#0B57D0] px-4 py-2 rounded-full hover:bg-slate-100/80 transition-all cursor-pointer">
+          <i data-lucide="share-2" class="w-4 h-4"></i>
+          <span>Share</span>
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- 4. ARTICLE BODY CONTENT & DEVICE MOCKUPS                                  -->
+  <!-- ========================================================================= -->
+  <article class="max-w-[820px] mx-auto px-6 py-14">
+    
+    <!-- Section 1 Headline & Paragraph -->
+    <h2 id="section1-heading" class="text-2xl md:text-[32px] font-display font-medium text-[#1F1F1F] leading-tight mb-6">
+      The Great Visibility Problem
+    </h2>
+
+    <div id="section1-body" class="text-[17px] md:text-[18px] text-[#3C4043] leading-[1.7] space-y-6 mb-12">
+      <!-- Injected via JavaScript -->
+    </div>
+
+    <!-- MOCKUP 1: Laptop Screen Mockup -->
+    <div class="my-14 rounded-[28px] bg-[#F8F9FA] border border-[#E0E3E7] p-4 sm:p-6 shadow-sm">
+      <div class="aspect-[16/10] rounded-[20px] overflow-hidden bg-[#EBF3FD] border border-slate-300 relative shadow-inner flex flex-col">
+        <!-- Mockup top bar -->
+        <div class="bg-white border-b border-slate-200 px-4 py-2.5 flex items-center justify-between text-xs text-slate-500">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-rose-400"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+            <span class="ml-2 font-mono text-[11px] text-slate-400">app.orbit.internal/telemetry</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200 font-semibold text-[10px] inline-flex items-center gap-1.5 shadow-xs">
+              <span class="w-1.5 h-1.5 rounded-full bg-blue-600 animate-pulse"></span>
+              Coming Soon • Part of Orbit's future vision
+            </span>
+            <span class="px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 font-medium text-[10px]">Active Trajectory</span>
+          </div>
+        </div>
+        <!-- Screen Content Graphic -->
+        <div class="flex-1 p-6 flex flex-col justify-between relative overflow-hidden bg-gradient-to-br from-[#F0F7FF] to-[#E2EEFE]">
+          <div class="max-w-md">
+            <div class="text-xs uppercase tracking-wider text-blue-700 font-bold mb-1 flex items-center gap-2">
+              <span>Orbit Console</span>
+              <span class="text-[9px] bg-white/80 border border-blue-200 text-blue-700 px-2 py-0.5 rounded-full font-medium">Goal Telemetry</span>
+            </div>
+            <h4 class="text-xl font-display font-bold text-slate-900">Weekly Goal Velocity Matrix</h4>
+            <p class="text-xs text-slate-600 mt-1">Real-time vector alignment answering: Am I getting closer?</p>
+          </div>
+
+          <div class="grid grid-cols-3 gap-3 my-4">
+            <div class="bg-white p-3 rounded-xl shadow-sm border border-blue-100">
+              <div class="text-[10px] text-slate-500 uppercase">Orbit Score</div>
+              <div class="text-2xl font-bold text-blue-600 font-mono">78</div>
+            </div>
+            <div class="bg-white p-3 rounded-xl shadow-sm border border-blue-100">
+              <div class="text-[10px] text-slate-500 uppercase">Consistency</div>
+              <div class="text-2xl font-bold text-emerald-600 font-mono">89%</div>
+            </div>
+            <div class="bg-white p-3 rounded-xl shadow-sm border border-blue-100">
+              <div class="text-[10px] text-slate-500 uppercase flex items-center justify-between">
+                <span>Velocity Delta</span>
+                <span class="text-[8px] bg-blue-50 text-blue-600 px-1.5 py-0.5 rounded font-semibold border border-blue-200">Coming Soon</span>
+              </div>
+              <div class="text-2xl font-bold text-sky-600 font-mono">+12%</div>
+            </div>
+          </div>
+
+          <div class="bg-white/80 p-3 rounded-xl border border-blue-100 text-xs text-slate-700 flex items-center justify-between">
+            <span>Milestone: Distributed System Architecture</span>
+            <span class="text-emerald-600 font-bold">Ahead by 5 days</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 2 Headline & Paragraph -->
+    <h2 id="section2-heading" class="text-2xl md:text-[32px] font-display font-medium text-[#1F1F1F] leading-tight mb-6">
+      Tracking Trajectory Instead of Checklists
+    </h2>
+
+    <div id="section2-body" class="text-[17px] md:text-[18px] text-[#3C4043] leading-[1.7] space-y-6 mb-12">
+      <!-- Injected via JavaScript -->
+    </div>
+
+    <!-- MOCKUP 2: Centered Smartphone Mockup -->
+    <div class="my-16 flex flex-col items-center justify-center">
+      <div class="w-[310px] sm:w-[330px] rounded-[48px] bg-[#121316] p-3 shadow-2xl border-4 border-slate-700 relative">
+        <div class="w-20 h-4 bg-black rounded-full mx-auto mb-2 flex items-center justify-center">
+          <div class="w-2.5 h-2.5 rounded-full bg-slate-900 border border-slate-700"></div>
+        </div>
+
+        <div class="w-full rounded-[38px] bg-white overflow-hidden border border-slate-200 min-h-[480px] flex flex-col justify-between p-4 text-slate-900 shadow-inner">
+          <div>
+            <div class="flex items-center justify-between text-xs text-slate-500 pb-3 border-b border-slate-100 mb-4">
+              <span class="font-bold">9:41</span>
+              <div class="flex items-center gap-1.5">
+                <i data-lucide="wifi" class="w-3.5 h-3.5"></i>
+                <i data-lucide="battery" class="w-3.5 h-3.5"></i>
+              </div>
+            </div>
+
+            <div class="bg-blue-50/70 p-3.5 rounded-2xl border border-blue-100 mb-4">
+              <div class="flex items-center gap-2 text-xs font-semibold text-blue-700 mb-1">
+                <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                <span>45-Second Daily Check-in</span>
+              </div>
+              <p class="text-xs text-slate-700 font-medium">
+                "What progress did you make today toward your Full Stack milestone?"
+              </p>
+            </div>
+
+            <div class="bg-slate-100 p-3 rounded-2xl text-xs text-slate-800 leading-relaxed mb-3">
+              "Completed GraphQL API layer and wrote integration tests for payment webhooks."
+            </div>
+
+            <div class="bg-emerald-50 border border-emerald-200 p-3 rounded-2xl text-xs text-emerald-800 leading-relaxed">
+              <div class="font-bold mb-0.5">Orbit Copilot:</div>
+              "Momentum recorded. Trajectory remains ahead of schedule by 5 days. Recovery recommended tonight."
+            </div>
+          </div>
+
+          <div class="bg-slate-100 rounded-full px-3.5 py-2 flex items-center justify-between text-xs text-slate-500 mt-6">
+            <span>Ask a question...</span>
+            <i data-lucide="mic" class="w-4 h-4 text-slate-600"></i>
+          </div>
+        </div>
+      </div>
+      <div class="text-[11px] text-slate-400 mt-3 font-mono">Orbit Native iOS & Android Experience</div>
+    </div>
+
+    <!-- Section 3 Body & Movement Quote -->
+    <div id="section3-body" class="text-[17px] md:text-[18px] text-[#3C4043] leading-[1.7] space-y-6">
+      <!-- Injected via JavaScript -->
+    </div>
+
+    <!-- CTA Section inside Article -->
+    <div class="mt-14 p-8 md:p-10 rounded-[28px] bg-[#F0F4F9] border border-[#E0E3E7] text-center">
+      <h3 class="text-2xl font-display font-medium text-[#1F1F1F] mb-3">
+        Experience measurable progress with Orbit
+      </h3>
+      <p class="text-[15px] text-[#444746] max-w-lg mx-auto mb-6">
+        The future belongs to people who know where they're going. Orbit helps you stay on course.
+      </p>
+      <a href="index.html#waitlist" class="google-pill-btn google-pill-blue py-3 px-8 text-sm">
+        Join Early Access
+      </a>
+    </div>
+
+  </article>
+
+  <!-- ========================================================================= -->
+  <!-- 5. "RELATED STORIES" CAROUSEL                                             -->
+  <!-- ========================================================================= -->
+  <section class="border-t border-[#E0E3E7] bg-[#FFFFFF] py-16">
+    <div class="max-w-[1400px] mx-auto px-6">
+      
+      <h2 class="text-3xl font-display font-medium text-[#1F1F1F] mb-8">
+        Related stories
+      </h2>
+
+      <!-- Related Stories Cards Row -->
+      <div id="related-carousel" class="flex gap-6 overflow-x-auto snap-x snap-mandatory no-scrollbar pb-6 scroll-smooth">
+        
+        <!-- Story 1 -->
+        <article class="flex-none w-[280px] sm:w-[320px] snap-start rounded-[24px] bg-[#F8F9FA] border border-[#E0E3E7] p-6 flex flex-col justify-between hover:shadow-md transition-all cursor-pointer group" onclick="switchArticle('why-most-goals-fail')">
+          <div>
+            <div class="aspect-[1/1] rounded-[20px] bg-[#E8F0FE] flex items-center justify-center mb-6 overflow-hidden relative">
+              <div class="w-24 h-24 rounded-full bg-blue-600 flex items-center justify-center text-white shadow-lg">
+                <i data-lucide="eye" class="w-10 h-10"></i>
+              </div>
+            </div>
+            <div class="text-[12px] text-[#5F6368] font-medium uppercase tracking-wider mb-2">Visibility</div>
+            <h3 class="text-lg font-display font-medium text-[#1F1F1F] leading-snug group-hover:text-[#0B57D0] transition-colors mb-3">
+              Why Most Goals Fail
+            </h3>
+          </div>
+          <div class="text-[12px] text-[#5F6368] pt-4 border-t border-slate-200">
+            By Orbit Philosophy
+          </div>
+        </article>
+
+        <!-- Story 2 -->
+        <article class="flex-none w-[280px] sm:w-[320px] snap-start rounded-[24px] bg-[#F8F9FA] border border-[#E0E3E7] p-6 flex flex-col justify-between hover:shadow-md transition-all cursor-pointer group" onclick="switchArticle('problem-with-motivation')">
+          <div>
+            <div class="aspect-[1/1] rounded-[20px] bg-[#0F172A] flex items-center justify-center mb-6 overflow-hidden relative text-white">
+              <div class="w-24 h-24 rounded-full bg-blue-500/30 flex items-center justify-center text-blue-400 border border-blue-400">
+                <i data-lucide="flame" class="w-10 h-10"></i>
+              </div>
+            </div>
+            <div class="text-[12px] text-[#5F6368] font-medium uppercase tracking-wider mb-2">Consistency</div>
+            <h3 class="text-lg font-display font-medium text-[#1F1F1F] leading-snug group-hover:text-[#0B57D0] transition-colors mb-3">
+              The Problem With Motivation
+            </h3>
+          </div>
+          <div class="text-[12px] text-[#5F6368] pt-4 border-t border-slate-200">
+            By Orbit Systems
+          </div>
+        </article>
+
+        <!-- Story 3 -->
+        <article class="flex-none w-[280px] sm:w-[320px] snap-start rounded-[24px] bg-[#F8F9FA] border border-[#E0E3E7] p-6 flex flex-col justify-between hover:shadow-md transition-all cursor-pointer group" onclick="switchArticle('we-dont-need-more-goals')">
+          <div>
+            <div class="aspect-[1/1] rounded-[20px] bg-[#FAF5FF] flex items-center justify-center mb-6 overflow-hidden relative">
+              <div class="w-24 h-24 rounded-full bg-purple-600 flex items-center justify-center text-white shadow-lg">
+                <i data-lucide="refresh-cw" class="w-10 h-10"></i>
+              </div>
+            </div>
+            <div class="text-[12px] text-[#5F6368] font-medium uppercase tracking-wider mb-2">Feedback Loops</div>
+            <h3 class="text-lg font-display font-medium text-[#1F1F1F] leading-snug group-hover:text-[#0B57D0] transition-colors mb-3">
+              We Don't Need More Goals
+            </h3>
+          </div>
+          <div class="text-[12px] text-[#5F6368] pt-4 border-t border-slate-200">
+            By Direction Systems
+          </div>
+        </article>
+
+        <!-- Story 4 -->
+        <article class="flex-none w-[280px] sm:w-[320px] snap-start rounded-[24px] bg-[#F8F9FA] border border-[#E0E3E7] p-6 flex flex-col justify-between hover:shadow-md transition-all cursor-pointer group" onclick="switchArticle('orbit-score')">
+          <div>
+            <div class="aspect-[1/1] rounded-[20px] bg-[#0B57D0] flex items-center justify-center mb-6 overflow-hidden relative text-white">
+              <div class="w-24 h-24 rounded-full bg-white/20 flex items-center justify-center text-white shadow-lg font-mono text-3xl font-bold">
+                78
+              </div>
+            </div>
+            <div class="text-[12px] text-[#5F6368] font-medium uppercase tracking-wider mb-2">Core Platform</div>
+            <h3 class="text-lg font-display font-medium text-[#1F1F1F] leading-snug group-hover:text-[#0B57D0] transition-colors mb-3">
+              The Orbit Score (0-100)
+            </h3>
+          </div>
+          <div class="text-[12px] text-[#5F6368] pt-4 border-t border-slate-200">
+            By Orbit Telemetry
+          </div>
+        </article>
+
+        <!-- Story 5 -->
+        <article class="flex-none w-[280px] sm:w-[320px] snap-start rounded-[24px] bg-[#F8F9FA] border border-[#E0E3E7] p-6 flex flex-col justify-between hover:shadow-md transition-all cursor-pointer group" onclick="switchArticle('orbit-deepmind-engine')">
+          <div>
+            <div class="aspect-[1/1] rounded-[20px] bg-[#EEF2FF] flex items-center justify-center mb-6 overflow-hidden relative">
+              <div class="w-24 h-24 rounded-full bg-indigo-600 flex items-center justify-center text-white shadow-lg">
+                <i data-lucide="cpu" class="w-10 h-10"></i>
+              </div>
+            </div>
+            <div class="text-[12px] text-indigo-600 font-semibold uppercase tracking-wider mb-2">Coming Soon</div>
+            <h3 class="text-lg font-display font-medium text-[#1F1F1F] leading-snug group-hover:text-[#0B57D0] transition-colors mb-3">
+              Orbit DeepMind Engine
+            </h3>
+          </div>
+          <div class="text-[12px] text-[#5F6368] pt-4 border-t border-slate-200">
+            By Research Team
+          </div>
+        </article>
+
+        <!-- Story 6 -->
+        <article class="flex-none w-[280px] sm:w-[320px] snap-start rounded-[24px] bg-[#F8F9FA] border border-[#E0E3E7] p-6 flex flex-col justify-between hover:shadow-md transition-all cursor-pointer group" onclick="switchArticle('orbit-manifesto')">
+          <div>
+            <div class="aspect-[1/1] rounded-[20px] bg-[#E8F0FE] flex items-center justify-center mb-6 overflow-hidden relative">
+              <div class="w-24 h-24 rounded-full bg-blue-600 flex items-center justify-center text-white shadow-lg">
+                <i data-lucide="sparkles" class="w-10 h-10"></i>
+              </div>
+            </div>
+            <div class="text-[12px] text-[#5F6368] font-medium uppercase tracking-wider mb-2">Core Declaration</div>
+            <h3 class="text-lg font-display font-medium text-[#1F1F1F] leading-snug group-hover:text-[#0B57D0] transition-colors mb-3">
+              The Orbit Manifesto
+            </h3>
+          </div>
+          <div class="text-[12px] text-[#5F6368] pt-4 border-t border-slate-200">
+            By Orbit Founding Team
+          </div>
+        </article>
+
+      </div>
+
+      <!-- Controls under Related Stories -->
+      <div class="flex items-center gap-4 mt-6">
+        <button id="related-prev" class="circle-nav-btn" aria-label="Previous Related Story">
+          <i data-lucide="chevron-left" class="w-5 h-5"></i>
+        </button>
+        <button id="related-next" class="circle-nav-btn" aria-label="Next Related Story">
+          <i data-lucide="chevron-right" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- 6. MASTER FOOTER                                                          -->
+  <!-- ========================================================================= -->
+  <footer class="border-t border-[#E0E3E7] bg-[#F8F9FA] py-12">
+    <div class="max-w-[1400px] mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-[#5F6368]">
+      <div class="flex items-center gap-6">
+        <span class="font-display font-bold text-base text-[#1F1F1F]">Orbit</span>
+        <a href="index.html" class="hover:text-[#1F1F1F]">Home</a>
+        <a href="index.html#manifesto" class="hover:text-[#1F1F1F]">Manifesto</a>
+        <a href="index.html#waitlist" class="hover:text-[#1F1F1F]">Early Access</a>
+        <a href="https://github.com/Naveen-dk/orbit-blog.git" target="_blank" rel="noopener noreferrer" class="hover:text-[#0B57D0] inline-flex items-center gap-1 font-medium">
+          <i data-lucide="github" class="w-3.5 h-3.5"></i>
+          <span>GitHub</span>
+        </a>
+        <a href="https://docs.google.com/spreadsheets/d/1yrLpcoCj1qljqi2OI1LTvUPy1eimPrfYQU_ACyyBkAY/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="hover:text-[#0B57D0] inline-flex items-center gap-1 font-medium">
+          <span>Google Sheet Responses</span>
+          <i data-lucide="external-link" class="w-3 h-3"></i>
+        </a>
+      </div>
+      <div>
+        "Everything revolves around your goals." • © 2026 Orbit Technologies Inc.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script for Mega Menu, Dynamic Article Routing & Scroll Progress -->
+  <script>
+    // =========================================================================
+    // MEGA MENU DATA (Shared across site)
+    // =========================================================================
+    const MEGA_DATA = {
+      'innovation': {
+        title: 'Innovation & AI',
+        ctaText: 'See all in Innovation & AI',
+        ctaLink: 'research.html',
+        col1Heading: 'Models & Research',
+        col1: [
+          { text: 'Orbit DeepMind Engine', url: 'research.html', badge: 'Coming Soon' },
+          { text: 'Goal Telemetry Models', url: 'article.html?id=goal-telemetry-models', badge: 'Coming Soon' },
+          { text: 'Orbit Labs', url: 'article.html?id=orbit-labs' },
+          { text: 'SkillGPS Foundation', url: 'article.html?id=skillgps-foundation' },
+          { text: 'Velocity Delta Analytics', url: 'article.html?id=velocity-delta-analytics', badge: 'Coming Soon' },
+          { text: 'See all →', url: 'article.html?id=innovation-ai-hub' }
+        ],
+        col2Heading: 'Products',
+        col2: [
+          { text: 'Orbit Copilot AI', url: 'article.html?id=orbit-copilot-ai' },
+          { text: '45s Daily Check-ins', url: 'article.html?id=daily-checkins' },
+          { text: 'SkillGPS Roadmaps', url: 'article.html?id=skillgps-roadmaps' },
+          { text: 'Streak Telemetry', url: 'article.html?id=streak-telemetry' },
+          { text: 'See all →', url: 'article.html?id=products-platforms-hub' }
+        ],
+        col3Heading: 'Infrastructure & cloud',
+        col3: [
+          { text: 'Orbit Cloud Sync', url: 'article.html?id=orbit-cloud-sync' },
+          { text: 'Google Sheets Live Sync', url: 'https://docs.google.com/spreadsheets/d/1yrLpcoCj1qljqi2OI1LTvUPy1eimPrfYQU_ACyyBkAY/edit?usp=sharing', external: true },
+          { text: 'Developer Webhooks', url: 'article.html?id=developer-webhooks' },
+          { text: 'See all →', url: 'https://docs.google.com/spreadsheets/d/1yrLpcoCj1qljqi2OI1LTvUPy1eimPrfYQU_ACyyBkAY/edit?usp=sharing', external: true }
+        ],
+        col4Heading: 'Technology',
+        col4: [
+          { text: 'Privacy & Zero-Distraction', url: 'article.html?id=privacy-zero-distraction' },
+          { text: 'Goal Consistency Science', url: 'article.html?id=goal-consistency-science' },
+          { text: 'Feedback Architecture', url: 'article.html?id=feedback-architecture' },
+          { text: 'See all →', url: 'article.html?id=feedback-architecture' }
+        ],
+        learnMore: [
+          { text: 'Orbit Philosophy Manifesto ↗', url: 'article.html?id=orbit-manifesto' },
+          { text: 'Why Most Goals Fail ↗', url: 'article.html?id=why-most-goals-fail' },
+          { text: 'The Problem With Motivation ↗', url: 'article.html?id=problem-with-motivation' },
+          { text: 'Google Sheet Responses ↗', url: 'https://docs.google.com/spreadsheets/d/1yrLpcoCj1qljqi2OI1LTvUPy1eimPrfYQU_ACyyBkAY/edit?usp=sharing', external: true }
+        ]
+      },
+      'products': {
+        title: 'Products & platforms',
+        ctaText: 'See all in Products & platforms',
+        ctaLink: 'products.html',
+        col1Heading: 'Core Platform',
+        col1: [
+          { text: 'Orbit Score (0-100)', url: 'article.html?id=orbit-score' },
+          { text: '45-Second Daily Check-in', url: 'article.html?id=daily-checkins' },
+          { text: 'Weekly Velocity Matrix', url: 'article.html?id=weekly-velocity-matrix' },
+          { text: 'Momentum Heatmaps', url: 'article.html?id=momentum-heatmaps', badge: 'Coming Soon' },
+          { text: 'See all →', url: 'article.html?id=products-platforms-hub' }
+        ],
+        col2Heading: 'Guidance & Skills',
+        col2: [
+          { text: 'SkillGPS Roadmaps', url: 'article.html?id=skillgps-roadmaps' },
+          { text: 'Milestone Decomposition', url: 'article.html?id=milestone-decomposition' },
+          { text: 'Accountability Loops', url: 'article.html?id=accountability-loops' },
+          { text: 'See all →', url: 'article.html?id=products-platforms-hub' }
+        ],
+        col3Heading: 'Data & Sync',
+        col3: [
+          { text: 'Google Sheets Automation', url: 'https://docs.google.com/spreadsheets/d/1yrLpcoCj1qljqi2OI1LTvUPy1eimPrfYQU_ACyyBkAY/edit?usp=sharing', external: true },
+          { text: 'Cloud Backups', url: 'article.html?id=cloud-backups' },
+          { text: 'Export CSV / JSON', url: 'article.html?id=export-csv-json' },
+          { text: 'See all →', url: 'https://docs.google.com/spreadsheets/d/1yrLpcoCj1qljqi2OI1LTvUPy1eimPrfYQU_ACyyBkAY/edit?usp=sharing', external: true }
+        ],
+        col4Heading: 'Ecosystem',
+        col4: [
+          { text: 'Web Dashboard', url: 'article.html?id=web-dashboard' },
+          { text: 'iOS Native Preview', url: 'article.html?id=ios-native-preview' },
+          { text: 'Android App Preview', url: 'article.html?id=android-app-preview' },
+          { text: 'See all →', url: 'article.html?id=web-dashboard' }
+        ],
+        learnMore: [
+          { text: 'Introducing Orbit ↗', url: 'article.html?id=introducing-orbit' },
+          { text: 'We Don’t Need More Goals ↗', url: 'article.html?id=we-dont-need-more-goals' },
+          { text: 'Progress Beats Productivity ↗', url: 'article.html?id=progress-beats-productivity' },
+          { text: 'Live Responses Sheet ↗', url: 'https://docs.google.com/spreadsheets/d/1yrLpcoCj1qljqi2OI1LTvUPy1eimPrfYQU_ACyyBkAY/edit?usp=sharing', external: true }
+        ]
+      },
+      'company': {
+        title: 'Company news',
+        ctaText: 'Explore Orbit Story & Mission',
+        ctaLink: 'article.html?id=company-story-mission',
+        col1Heading: 'Foundations',
+        col1: [
+          { text: 'The Orbit Manifesto', url: 'article.html?id=orbit-manifesto' },
+          { text: 'Why Orbit Exists', url: 'article.html?id=why-orbit-exists' },
+          { text: 'Building in Public', url: 'article.html?id=building-in-public' },
+          { text: 'See all →', url: 'article.html?id=company-story-mission' }
+        ],
+        col2Heading: 'Movement & People',
+        col2: [
+          { text: 'Early Adopter Cohort', url: 'article.html?id=early-adopter-cohort' },
+          { text: 'Product Hunt Launch', url: 'article.html?id=product-hunt-launch' },
+          { text: 'Founding Principles', url: 'article.html?id=founding-principles' },
+          { text: 'See all →', url: 'article.html?id=early-adopter-cohort' }
+        ],
+        col3Heading: 'Media & Research',
+        col3: [
+          { text: 'Goal Science Whitepaper', url: 'article.html?id=goal-science-whitepaper' },
+          { text: 'Productivity Theater Trap', url: 'article.html?id=productivity-theater-trap' },
+          { text: 'Brand Assets', url: 'article.html?id=brand-assets' },
+          { text: 'See all →', url: 'article.html?id=goal-science-whitepaper' }
+        ],
+        col4Heading: 'Connect',
+        col4: [
+          { text: 'LinkedIn Community', url: 'article.html?id=orbit-community' },
+          { text: 'GitHub Open Repo ↗', url: 'https://github.com/Naveen-dk/orbit-blog.git', external: true },
+          { text: 'X / Twitter @Orbit', url: 'article.html?id=orbit-community' },
+          { text: 'See all →', url: 'article.html?id=orbit-community' }
+        ],
+        learnMore: [
+          { text: 'The Orbit Manifesto ↗', url: 'article.html?id=orbit-manifesto' },
+          { text: 'Join Early Access ↗', url: 'index.html#waitlist' },
+          { text: 'Google Sheet Responses ↗', url: 'https://docs.google.com/spreadsheets/d/1yrLpcoCj1qljqi2OI1LTvUPy1eimPrfYQU_ACyyBkAY/edit?usp=sharing', external: true }
+        ]
+      }
+    };
+
+    // =========================================================================
+    // COMPLETE ARTICLE REPOSITORY (Every navigation menu destination)
+    // =========================================================================
+    const ARTICLES = {
+      // 1. Flagship Articles
+      'why-most-goals-fail': {
+        title: 'Why Most Goals Fail',
+        deck: "Every year millions of people set goals. Learn a skill. Build a startup. Get fit. Read more books. Yet most goals never become reality. The problem isn't motivation. The problem is visibility.",
+        date: 'Nov 20, 2026',
+        readTime: '4 min read',
+        author: 'Orbit Philosophy Team',
+        role: 'Core Movement Series',
+        category: 'Movement Essays',
+        subcategory: 'Goal Visibility',
+        section1Heading: 'The Great Visibility Problem',
+        section1: `
+          <p>Every year millions of people set ambitious goals. They purchase courses, download habit tracking apps, and fill out elaborate task templates. Yet within weeks, the vast majority abandon their pursuits.</p>
+          <p>The problem isn't motivation. The problem isn't intelligence. <strong>The problem is visibility.</strong> Most people don't know if they're actually moving closer to their goals.</p>
+          <div class="movement-quote">
+            They track tasks.<br>
+            They track habits.<br>
+            They track streaks.<br>
+            <strong>But they rarely track real progress.</strong>
+          </div>
+        `,
+        section2Heading: 'Tracking Trajectory Instead of Checklists',
+        section2: `
+          <p>That's the problem Orbit was created to solve. Orbit helps people stay aligned with their goals, measure meaningful progress, and make better decisions every day.</p>
+          <p>When you measure directional velocity rather than task volume, your subconscious stops obsessing over trivial chores and stays locked on your true north.</p>
+        `,
+        section3: `
+          <div class="movement-quote">
+            Because progress isn't about what you planned.<br>
+            <strong>Progress is about what actually happened.</strong>
+          </div>
+          <p>By replacing arbitrary task ticking with closed-loop trajectory telemetry, Orbit turns ambitious goals into visible, deterministic progress.</p>
+        `
+      },
+      'problem-with-motivation': {
+        title: 'The Problem With Motivation',
+        deck: "Motivation feels powerful. But motivation is temporary. Consistency beats motivation. Systems beat motivation. Data beats motivation.",
+        date: 'Nov 18, 2026',
+        readTime: '3 min read',
+        author: 'Orbit Consistency Systems',
+        role: 'Execution Systems',
+        category: 'Movement Essays',
+        subcategory: 'Habit Telemetry',
+        section1Heading: 'Why Willpower Is a Depleting Resource',
+        section1: `
+          <p>Motivation feels powerful when it strikes. But motivation is temporary. Some days you'll feel inspired. Most days you won't.</p>
+          <p>The people who achieve extraordinary results aren't constantly motivated. They're consistent.</p>
+          <div class="movement-quote">
+            Consistency beats motivation.<br>
+            Systems beat motivation.<br>
+            <strong>Data beats motivation.</strong>
+          </div>
+        `,
+        section2Heading: 'Reality Matters More Than Intentions',
+        section2: `
+          <p>Orbit was designed around this fundamental truth. Instead of asking: <em>"How motivated are you?"</em></p>
+          <p class="text-xl font-bold text-slate-900">Orbit asks: <strong>"What progress did you make today?"</strong></p>
+          <p>Because reality matters far more than intentions. A 45-second reflection ground truth connects your daily actions to real progress.</p>
+        `,
+        section3: `
+          <p>When you focus on verifiable data instead of emotional highs, you eliminate burnout and sustain compounding momentum indefinitely.</p>
+        `
+      },
+      'we-dont-need-more-goals': {
+        title: "We Don't Need More Goals",
+        deck: "The internet is full of advice about setting SMART goals and 5-year plans. The world doesn't need more goals. The world needs better feedback loops.",
+        date: 'Nov 15, 2026',
+        readTime: '3 min read',
+        author: 'Orbit Direction Systems',
+        role: 'Goal Telemetry',
+        category: 'Movement Essays',
+        subcategory: 'Feedback Architecture',
+        section1Heading: 'The Goal Advice Saturation',
+        section1: `
+          <p>The internet is full of advice about setting goals: SMART goals, monthly goals, yearly goals, five-year goals.</p>
+          <p>The world doesn't need more goals. <strong>The world needs better feedback loops.</strong></p>
+          <div class="movement-quote">
+            If someone wants to become a developer, they already know the destination.<br>
+            What they don't know is: <strong>Am I getting closer?</strong>
+          </div>
+        `,
+        section2Heading: 'The Three Critical Questions',
+        section2: `
+          <p>What people desperately need to know on a day-to-day basis are three core metrics:</p>
+          <ul class="space-y-2 my-4 text-slate-900 font-semibold text-lg">
+            <li>• Am I getting closer?</li>
+            <li>• Am I improving?</li>
+            <li>• Am I wasting time?</li>
+          </ul>
+          <p>Orbit helps answer those questions with data, insights, and daily reflection.</p>
+        `,
+        section3: `
+          <p>With real-time feedback loops, you never spend months drifting in the wrong direction before realizing your mistake.</p>
+        `
+      },
+      'introducing-orbit': {
+        title: 'Introducing Orbit',
+        deck: "Orbit started from a simple realization: Most people measure activity. Very few measure direction. Being busy doesn't guarantee progress. Checking tasks doesn't guarantee growth.",
+        date: 'Nov 12, 2026',
+        readTime: '2 min read',
+        author: 'Founding Team',
+        role: 'Product Announcement',
+        category: 'Orbit Vision',
+        subcategory: 'Philosophy',
+        section1Heading: 'Activity Versus Direction',
+        section1: `
+          <p>Orbit started from a simple realization. Most people measure activity. Very few measure direction.</p>
+          <p>Being busy doesn't guarantee progress. Checking tasks doesn't guarantee growth.</p>
+          <div class="movement-quote">
+            Orbit helps people focus on what matters:<br>
+            <strong>Progress • Consistency • Direction • Momentum</strong>
+          </div>
+        `,
+        section2Heading: 'Everything Revolves Around Your Goals',
+        section2: `
+          <p>Instead of fragmented tools that compete for your attention, Orbit provides a single gravitational center where your aspirations and daily execution converge.</p>
+        `,
+        section3: `
+          <div class="movement-quote text-2xl text-blue-700 font-bold">
+            Everything revolves around your goals.
+          </div>
+        `
+      },
+      'progress-beats-productivity': {
+        title: 'Progress Beats Productivity',
+        deck: "Productivity has become a trap. People spend hours organizing tasks and building perfect dashboards. Progress means learning a skill, completing a project, and growing your business.",
+        date: 'Nov 09, 2026',
+        readTime: '3 min read',
+        author: 'Strategy & Execution',
+        role: 'Movement Series',
+        category: 'Movement Essays',
+        subcategory: 'Execution',
+        section1Heading: 'Escaping Productivity Theater',
+        section1: `
+          <p>Productivity has become a trap. People spend hours organizing tasks, customizing dashboards, watching productivity videos, and building perfect systems.</p>
+          <div class="movement-quote">
+            Orbit focuses on progress.<br>
+            <strong>Not productivity theater.</strong>
+          </div>
+        `,
+        section2Heading: 'What Real Progress Means',
+        section2: `
+          <p>Progress is fundamentally different from activity. Progress means:</p>
+          <ul class="space-y-2 my-4 text-slate-800 font-medium">
+            <li>• Learning a new skill</li>
+            <li>• Completing a project</li>
+            <li>• Improving your health</li>
+            <li>• Growing your business</li>
+          </ul>
+        `,
+        section3: `
+          <p>Stop managing tasks. Start proving progress.</p>
+        `
+      },
+      'orbit-manifesto': {
+        title: 'The Orbit Manifesto',
+        deck: "We believe people don't lack ambition. They lack clarity. We believe progress should be measurable. We believe goals deserve accountability. We believe consistency beats motivation. We believe growth should be visible.",
+        date: 'Nov 24, 2026',
+        readTime: '3 min read',
+        author: 'Orbit Founding Team',
+        role: 'Core Declaration',
+        category: 'Orbit Vision',
+        subcategory: 'The Manifesto',
+        section1Heading: "People Don't Lack Ambition. They Lack Clarity.",
+        section1: `
+          <p>Every person on this planet who sets an ambitious target possesses the raw will to succeed. The friction isn't ambition. The friction is foggy visibility.</p>
+          <div class="movement-quote">
+            We believe people don't lack ambition.<br>
+            <strong>They lack clarity.</strong>
+          </div>
+          <p>When you cannot see whether your actions today moved your needle, doubt creeps in. Willpower degrades. Abandonment follows.</p>
+        `,
+        section2Heading: 'The Core Tenets of Measurable Growth',
+        section2: `
+          <p>Orbit was founded on five unyielding principles:</p>
+          <ul class="space-y-3 my-6 text-slate-800 font-semibold text-lg">
+            <li>• We believe progress should be measurable.</li>
+            <li>• We believe goals deserve accountability.</li>
+            <li>• We believe consistency beats motivation.</li>
+            <li>• We believe growth should be visible.</li>
+          </ul>
+          <p>By transforming abstract aspirations into daily telemetry, we give individuals the exact feedback loop required for continuous compounding.</p>
+        `,
+        section3: `
+          <div class="movement-quote text-2xl text-blue-700 font-bold">
+            This is why Orbit exists.<br>
+            Everything revolves around your goals.
+          </div>
+        `
+      },
+      'ask-maps': {
+        title: 'New Ask Maps features to help with holiday travel and prep',
+        deck: 'Build custom road trip itineraries, get route tips, find local appointments, and search your saved lists with new Ask Maps features.',
+        date: 'Nov 16, 2026',
+        readTime: '5 min read',
+        author: 'Maz Khorasani',
+        role: 'Product Director, Google Maps',
+        category: 'Products & Platforms',
+        subcategory: 'Maps',
+        section1Heading: 'Get on-the-go help with your holiday road trips',
+        section1: `
+          <p>Now you can build step-by-step trip itineraries and get helpful, real-time details about your route right when you pull up directions.</p>
+          <p>Use Ask Maps to plan a day trip for holiday shopping or something more complex — like a three-day road trip with stops for coastal hikes and oceanfront dining.</p>
+        `,
+        section2Heading: 'Check off your holiday prep and let Maps find appointments for you',
+        section2: `
+          <p>Holiday prep comes with a long list of to-dos. Now, with new agentic capabilities, you can choose to have Ask Maps find appointments and call local businesses for you.</p>
+        `,
+        section3: `
+          <p>Whether you're taking a multi-day road trip or running errands around town, Maps keeps you a step ahead.</p>
+        `
+      },
+
+      // 2. Innovation & AI Category Pages
+      'innovation-ai-hub': {
+        title: 'The Frontier of Goal Telemetry & AI Research',
+        deck: 'How Orbit blends deep learning, cognitive behavioral science, and real-time velocity metrics to revolutionize how ambitious humans achieve their potential.',
+        date: 'Nov 24, 2026',
+        readTime: '4 min read',
+        author: 'Orbit AI Labs',
+        role: 'Research Overview',
+        category: 'Innovation & AI',
+        subcategory: 'Overview',
+        section1Heading: 'Algorithmic Goal Deconstruction',
+        section1: `
+          <p>At Orbit Innovation & AI, we ask one core research question: <em>Why can self-driving cars calculate their arrival time down to the second, yet human goal tracking remains stuck on static checklists?</em></p>
+          <p>Our research lab is building the world's first predictive telemetry platform for human ambition. By translating qualitative aspirations into quantitative velocity vectors, we eliminate ambiguity and make progress deterministic.</p>
+          <div class="movement-quote">
+            AI should not generate more distractions.<br>
+            <strong>AI should provide ruthless clarity on your true north.</strong>
+          </div>
+        `,
+        section2Heading: 'Our Four Pillars of Research',
+        section2: `
+          <p>Our research pipeline centers on four interconnected domains:</p>
+          <ul class="space-y-3 my-4 text-slate-800 font-medium">
+            <li><strong>1. Trajectory Projection:</strong> Machine learning models predicting milestone arrival dates based on 14-day rolling velocity.</li>
+            <li><strong>2. Cognitive Load Reduction:</strong> Designing 45-second micro-prompts that extract maximum signal with zero fatigue.</li>
+            <li><strong>3. SkillGPS Decomposition:</strong> Neural parsing of complex skills (e.g. "Full Stack Developer") into actionable sub-nodes.</li>
+            <li><strong>4. Zero-Distraction Infrastructure:</strong> Private-by-design cloud state sync with live Google Sheets automation.</li>
+          </ul>
+        `,
+        section3: `
+          <p>Explore the research papers, telemetry models, and future roadmaps below to see where goal execution is heading.</p>
+        `
+      },
+      'orbit-deepmind-engine': {
+        isComingSoon: true,
+        title: 'Orbit DeepMind Engine: Trajectory Prediction Models',
+        deck: 'Applying sequence-to-sequence neural architectures to detect micro-deviations in human execution before goal abandonment occurs.',
+        date: 'Nov 23, 2026',
+        readTime: '5 min read',
+        author: 'DeepMind Research Fellow & Orbit Team',
+        role: 'AI Architecture',
+        category: 'Innovation & AI',
+        subcategory: 'Models & Research',
+        section1Heading: 'Predicting Abandonment 14 Days Early',
+        section1: `
+          <p>Most goal trackers fail because they only report the past: a missed streak, an uncompleted checkbox, an empty calendar slot. By then, emotional disengagement has already taken root.</p>
+          <p>The Orbit DeepMind Engine evaluates multi-variable telemetry—daily check-in sentiment, task completion latency, velocity deltas, and recovery intervals—to forecast drop-off risks up to two weeks in advance.</p>
+          <div class="movement-quote">
+            Traditional tools tell you when you failed.<br>
+            <strong>The Orbit DeepMind Engine course-corrects you before you stall.</strong>
+          </div>
+        `,
+        section2Heading: 'How Trajectory Vectors Work',
+        section2: `
+          <p>Every goal is modeled as a multi-dimensional trajectory. Rather than scoring raw hours worked, the model measures <em>vector alignment</em>: did today's actions bring the system closer to the target milestone?</p>
+          <p>When the model senses friction, it automatically suggests scope reduction or milestone restructuring via Orbit Copilot.</p>
+        `,
+        section3: `
+          <p>This engine represents the core of Orbit's future vision, currently in active prototyping with early research cohorts.</p>
+        `
+      },
+      'goal-telemetry-models': {
+        isComingSoon: true,
+        title: 'Goal Telemetry Models: Transforming Intent into Measurable Vectors',
+        deck: 'How mathematical vector fields allow individuals to quantify daily effort against macro goals without manual spreadsheet gymnastics.',
+        date: 'Nov 22, 2026',
+        readTime: '4 min read',
+        author: 'Orbit Telemetry Group',
+        role: 'Applied Mathematics',
+        category: 'Innovation & AI',
+        subcategory: 'Models & Research',
+        section1Heading: 'Beyond Subjective To-Do Lists',
+        section1: `
+          <p>Human beings are notoriously poor at estimating their own rate of progress. We overestimate what we can do in a day and underestimate what compounds over six months.</p>
+          <p>Goal Telemetry Models mathematically bridge this gap. By measuring effort through consistent daily delta equations, Orbit gives you an objective mirror of reality.</p>
+          <div class="movement-quote">
+            You cannot optimize what you do not measure.<br>
+            <strong>And you cannot measure what lacks telemetry.</strong>
+          </div>
+        `,
+        section2Heading: 'The Vector Formulation of Progress',
+        section2: `
+          <p>In our model, Progress = Velocity × Directional Alignment. Checking off ten irrelevant chores yields zero forward momentum on your primary goal.</p>
+          <p>Orbit models this relationship directly in the Weekly Velocity Matrix, ensuring every unit of energy spent moves your primary needle.</p>
+        `,
+        section3: `
+          <p>Goal Telemetry turns abstract New Year's resolutions into deterministic engineering milestones.</p>
+        `
+      },
+      'orbit-labs': {
+        title: 'Orbit Labs: Where Goal Science Meets Machine Learning',
+        deck: 'An inside look at our experimental sandbox for testing haptic check-ins, acoustic sentiment parsing, and ambient momentum indicators.',
+        date: 'Nov 21, 2026',
+        readTime: '4 min read',
+        author: 'Orbit Labs R&D',
+        role: 'Experimental Design',
+        category: 'Innovation & AI',
+        subcategory: 'Models & Research',
+        section1Heading: 'The Sandbox for Ambitious Humans',
+        section1: `
+          <p>Orbit Labs is where we prototype radical ideas that challenge the status quo of productivity software. We don't build generic to-do apps; we build sensory instruments for human drive.</p>
+          <div class="movement-quote">
+            Friction is the enemy of consistency.<br>
+            <strong>If a check-in takes longer than 45 seconds, the system is broken.</strong>
+          </div>
+        `,
+        section2Heading: 'Active Lab Experiments',
+        section2: `
+          <p>Projects currently being tested inside Orbit Labs include:</p>
+          <ul class="space-y-2 my-4 text-slate-800 font-medium">
+            <li>• <strong>Voice-to-Telemetry:</strong> Single-sentence audio reflections parsed into quantitative milestone advances.</li>
+            <li>• <strong>E-Ink Ambient Displays:</strong> Hardware desk widgets showing only your Orbit Score and current milestone.</li>
+            <li>• <strong>Google Sheets Bidirectional Webhooks:</strong> Zero-latency synchronizations for custom personal dashboards.</li>
+          </ul>
+        `,
+        section3: `
+          <p>Lab prototypes that demonstrate proven consistency improvements graduate into the core Orbit mobile and web dashboard.</p>
+        `
+      },
+      'skillgps-foundation': {
+        title: 'SkillGPS Foundation: The Algorithmic Roadmap for Any Pursuit',
+        deck: 'How knowledge graph embeddings decompose any complex discipline—from Systems Engineering to Indie Hacking—into progressive mastery stages.',
+        date: 'Nov 20, 2026',
+        readTime: '4 min read',
+        author: 'Curriculum & AI Team',
+        role: 'Skill Architecture',
+        category: 'Innovation & AI',
+        subcategory: 'Models & Research',
+        section1Heading: 'The Curse of Not Knowing What to Learn Next',
+        section1: `
+          <p>When someone decides to learn a new skill—like modern full-stack development—they are greeted by an overwhelming swamp of tutorials, frameworks, and conflicting roadmaps.</p>
+          <p>SkillGPS Foundation structures the learning domain into an acyclic directed knowledge graph. It knows exactly which prerequisite unlocks which capability.</p>
+          <div class="movement-quote">
+            A goal without a roadmap is just a wish.<br>
+            <strong>SkillGPS gives every wish a navigational coordinate.</strong>
+          </div>
+        `,
+        section2Heading: 'Dynamic Re-Routing When You Get Stuck',
+        section2: `
+          <p>Just like Google Maps re-routes around traffic bottlenecks, SkillGPS re-routes when you face conceptual blockers. If a concept proves too steep, Orbit dynamically injects bridge exercises.</p>
+        `,
+        section3: `
+          <p>Never again wonder: "What should I work on today?" Orbit knows the next logical stepping stone.</p>
+        `
+      },
+      'velocity-delta-analytics': {
+        isComingSoon: true,
+        title: 'Velocity Delta Analytics: Detecting Momentum Before It Fades',
+        deck: 'Introducing the mathematical delta rate of change metric that alerts you when your execution tempo accelerates or decelerates.',
+        date: 'Nov 19, 2026',
+        readTime: '3 min read',
+        author: 'Data & Metrics Team',
+        role: 'Predictive Analytics',
+        category: 'Innovation & AI',
+        subcategory: 'Models & Research',
+        section1Heading: 'Measuring the Second Derivative of Effort',
+        section1: `
+          <p>Speed is distance over time. Velocity is speed in a specific direction. But <em>acceleration</em>—the delta of velocity—is what truly dictates whether a human will reach their goal.</p>
+          <p>Velocity Delta Analytics calculates the seven-day moving average of your output tempo. An uptick in velocity (+12%) indicates compounding flow.</p>
+          <div class="movement-quote">
+            Momentum is fragile.<br>
+            <strong>Velocity Delta makes momentum visible so you can protect it.</strong>
+          </div>
+        `,
+        section2Heading: 'Early Intervention for Cognitive Fatigue',
+        section2: `
+          <p>When Velocity Delta dips into the negative for 3 consecutive days, Orbit doesn't nag or guilt-trip you. Instead, it suggests active recovery: <em>"Rest tonight to protect tomorrow's trajectory."</em></p>
+        `,
+        section3: `
+          <p>Velocity Delta is slated for Orbit 1.2 release, currently visible as a roadmap preview in our telemetry console.</p>
+        `
+      },
+      'orbit-copilot-ai': {
+        title: 'Orbit Copilot AI: Your Daily Trajectory Partner',
+        deck: 'An intelligent companion designed not to flatter you, but to keep your daily decisions aligned with your long-term ambitions.',
+        date: 'Nov 18, 2026',
+        readTime: '4 min read',
+        author: 'Orbit Product Team',
+        role: 'Copilot Engineering',
+        category: 'Innovation & AI',
+        subcategory: 'Products',
+        section1Heading: 'An AI That Asks the Hard Questions',
+        section1: `
+          <p>Most AI assistants are reactive yes-men: they write generic emails or summarize long PDFs. Orbit Copilot is proactive, contextual, and singularly obsessed with your goals.</p>
+          <p>At the end of each day, Copilot assesses your 45-second check-in and responds with razor-sharp insight: <em>"You spent 4 hours tweaking CSS, but your milestone is backend API completion. Realign tomorrow."</em></p>
+          <div class="movement-quote">
+            Tough love backed by telemetry.<br>
+            <strong>Orbit Copilot is the accountability partner you always needed.</strong>
+          </div>
+        `,
+        section2Heading: 'Contextual Memory of Your Entire Journey',
+        section2: `
+          <p>Copilot remembers every milestone you completed, every plateau you overcame, and what past strategies restored your momentum. It doesn't start from scratch every conversation.</p>
+        `,
+        section3: `
+          <p>Experience Copilot directly in the Orbit mobile check-in experience.</p>
+        `
+      },
+      'daily-checkins': {
+        title: 'The 45-Second Daily Check-in: Micro-Reflections with Macro Impact',
+        deck: 'Why spending 45 seconds answering one honest question creates more compounding momentum than hours of journaling or task-managing.',
+        date: 'Nov 17, 2026',
+        readTime: '3 min read',
+        author: 'Human Interface Team',
+        role: 'Interaction Design',
+        category: 'Innovation & AI',
+        subcategory: 'Products',
+        section1Heading: 'The Frictionless Reflection Protocol',
+        section1: `
+          <p>Most reflection systems collapse under their own weight. Prompts asking for 10 bullet points, mood scales, and gratitude lists are abandoned by day 5.</p>
+          <p>Orbit simplifies daily reflection down to its irreducible core: <strong>45 seconds. One question. One honest answer.</strong></p>
+          <div class="movement-quote">
+            "What progress did you make today toward your milestone?"<br>
+            <strong>45 seconds to record ground truth.</strong>
+          </div>
+        `,
+        section2Heading: 'Designed for Mobile Flow',
+        section2: `
+          <p>Whether you're riding the subway or winding down for sleep, a single tap lets you voice or type your ground truth. Orbit records the trajectory instantly.</p>
+        `,
+        section3: `
+          <p>Consistency is built on tiny, frictionless rituals repeated daily.</p>
+        `
+      },
+      'skillgps-roadmaps': {
+        title: 'SkillGPS Roadmaps: Autonomous Milestone Decomposition',
+        deck: 'How to break down multi-month ambitions into discrete 14-day verifiable milestones that guarantee measurable execution.',
+        date: 'Nov 16, 2026',
+        readTime: '4 min read',
+        author: 'Curriculum Systems',
+        role: 'Product Guidance',
+        category: 'Innovation & AI',
+        subcategory: 'Products',
+        section1Heading: 'From Abstract Goal to Atomic Step',
+        section1: `
+          <p>Saying "I want to become an AI engineer" is paralyzing. Where do you start? What is step 1? What is step 50?</p>
+          <p>SkillGPS Roadmaps decomposes massive ambitions into sequential, verifiable milestones. Each milestone has an objective definition of done.</p>
+          <div class="movement-quote">
+            Big goals inspire.<br>
+            <strong>Small milestones execute.</strong>
+          </div>
+        `,
+        section2Heading: 'Interactive Roadmap Navigation',
+        section2: `
+          <p>Follow along your customized tree with visual node unlocking, prerequisite badges, and live telemetry updates that sync directly with your Orbit Score.</p>
+        `,
+        section3: `
+          <p>Stop wandering through endless tutorials. Let SkillGPS guide your path to mastery.</p>
+        `
+      },
+      'streak-telemetry': {
+        title: 'Streak Telemetry: Why Daily Action Must Connect to True North',
+        deck: 'Why counting arbitrary streak numbers often leads to fake progress, and how Orbit connects daily streaks to actual milestone movement.',
+        date: 'Nov 15, 2026',
+        readTime: '3 min read',
+        author: 'Orbit Behavioral Team',
+        role: 'Telemetry Design',
+        category: 'Innovation & AI',
+        subcategory: 'Products',
+        section1Heading: 'The Streak Paradox',
+        section1: `
+          <p>You can maintain a 300-day streak on a language app while remaining entirely unable to order coffee in that language. You maintained the habit, but made zero progress.</p>
+          <div class="movement-quote">
+            A streak of busywork is still busywork.<br>
+            <strong>Orbit tracks trajectory streaks, not ritual streaks.</strong>
+          </div>
+        `,
+        section2Heading: 'Ground Truth Telemetry',
+        section2: `
+          <p>Orbit only advances your streak counter when your daily reflection confirms genuine milestone advancement. This protects you from fooling yourself.</p>
+        `,
+        section3: `
+          <p>Celebrate real progress, not empty calendar checkmarks.</p>
+        `
+      },
+      'orbit-cloud-sync': {
+        title: 'Orbit Cloud Sync: Real-Time Decentralized State Synchronization',
+        deck: 'Zero-latency sync architecture keeping your web dashboard, mobile app, and external spreadsheet in continuous lockstep.',
+        date: 'Nov 14, 2026',
+        readTime: '3 min read',
+        author: 'Infrastructure Team',
+        role: 'Distributed Systems',
+        category: 'Innovation & AI',
+        subcategory: 'Infrastructure & cloud',
+        section1Heading: 'Offline-First, Real-Time Everywhere',
+        section1: `
+          <p>Goal reflection happens anywhere: on an airplane without WiFi, in an elevator, or at your desk. Orbit Cloud Sync ensures that your reflections are cached locally and synchronized with sub-second latency.</p>
+          <div class="movement-quote">
+            Your goals should never be gated by internet connectivity.<br>
+            <strong>Capture your ground truth instantly. We sync when ready.</strong>
+          </div>
+        `,
+        section2Heading: 'End-to-End Encrypted State',
+        section2: `
+          <p>Your reflections and aspirations are deeply personal. All telemetry data is encrypted at rest and in transit using modern cryptographic primitives.</p>
+        `,
+        section3: `
+          <p>Engineered for high reliability, zero lag, and total peace of mind.</p>
+        `
+      },
+      'developer-webhooks': {
+        title: 'Developer Webhooks: Integrating Orbit Telemetry into Any Workflow',
+        deck: 'Trigger automated actions in GitHub, Slack, Notion, or custom scripts whenever your Orbit Score changes or a milestone completes.',
+        date: 'Nov 13, 2026',
+        readTime: '3 min read',
+        author: 'Platform API Team',
+        role: 'Developer Relations',
+        category: 'Innovation & AI',
+        subcategory: 'Infrastructure & cloud',
+        section1Heading: 'The Open Goal Telemetry API',
+        section1: `
+          <p>We believe your personal data belongs to you. Developer Webhooks allow engineers and founders to stream Orbit events into their existing tech stack.</p>
+          <div class="movement-quote">
+            Commit code on GitHub ➔ Trigger milestone advancement in Orbit.<br>
+            <strong>Automated telemetry for builder workflows.</strong>
+          </div>
+        `,
+        section2Heading: 'JSON Payloads for Every Telemetry Event',
+        section2: `
+          <p>Subscribe to <code>milestone.completed</code>, <code>checkin.recorded</code>, and <code>orbit_score.updated</code> with standard HMAC-authenticated webhook payloads.</p>
+        `,
+        section3: `
+          <p>Connect your ambition directly to your production toolset.</p>
+        `
+      },
+      'privacy-zero-distraction': {
+        title: 'Privacy & Zero-Distraction: Engineered for Deep Flow',
+        deck: 'Why Orbit will never have algorithmic social feeds, badges to show off, or distracting notifications that pull you away from deep work.',
+        date: 'Nov 12, 2026',
+        readTime: '3 min read',
+        author: 'Ethics & Design',
+        role: 'Human-Centered Design',
+        category: 'Innovation & AI',
+        subcategory: 'Technology',
+        section1Heading: 'The War on Your Attention',
+        section1: `
+          <p>Most modern apps are designed like slot machines: endless red notification dots, social leaderboards, and algorithms optimized for screen time.</p>
+          <p>Orbit is the antithesis of the attention economy. We want you inside Orbit for exactly 45 seconds a day, and then back into the real world doing real work.</p>
+          <div class="movement-quote">
+            Our metric of success is how fast you leave Orbit to do the work.<br>
+            <strong>Zero distractions. Pure focus.</strong>
+          </div>
+        `,
+        section2Heading: 'No Ads. No Data Harvesting.',
+        section2: `
+          <p>We will never monetize your vulnerabilities or sell your goal history to advertisers. You are the customer, not the product.</p>
+        `,
+        section3: `
+          <p>Respect for your cognitive bandwidth is built into every pixel.</p>
+        `
+      },
+      'goal-consistency-science': {
+        title: 'Goal Consistency Science: Compounding Velocity Beats Motivation',
+        deck: 'The cognitive psychology and behavioral neurobiology behind small, relentless daily increments versus sporadic heroic sprints.',
+        date: 'Nov 11, 2026',
+        readTime: '4 min read',
+        author: 'Behavioral Neuroscience Team',
+        role: 'Cognitive Science',
+        category: 'Innovation & AI',
+        subcategory: 'Technology',
+        section1Heading: 'The Mathematics of Compounding Growth',
+        section1: `
+          <p>Improving by 1% each day makes you 37 times better over a year. But the inverse is also true: 1% decay each day reduces you to almost zero.</p>
+          <p>Heroic all-nighters lead to multi-day burnout recovery periods that obliterate average velocity. Consistent, measured output wins every time.</p>
+          <div class="movement-quote">
+            Amateurs rely on inspiration.<br>
+            <strong>Professionals rely on compounding consistency.</strong>
+          </div>
+        `,
+        section2Heading: 'Reducing Decision Fatigue with Orbit',
+        section2: `
+          <p>By defining your next step ahead of time, Orbit eliminates the morning friction of deciding what to do. You simply execute.</p>
+        `,
+        section3: `
+          <p>Let science, not mood, dictate your trajectory.</p>
+        `
+      },
+      'feedback-architecture': {
+        title: 'Feedback Architecture: Closing the Loop Between Action and Outcome',
+        deck: 'How tight feedback loops transform ambiguous aspirations into deterministic realities through rapid error correction.',
+        date: 'Nov 10, 2026',
+        readTime: '4 min read',
+        author: 'Cybernetics & Systems',
+        role: 'Systems Architecture',
+        category: 'Innovation & AI',
+        subcategory: 'Technology',
+        section1Heading: 'The Cybernetics of Human Progress',
+        section1: `
+          <p>In classical control theory, a guidance system requires three elements: a target coordinate, a sensor measuring current position, and an actuator to adjust course.</p>
+          <p>Without the sensor, any guidance rocket drifts aimlessly into space. Orbit acts as your life's guidance sensor.</p>
+          <div class="movement-quote">
+            The world doesn't need more goals.<br>
+            <strong>The world needs better feedback loops.</strong>
+          </div>
+        `,
+        section2Heading: 'Closing the Reality Gap',
+        section2: `
+          <p>By comparing your intended milestone date with your current velocity, Orbit continuously calculates the delta and provides instant feedback.</p>
+        `,
+        section3: `
+          <p>Tighten your feedback loops, and mastery naturally follows.</p>
+        `
+      },
+
+      // 3. Products & Platforms Category Pages
+      'products-platforms-hub': {
+        title: 'The Orbit Platform: Designed for Deterministic Execution',
+        deck: 'An architectural breakdown of the Orbit Core Platform, SkillGPS navigation engine, multi-device ecosystem, and data synchronizations.',
+        date: 'Nov 24, 2026',
+        readTime: '4 min read',
+        author: 'Orbit Platform Leadership',
+        role: 'Product Architecture',
+        category: 'Products & Platforms',
+        subcategory: 'Core Platform',
+        section1Heading: 'A Unified System for Personal Trajectory',
+        section1: `
+          <p>Orbit is not a collection of fragmented features. It is a cohesive, mathematically modeled guidance platform designed to give ambitious individuals complete visibility over their life's work.</p>
+          <div class="movement-quote">
+            Everything revolves around your goals.<br>
+            <strong>The platform exists to turn intent into demonstrable reality.</strong>
+          </div>
+        `,
+        section2Heading: 'Core Platform Modules',
+        section2: `
+          <ul class="space-y-3 my-4 text-slate-800 font-medium">
+            <li>• <strong>Orbit Score (0-100):</strong> The single unified telemetry score quantifying daily momentum and velocity.</li>
+            <li>• <strong>45-Second Daily Check-in:</strong> Frictionless ground truth recording via voice or quick text.</li>
+            <li>• <strong>Weekly Velocity Matrix:</strong> Directional telemetry mapping effort directly to milestone advancement.</li>
+            <li>• <strong>Ecosystem Apps:</strong> Seamless web dashboard, native iOS preview, and Android Material You experience.</li>
+          </ul>
+        `,
+        section3: `
+          <p>Discover each platform component below to see how Orbit keeps you on your highest trajectory.</p>
+          <div class="pt-4">
+            <a href="products.html" class="google-pill-btn google-pill-blue">
+              <span>View Full Products & Platforms Hub</span>
+              <span>→</span>
+            </a>
+          </div>
+        `
+      },
+      'orbit-score': {
+        title: 'The Orbit Score (0-100): The Single Truth Metric for Real Progress',
+        deck: 'How a single intuitive composite number replaces dozens of messy charts, reflecting your real-time momentum and milestone health.',
+        date: 'Nov 23, 2026',
+        readTime: '4 min read',
+        author: 'Metrics & Analytics Team',
+        role: 'Core Platform',
+        category: 'Products & Platforms',
+        subcategory: 'Core Platform',
+        section1Heading: 'One Number to Understand Your Trajectory',
+        section1: `
+          <p>Credit scores tell lenders your financial trustworthiness in a single digit. Fitness trackers give you a sleep score. But until now, there has been no unified metric for personal goal trajectory.</p>
+          <p>The <strong>Orbit Score (0-100)</strong> changes that forever. It combines consistency rate, milestone completion tempo, and velocity delta into one undeniable truth metric.</p>
+          <div class="movement-quote">
+            Orbit Score: 78 • Consistency: 89% • Velocity: +12%<br>
+            <strong>Real-time certainty in a noisy world.</strong>
+          </div>
+        `,
+        section2Heading: 'How Your Orbit Score Evolves',
+        section2: `
+          <p>A score between 70 and 85 indicates optimal compounding momentum without burnout. Falling below 60 signals drift; climbing above 90 reminds you to take scheduled rest.</p>
+        `,
+        section3: `
+          <p>Watch your Orbit Score rise as you conquer each successive milestone.</p>
+        `
+      },
+      'weekly-velocity-matrix': {
+        title: 'The Weekly Velocity Matrix: Real-Time Directional Alignment',
+        deck: 'Visualizing your 7-day effort distribution against target milestones to answer the ultimate question: Am I getting closer?',
+        date: 'Nov 22, 2026',
+        readTime: '3 min read',
+        author: 'Visualization Team',
+        role: 'Core Platform',
+        category: 'Products & Platforms',
+        subcategory: 'Core Platform',
+        section1Heading: 'Visualizing Where Your Energy Actually Went',
+        section1: `
+          <p>At the end of a busy week, most people feel exhausted but uncertain whether they accomplished anything meaningful. The Weekly Velocity Matrix answers that question with geometric precision.</p>
+          <div class="movement-quote">
+            Being busy is a decision.<br>
+            <strong>Being effective is a measurement.</strong>
+          </div>
+        `,
+        section2Heading: 'Color-Coded Vector Alignment',
+        section2: `
+          <p>Each milestone quadrant displays active hours, velocity deltas, and days ahead or behind schedule. Green vectors represent ahead-of-schedule execution.</p>
+        `,
+        section3: `
+          <p>Eliminate Sunday anxiety with clear weekly telemetry.</p>
+        `
+      },
+      'momentum-heatmaps': {
+        isComingSoon: true,
+        title: 'Momentum Heatmaps: Visualizing Energy Density and Progress Rhythms',
+        deck: 'A multi-spectral heat map showing when during the week your highest-value milestone breakthroughs occur.',
+        date: 'Nov 21, 2026',
+        readTime: '3 min read',
+        author: 'Telemetry Research',
+        role: 'Data Visualization',
+        category: 'Products & Platforms',
+        subcategory: 'Core Platform',
+        section1Heading: 'Understanding Your Personal Rhythms',
+        section1: `
+          <p>Not all hours are created equal. Two hours of focused execution on a Tuesday morning can produce more progress than ten hours of fatigued multitasking on a Friday afternoon.</p>
+          <p>Momentum Heatmaps analyze your check-in timestamps and velocity deltas to illustrate your personal chronobiological peak windows.</p>
+          <div class="movement-quote">
+            Align high-gravity goals with high-energy hours.<br>
+            <strong>Optimize your biology for deterministic success.</strong>
+          </div>
+        `,
+        section2Heading: 'Previewing Orbit 1.1',
+        section2: `
+          <p>This feature is in active development as part of Orbit's future vision roadmap, slated for release to early access cohorts soon.</p>
+        `,
+        section3: `
+          <p>Join the waitlist to receive first-access invites.</p>
+        `
+      },
+      'milestone-decomposition': {
+        title: 'Milestone Decomposition: Turning Impossible Dreams into 14-Day Sprints',
+        deck: 'The cognitive framework behind shrinking intimidating lifetime ambitions into lightweight, non-threatening two-week checkpoints.',
+        date: 'Nov 20, 2026',
+        readTime: '4 min read',
+        author: 'Product Strategy',
+        role: 'Guidance & Skills',
+        category: 'Products & Platforms',
+        subcategory: 'Guidance & Skills',
+        section1Heading: 'Why Large Horizons Cause Paralysis',
+        section1: `
+          <p>When you look at a mountaintop, your brain perceives danger and energy expenditure. When you look at the immediate five steps in front of you, walking is effortless.</p>
+          <div class="movement-quote">
+            Deconstruct everything.<br>
+            <strong>If a milestone cannot be proven in 14 days, it is too large.</strong>
+          </div>
+        `,
+        section2Heading: 'The 14-Day Sprint Cadence',
+        section2: `
+          <p>Orbit automatically guides you through decomposing goals into bite-sized sprints. At the end of 14 days, you celebrate objective proof of completion before advancing.</p>
+        `,
+        section3: `
+          <p>Turn mountains into easy steps with Milestone Decomposition.</p>
+        `
+      },
+      'accountability-loops': {
+        title: 'Accountability Loops: Honest Reflection Without Guilt or Shame',
+        deck: 'How to build psychological safety into your daily tracking so you never dread confronting your true progress numbers.',
+        date: 'Nov 19, 2026',
+        readTime: '3 min read',
+        author: 'Orbit Psychology',
+        role: 'Guidance & Skills',
+        category: 'Products & Platforms',
+        subcategory: 'Guidance & Skills',
+        section1Heading: 'Removing Shame from Goal Tracking',
+        section1: `
+          <p>Traditional habit trackers make you feel terrible when you miss a day. The broken chain triggers guilt, which causes avoidance, which causes total abandonment.</p>
+          <p>Orbit replaces punitive red X marks with curiosity: <em>"Zero progress today? That's data, not failure. What caused the friction?"</em></p>
+          <div class="movement-quote">
+            Data is neutral. Reality is information.<br>
+            <strong>Shame destroys consistency. Curiosity restores it.</strong>
+          </div>
+        `,
+        section2Heading: 'The Recovery Protocol',
+        section2: `
+          <p>Orbit's accountability loops automatically offer gentle recovery prompts to recalibrate expectations and maintain psychological momentum.</p>
+        `,
+        section3: `
+          <p>Stay honest, stay kind to yourself, and keep moving forward.</p>
+        `
+      },
+      'cloud-backups': {
+        title: 'Cloud Backups: Guaranteed Redundancy for Your Life’s Ambitions',
+        deck: 'Automated snapshotting, point-in-time recovery, and multi-region replication ensuring your life journal and goal telemetry are never lost.',
+        date: 'Nov 18, 2026',
+        readTime: '3 min read',
+        author: 'Site Reliability Engineering',
+        role: 'Data & Sync',
+        category: 'Products & Platforms',
+        subcategory: 'Data & Sync',
+        section1Heading: 'Your Life Work Deserves Enterprise Redundancy',
+        section1: `
+          <p>Your reflections, insights, and goal trajectory represent the blueprint of your future. We treat this data with the highest tier of engineering integrity.</p>
+          <div class="movement-quote">
+            Continuous snapshots. Multi-region backups.<br>
+            <strong>Your progress is preserved forever.</strong>
+          </div>
+        `,
+        section2Heading: 'Instant Recovery',
+        section2: `
+          <p>Lost your phone? Switching laptops? Log into Orbit and your entire history, active roadmaps, and score telemetry restore in seconds.</p>
+        `,
+        section3: `
+          <p>Rest easy knowing your growth record is bulletproof.</p>
+        `
+      },
+      'export-csv-json': {
+        title: 'Export CSV / JSON: Total Data Ownership and Portability',
+        deck: 'One-click full export of your entire check-in history, velocity metrics, and goal roadmaps in open standard formats.',
+        date: 'Nov 17, 2026',
+        readTime: '2 min read',
+        author: 'Data Openness Initiative',
+        role: 'Data & Sync',
+        category: 'Products & Platforms',
+        subcategory: 'Data & Sync',
+        section1Heading: 'No Walled Gardens',
+        section1: `
+          <p>We reject apps that lock your personal history hostage behind proprietary databases. In Orbit, you can export your complete raw data at any moment.</p>
+          <div class="movement-quote">
+            Your data is yours.<br>
+            <strong>Download every check-in, score, and milestone in clean JSON or CSV.</strong>
+          </div>
+        `,
+        section2Heading: 'Analyze in Python, Excel, or R',
+        section2: `
+          <p>Import your raw telemetry into Jupyter notebooks or custom BI tools to run your own regressions and visualizations.</p>
+        `,
+        section3: `
+          <p>Open standards, total portability, zero lock-in.</p>
+        `
+      },
+      'web-dashboard': {
+        title: 'Orbit Web Dashboard: The Command Center for High Achievers',
+        deck: 'A clean, typography-led desktop workspace built for Sunday weekly planning, deep retrospectives, and roadmap configuration.',
+        date: 'Nov 16, 2026',
+        readTime: '3 min read',
+        author: 'Web Experience Team',
+        role: 'Ecosystem',
+        category: 'Products & Platforms',
+        subcategory: 'Ecosystem',
+        section1Heading: 'Spacious Desktop Clarity',
+        section1: `
+          <p>While the mobile app is built for 45-second micro-reflections, the Orbit Web Dashboard is designed for macro perspective.</p>
+          <p>Spread across your wide screen, the console shows your Weekly Velocity Matrix, active SkillGPS branches, and historical trend lines in one glance.</p>
+          <div class="movement-quote">
+            Micro-action on your phone.<br>
+            <strong>Macro-vision on your desktop.</strong>
+          </div>
+        `,
+        section2Heading: 'Keyboard-First Navigation',
+        section2: `
+          <p>Power users can navigate, check off milestones, and query Copilot using intuitive vim-style or command-palette shortcuts.</p>
+        `,
+        section3: `
+          <p>Access the web experience from any modern browser.</p>
+        `
+      },
+      'ios-native-preview': {
+        title: 'Orbit iOS Native Preview: Haptic Telemetry in Your Pocket',
+        deck: 'An exclusive sneak peek into our SwiftUI native experience with Lock Screen widgets, Interactive Live Activities, and haptic feedback.',
+        date: 'Nov 15, 2026',
+        readTime: '3 min read',
+        author: 'iOS Engineering Lead',
+        role: 'Ecosystem',
+        category: 'Products & Platforms',
+        subcategory: 'Ecosystem',
+        section1Heading: 'Built with SwiftUI and Modern iOS Primitives',
+        section1: `
+          <p>We engineered Orbit for iOS to feel completely native to Apple's design ethos: smooth 120Hz ProMotion animations, subtle haptic clicks on check-in completion, and zero stutter.</p>
+          <div class="movement-quote">
+            Check in directly from your Lock Screen.<br>
+            <strong>45 seconds without even opening the app.</strong>
+          </div>
+        `,
+        section2Heading: 'Live Activity Milestone Tracking',
+        section2: `
+          <p>See your current daily focus pinned to the Dynamic Island while doing deep work, keeping your subconscious aligned with true north.</p>
+        `,
+        section3: `
+          <p>Currently entering TestFlight private beta for waitlist members.</p>
+        `
+      },
+      'android-app-preview': {
+        title: 'Orbit Android App Preview: Material You Design for Relentless Focus',
+        deck: 'Jetpack Compose native architecture featuring dynamic theming, predictive back gestures, and Glance homescreen telemetry widgets.',
+        date: 'Nov 14, 2026',
+        readTime: '3 min read',
+        author: 'Android Engineering Lead',
+        role: 'Ecosystem',
+        category: 'Products & Platforms',
+        subcategory: 'Ecosystem',
+        section1Heading: 'First-Class Material You Experience',
+        section1: `
+          <p>Our Android experience embraces Google's Material 3 design system. It adapts dynamically to your wallpaper colors while preserving Orbit's signature cobalt blue accents.</p>
+          <div class="movement-quote">
+            Native Jetpack Compose architecture.<br>
+            <strong>Fast, fluid, and beautifully minimalist.</strong>
+          </div>
+        `,
+        section2Heading: 'Glance Homescreen Widgets',
+        section2: `
+          <p>Track your Orbit Score and today's milestone question directly from your Android homescreen with zero friction.</p>
+        `,
+        section3: `
+          <p>Android APK preview coming soon to Google Play beta tracks.</p>
+        `
+      },
+
+      // 4. Company News & Stories Category Pages
+      'company-story-mission': {
+        title: 'The Orbit Story: Why Everything Revolves Around Your Goals',
+        deck: 'How a group of founders and developers got tired of meaningless task-ticking and set out to build the navigational instruments of human potential.',
+        date: 'Nov 24, 2026',
+        readTime: '4 min read',
+        author: 'Founding Team',
+        role: 'Company Story',
+        category: 'Company News',
+        subcategory: 'Foundations',
+        section1Heading: 'The Origin of Orbit',
+        section1: `
+          <p>Orbit was born out of frustration. As engineers and creators, we had tested every productivity app on the market: Kanban boards, bullet journals, habit trackers, and AI note-takers.</p>
+          <p>Yet despite checking off hundreds of tasks every month, we frequently looked back and realized we were no closer to our life's biggest aspirations.</p>
+          <div class="movement-quote">
+            We were tracking tasks.<br>
+            <strong>We were not measuring progress.</strong>
+          </div>
+        `,
+        section2Heading: 'The Declaration of Orbit',
+        section2: `
+          <p>We realized humanity didn't need another to-do list. Humanity needed a telemetry system. We set out to build Orbit to prove that personal growth can be deterministic, measurable, and inspiring.</p>
+        `,
+        section3: `
+          <div class="movement-quote text-2xl text-blue-700 font-bold">
+            Everything revolves around your goals.
+          </div>
+        `
+      },
+      'why-orbit-exists': {
+        title: 'Why Orbit Exists: Because People Lack Direction, Not Ambition',
+        deck: 'Why task managers make you feel busy while stealing your life, and why directional telemetry is the only solution.',
+        date: 'Nov 23, 2026',
+        readTime: '3 min read',
+        author: 'Orbit Leadership',
+        role: 'Company Mission',
+        category: 'Company News',
+        subcategory: 'Foundations',
+        section1Heading: 'The Productivity Illusion',
+        section1: `
+          <p>Checking off 15 minor tasks feels rewarding. The brain releases dopamine. You feel productive.</p>
+          <p>But when those 15 tasks don't connect to learning a skill, launching your startup, or changing your career, you have fallen into the productivity illusion.</p>
+          <div class="movement-quote">
+            Being busy is easy.<br>
+            <strong>Moving in the right direction requires courage and telemetry.</strong>
+          </div>
+        `,
+        section2Heading: 'The Orbit Promise',
+        section2: `
+          <p>We exist to keep you honest, keep you aligned, and give you the daily feedback loops necessary to achieve the future you desire.</p>
+        `,
+        section3: `
+          <p>Join our movement and experience measurable progress.</p>
+        `
+      },
+      'building-in-public': {
+        title: 'Building in Public: Documenting the Zero-to-One Journey of Orbit',
+        deck: 'Why we share our design iterations, user feedback sheets, and code architecture openly with our early community.',
+        date: 'Nov 22, 2026',
+        readTime: '3 min read',
+        author: 'Orbit Public Log',
+        role: 'Open Startup',
+        category: 'Company News',
+        subcategory: 'Foundations',
+        section1Heading: 'Radical Transparency from Day One',
+        section1: `
+          <p>We don't build behind closed doors. Every major design milestone, survey response, and telemetry calculation is discussed openly with our community.</p>
+          <div class="movement-quote">
+            Public feedback breeds accountability.<br>
+            <strong>We use the same telemetry principles to build Orbit that Orbit gives its users.</strong>
+          </div>
+        `,
+        section2Heading: 'Live Google Sheet Responses',
+        section2: `
+          <p>We maintain our real-time waitlist responses directly in an open Google Sheet so users can see our community's shared goals and feature requests.</p>
+        `,
+        section3: `
+          <p>Follow along on Twitter/X, GitHub, and our movement blog.</p>
+        `
+      },
+      'early-adopter-cohort': {
+        title: 'The Early Adopter Cohort: Shaping the Future of Goal Telemetry',
+        deck: 'Meet the first 500 developers, students, and founders helping us refine the Orbit Score algorithm before global launch.',
+        date: 'Nov 21, 2026',
+        readTime: '3 min read',
+        author: 'Community Team',
+        role: 'Movement & People',
+        category: 'Company News',
+        subcategory: 'Movement & People',
+        section1Heading: 'The Pioneer Cohort',
+        section1: `
+          <p>Great software is not built in a vacuum. It is forged in the daily routines of passionate early adopters who refuse to settle for mediocre productivity tools.</p>
+          <div class="movement-quote">
+            500 ambitious humans.<br>
+            <strong>One shared conviction: real progress must be measurable.</strong>
+          </div>
+        `,
+        section2Heading: 'Early Cohort Privileges',
+        section2: `
+          <p>Members of our early adopter cohort receive lifetime founding member badges, direct Slack access to the engineering team, and custom SkillGPS roadmaps.</p>
+        `,
+        section3: `
+          <p>Sign up on our waitlist today to be considered for Cohort 2.</p>
+        `
+      },
+      'product-hunt-launch': {
+        title: 'Product Hunt Launch: The Roadmap to Orbit 1.0',
+        deck: 'How we are preparing for our global debut and what community members can do to support our launch day.',
+        date: 'Nov 20, 2026',
+        readTime: '3 min read',
+        author: 'Growth & Launch Team',
+        role: 'Movement & People',
+        category: 'Company News',
+        subcategory: 'Movement & People',
+        section1Heading: 'The Global Reveal',
+        section1: `
+          <p>Our upcoming Product Hunt launch marks the official graduation of Orbit from private research alpha to public beta.</p>
+          <div class="movement-quote">
+            Launching a tool is good.<br>
+            <strong>Igniting a movement around measurable progress is our mission.</strong>
+          </div>
+        `,
+        section2Heading: 'What to Expect on Launch Day',
+        section2: `
+          <p>Live demos, open telemetry challenges, AMA sessions with the founders, and instant invite codes for waitlist subscribers.</p>
+        `,
+        section3: `
+          <p>Stay tuned for our official launch announcement date.</p>
+        `
+      },
+      'founding-principles': {
+        title: 'The Founding Principles of Orbit: Direction Over Distraction',
+        deck: 'The five core tenets that guide every engineering and product decision made at Orbit Technologies.',
+        date: 'Nov 19, 2026',
+        readTime: '3 min read',
+        author: 'Founders Council',
+        role: 'Philosophy',
+        category: 'Company News',
+        subcategory: 'Movement & People',
+        section1Heading: 'Our Immutable North Stars',
+        section1: `
+          <p>When faced with tradeoffs between growth hacking and product integrity, our founding principles dictate the answer every single time.</p>
+          <div class="movement-quote">
+            1. Direction over speed.<br>
+            2. Ground truth over wishful thinking.<br>
+            3. 45-second friction over elaborate dashboards.<br>
+            4. User empowerment over app retention.<br>
+            5. Everything revolves around your goals.
+          </div>
+        `,
+        section2Heading: 'Built to Last Decades',
+        section2: `
+          <p>We are not building a flip startup. We are building an enduring personal operating system that supports humans across their entire careers.</p>
+        `,
+        section3: `
+          <p>Read the full Orbit Manifesto for our complete declaration.</p>
+        `
+      },
+      'goal-science-whitepaper': {
+        title: 'Goal Science Whitepaper: Cognitive Load, Telemetry, and Consistency',
+        deck: 'Download our comprehensive 24-page academic whitepaper detailing the cognitive science behind the Orbit Score formula.',
+        date: 'Nov 18, 2026',
+        readTime: '5 min read',
+        author: 'Research & Telemetry Lab',
+        role: 'Media & Research',
+        category: 'Company News',
+        subcategory: 'Media & Research',
+        section1Heading: 'The Science of Goal Realization',
+        section1: `
+          <p>Synthesizing research from cognitive psychology, human-computer interaction, and feedback systems, our whitepaper outlines why traditional productivity models fail 92% of users.</p>
+          <div class="movement-quote">
+            The failure rate of New Year's resolutions is not human weakness.<br>
+            <strong>It is an interface defect in how goals are represented.</strong>
+          </div>
+        `,
+        section2Heading: 'Key Insights from the Study',
+        section2: `
+          <ul class="space-y-2 my-4 text-slate-800 font-medium">
+            <li>• Reflection latency exceeding 60 seconds increases dropout by 400%.</li>
+            <li>• Vector-aligned feedback loops increase 90-day persistence from 14% to 76%.</li>
+            <li>• Objective telemetry eliminates the need for erratic motivational spikes.</li>
+          </ul>
+        `,
+        section3: `
+          <p>Download the full whitepaper or read the executive summary here.</p>
+        `
+      },
+      'productivity-theater-trap': {
+        title: 'The Productivity Theater Trap: Stop Organizing, Start Progressing',
+        deck: 'An essay analyzing why spending 3 hours color-coding your Notion database gives you a false feeling of accomplishment.',
+        date: 'Nov 17, 2026',
+        readTime: '4 min read',
+        author: 'Cultural Criticism Series',
+        role: 'Media & Research',
+        category: 'Company News',
+        subcategory: 'Media & Research',
+        section1Heading: 'The Seduction of Organizing',
+        section1: `
+          <p>Organizing feels like working. Moving a card across a Trello board feels like shipping code. Changing font colors on your calendar feels like health.</p>
+          <p>It is not. It is <strong>productivity theater</strong>: performative busyness designed to distract your mind from the intimidating reality of creative work.</p>
+          <div class="movement-quote">
+            Orbit has no color-coding.<br>
+            <strong>Orbit has no tags. Orbit only asks: Did you make progress today?</strong>
+          </div>
+        `,
+        section2Heading: 'Escaping the Trap',
+        section2: `
+          <p>Strip away the elaborate dashboards. Spend 45 seconds recording your daily ground truth, and spend the remaining 23 hours and 59 minutes living your life.</p>
+        `,
+        section3: `
+          <p>Progress beats productivity every single time.</p>
+        `
+      },
+      'brand-assets': {
+        title: 'Orbit Brand Assets: Design Philosophy, Logos, and Media Kit',
+        deck: 'Download official high-resolution Orbit logos, SVG icons, color palettes, and typographic guidelines for press and community use.',
+        date: 'Nov 16, 2026',
+        readTime: '2 min read',
+        author: 'Brand Design Studio',
+        role: 'Media & Research',
+        category: 'Company News',
+        subcategory: 'Media & Research',
+        section1Heading: 'The Visual Language of Orbit',
+        section1: `
+          <p>The Orbit brand identity represents celestial clarity, mathematical precision, and human warmth. Our primary cobalt blue (#0B57D0) symbolizes deep focus and truth.</p>
+          <div class="movement-quote">
+            Clean typography. Purposeful gradients. Zero fluff.<br>
+            <strong>The visual identity of an ambitious generation.</strong>
+          </div>
+        `,
+        section2Heading: 'Media Kit Package Contents',
+        section2: `
+          <ul class="space-y-2 my-4 text-slate-800 font-medium">
+            <li>• High-res Vector SVG and PNG logos (Dark and Light modes)</li>
+            <li>• Product dashboard mockups and mobile check-in UI frames</li>
+            <li>• Typography guides (Google Sans & Inter font pairings)</li>
+          </ul>
+        `,
+        section3: `
+          <p>Feel free to use our official brand assets when writing about Orbit.</p>
+        `
+      },
+      'orbit-community': {
+        title: 'Connect with Orbit: LinkedIn, GitHub, and X Communities',
+        deck: 'Join thousands of builders, researchers, and self-improvement enthusiasts discussing goal science and building in public.',
+        date: 'Nov 15, 2026',
+        readTime: '2 min read',
+        author: 'Community Relations',
+        role: 'Connect',
+        category: 'Company News',
+        subcategory: 'Connect',
+        section1Heading: 'A Gathering of High Achievers',
+        section1: `
+          <p>Orbit is more than software—it is a community of people who believe in deliberate, measurable personal evolution.</p>
+          <div class="movement-quote">
+            Surround yourself with people who measure direction, not noise.<br>
+            <strong>Connect with fellow ambitious builders.</strong>
+          </div>
+        `,
+        section2Heading: 'Where to Find Us',
+        section2: `
+          <ul class="space-y-3 my-4 text-slate-800 font-semibold text-lg">
+            <li>• <strong>X / Twitter:</strong> Follow <a href="https://twitter.com" target="_blank" class="text-blue-600 underline">@Orbit</a> for daily goal science insights.</li>
+            <li>• <strong>GitHub:</strong> Star our open-source repo: <a href="https://github.com/Naveen-dk/orbit-blog.git" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">github.com/Naveen-dk/orbit-blog</a></li>
+            <li>• <strong>LinkedIn:</strong> Network with professionals and founders in our cohort.</li>
+            <li>• <strong>Google Sheets:</strong> View our live community responses sheet.</li>
+          </ul>
+        `,
+        section3: `
+          <p>We welcome you to join our growing global movement.</p>
+        `
+      }
+    };
+
+    // =========================================================================
+    // DYNAMIC ARTICLE RENDERER
+    // =========================================================================
+    function getArticleId() {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get('id') || 'why-most-goals-fail';
+    }
+
+    function renderArticle(id) {
+      if (id === 'orbit-deepmind-engine') {
+        window.location.replace('research.html');
+        return;
+      }
+      if (id === 'skillgps-foundation') {
+        window.location.replace('skillgps.html');
+        return;
+      }
+      const art = ARTICLES[id] || ARTICLES['why-most-goals-fail'];
+      
+      document.getElementById('page-head-title').textContent = `${art.title} — News from Orbit`;
+      document.getElementById('sticky-title').textContent = art.title;
+      document.getElementById('article-headline').textContent = art.title;
+      document.getElementById('article-deck').textContent = art.deck;
+      document.getElementById('article-date').textContent = art.date;
+      document.getElementById('article-readtime').textContent = art.readTime;
+      document.getElementById('article-author-name').textContent = art.author;
+      document.getElementById('article-author-role').textContent = art.role;
+      document.getElementById('bread-category').textContent = art.category;
+      document.getElementById('bread-subcategory').textContent = art.subcategory;
+
+      // Handle Coming Soon Badge
+      const badgeEl = document.getElementById('future-badge');
+      if (art.isComingSoon) {
+        badgeEl.classList.remove('hidden');
+      } else {
+        badgeEl.classList.add('hidden');
+      }
+
+      document.getElementById('section1-heading').textContent = art.section1Heading;
+      document.getElementById('section1-body').innerHTML = art.section1;
+      document.getElementById('section2-heading').textContent = art.section2Heading;
+      document.getElementById('section2-body').innerHTML = art.section2;
+      document.getElementById('section3-body').innerHTML = art.section3;
+
+      lucide.createIcons();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function switchArticle(id) {
+      history.pushState(null, '', `article.html?id=${id}`);
+      renderArticle(id);
+      closeMegaMenu();
+    }
+
+    // =========================================================================
+    // MEGA MENU CONTROLLER
+    // =========================================================================
+    let activeMegaCategory = null;
+
+    function renderColumnList(items) {
+      return items.map(item => {
+        const targetAttr = item.external ? 'target="_blank" rel="noopener noreferrer"' : '';
+        const badgeHtml = item.badge 
+          ? `<span class="inline-flex items-center gap-1 text-[10px] font-semibold bg-blue-50 text-blue-700 border border-blue-200 px-2 py-0.5 rounded-full ml-1">
+               <span class="w-1.5 h-1.5 rounded-full bg-blue-600 animate-pulse"></span>
+               ${item.badge}
+             </span>`
+          : '';
+        return `<li><a href="${item.url}" ${targetAttr}><span>${item.text}</span> ${badgeHtml}</a></li>`;
+      }).join('');
+    }
+
+    function toggleMegaMenu(category) {
+      const menu = document.getElementById('megaMenuPanel');
+      const allBtns = {
+        'innovation': document.getElementById('innovationBtn'),
+        'products': document.getElementById('productsBtn'),
+        'company': document.getElementById('companyBtn')
+      };
+
+      if (activeMegaCategory === category && menu.classList.contains('open')) {
+        closeMegaMenu();
+        return;
+      }
+
+      activeMegaCategory = category;
+      Object.keys(allBtns).forEach(key => {
+        const btn = allBtns[key];
+        if (btn) {
+          const isActive = (key === category);
+          btn.classList.toggle('active', isActive);
+          btn.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+        }
+      });
+
+      const data = MEGA_DATA[category];
+      if (data) {
+        document.getElementById('megaTitle').textContent = data.title;
+        document.getElementById('megaCtaText').textContent = data.ctaText;
+        document.getElementById('megaCtaBtn').setAttribute('href', data.ctaLink);
+
+        document.getElementById('col1Heading').textContent = data.col1Heading;
+        document.getElementById('col1List').innerHTML = renderColumnList(data.col1);
+
+        document.getElementById('col2Heading').textContent = data.col2Heading;
+        document.getElementById('col2List').innerHTML = renderColumnList(data.col2);
+
+        document.getElementById('col3Heading').textContent = data.col3Heading;
+        document.getElementById('col3List').innerHTML = renderColumnList(data.col3);
+
+        document.getElementById('col4Heading').textContent = data.col4Heading;
+        document.getElementById('col4List').innerHTML = renderColumnList(data.col4);
+
+        document.getElementById('learnMoreLinks').innerHTML = data.learnMore.map(item => {
+          const targetAttr = item.external ? 'target="_blank" rel="noopener noreferrer"' : '';
+          return `<a href="${item.url}" ${targetAttr}>${item.text}</a>`;
+        }).join('');
+      }
+
+      menu.classList.add('open');
+    }
+
+    function closeMegaMenu() {
+      const menu = document.getElementById('megaMenuPanel');
+      if (menu) menu.classList.remove('open');
+      activeMegaCategory = null;
+
+      ['innovationBtn', 'productsBtn', 'companyBtn'].forEach(id => {
+        const btn = document.getElementById(id);
+        if (btn) {
+          btn.classList.remove('active');
+          btn.setAttribute('aria-expanded', 'false');
+        }
+      });
+    }
+
+    document.addEventListener('click', (e) => {
+      const navbar = document.getElementById('mainNavbar');
+      if (navbar && !navbar.contains(e.target)) {
+        closeMegaMenu();
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeMegaMenu();
+    });
+
+    // =========================================================================
+    // STICKY HEADER & READING PROGRESS
+    // =========================================================================
+    const stickyBar = document.getElementById('sticky-reading-bar');
+    const progressBar = document.getElementById('reading-progress-bar');
+
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+
+      if (scrollY > 280) {
+        stickyBar.classList.add('visible');
+      } else {
+        stickyBar.classList.remove('visible');
+      }
+
+      if (totalHeight > 0) {
+        const pct = Math.min(100, Math.max(0, (scrollY / totalHeight) * 100));
+        progressBar.style.width = pct + '%';
+      }
+    }, { passive: true });
+
+    // =========================================================================
+    // SHARE & CAROUSEL
+    // =========================================================================
+    function shareArticle() {
+      if (navigator.share) {
+        navigator.share({
+          title: document.getElementById('article-headline').textContent,
+          url: window.location.href
+        }).catch(() => {});
+      } else {
+        navigator.clipboard.writeText(window.location.href);
+        const toast = document.getElementById('share-toast');
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 3000);
+      }
+    }
+
+    const relCarousel = document.getElementById('related-carousel');
+    document.getElementById('related-prev').addEventListener('click', () => {
+      relCarousel.scrollBy({ left: -340, behavior: 'smooth' });
+    });
+    document.getElementById('related-next').addEventListener('click', () => {
+      relCarousel.scrollBy({ left: 340, behavior: 'smooth' });
+    });
+
+    // Listen to browser forward/back buttons
+    window.addEventListener('popstate', () => {
+      renderArticle(getArticleId());
+    });
+
+    // Initialize on Load
+    renderArticle(getArticleId());
+  </script>
+</body>
+</html>
