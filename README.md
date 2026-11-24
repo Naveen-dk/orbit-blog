@@ -1,74 +1,76 @@
-# Orbit — Everything Revolves Around Your Goals
+# Orbit — News, Research & Measurable Progress
 
-A modern, venture-backed startup landing page and blog platform for **Orbit**, the AI-powered goal operating system that helps users measure real progress toward their goals through directional guidance, daily check-ins, and progress analytics.
+> *"Progress isn't about what you planned. Progress is about what actually happened."*
 
----
-
-## 🚀 Live Features & Architecture
-
-### 1. Brand & Design System
-- **Theme**: Dark Mode with `#050816` background, `#2563EB` primary, `#60A5FA` secondary, and `#FFFFFF` typography.
-- **Visual Aesthetic**: Inspired by Linear, Arc, Notion, Vercel, and Stripe with glassmorphism (`backdrop-filter: blur(16px)`), subtle radial glow gradients, and rounded geometry.
-- **Interactive Orbital Canvas**: Real-time gravitational particle simulation with celestial satellites representing goals orbiting the user.
-
-### 2. Website Structure
-1. **Landing Page (`#home`)**:
-   - **Hero Section**: High-impact headline, subheadline, CTA buttons (`[Join Early Access]`, `[Read Our Story]`), active supporter counter, and 3D animated orbital rings.
-   - **Problem Section**: Clear contrast between the fragmented approach (to-do lists, habit trackers, motivational videos) and the Orbit vector trajectory solution.
-   - **Orbit Solution Section**: Interactive cards for **Orbit Score**, **Daily Check-ins**, **AI Insights**, **SkillGPS Roadmaps**, **Growth Analytics**, and **Streak Tracking**.
-   - **Interactive Feature Preview Console**: Live dashboard mockup displaying:
-     - Orbit Score: **78**
-     - Consistency: **89%**
-     - Weekly Progress: **+12%**
-     - Current Goal: **Become a Full Stack Developer** (with interactive toggles for SaaS and Marathon goals).
-     - Interactive **"Complete Daily Check-in"** simulator with live telemetry boost and celebratory confetti.
-   - **Why Orbit Exists**: Core philosophical manifesto on tracking progress instead of tasks.
-   - **Social Proof**: Real user testimonials from students, developers, and founders.
-   - **Build In Public**: Direct links to GitHub, X/Twitter, and LinkedIn.
-
-2. **About Orbit (`#about`)**:
-   - The origin story, mission statement, and tailored solutions for our target audiences: Students, Developers, Founders, Freelancers, Professionals, and Self-improvement enthusiasts.
-
-3. **Blog Platform (`#blog`) — Google Material Design 3 Spec**:
-   - Recreates the clean UI of **News from Google** (`blog.google`) as specified in the reference screenshots:
-     - **Horizontal Snap-Carousel Hero**: Smooth horizontal scrolling with custom `<` and `>` controls and a progress indicator bar.
-     - **Rounded Geometry & Soft Elevation**: 24px and 28px border radii with subtle pastel gradients.
-     - **Google News Newsletter Banner**: Pill-shaped subscription card with inline email input.
-     - **"More Updates" & "What's New"**: Filterable card grids with topic pills (`Productivity`, `AI Insights`, `SkillGPS`, `Build In Public`).
-     - **All 5 Featured Articles with Full Reading Modal**:
-       1. *Why Most Goals Fail*
-       2. *The Problem With Motivation*
-       3. *Progress Beats Productivity*
-       4. *Building Orbit In Public*
-       5. *How To Stay Consistent For 100 Days*
-
-4. **Join Early Access / Waitlist (`#waitlist`)**:
-   - High-converting waitlist form collecting Name, Email, Role, and Biggest Goal.
-   - Dynamic counter starting at `148+ early supporters` with persistent browser local storage.
-   - Multi-colored confetti burst on submission, queue position confirmation (`#149`), and instant referral link generator.
-
-5. **Contact (`#contact`)**:
-   - Direct message form, founder contact details, and interactive FAQ accordion.
-
-6. **Footer**:
-   - Full brand navigation, status indicator ("All Systems Operational • Alpha 1.0"), and social channels.
+Orbit is an editorial-first product launch website and movement hub inspired by Google's *The Keyword* (`blog.google`). It features high-performance 120 FPS native scrolling, Material You (Material 3) organic SVG shape masks, and an automated serverless backend powered by Google Apps Script, Google Sheets, and Gmail.
 
 ---
 
-## 🛠 Tech Stack
-- **HTML5 & Modern Web APIs** (History Hash Routing, LocalStorage, Canvas 2D)
-- **Tailwind CSS CDN** (utility layout engine)
-- **Custom CSS Engine (`styles.css`)** (Custom cubic-bezier easing `cubic-bezier(0.2, 0, 0, 1)`, glassmorphism, responsive snap-carousel)
-- **Lucide Icons** (lightweight vector icons)
-- **JavaScript ES6+ (`app.js`)** (Orbital physics, confetti generator, reactive goal switcher, modal reader)
+## 🛰️ Features
+
+- **Google Editorial Design System:** Recreates the typography, layout rhythm, and pill-button aesthetic of Google's flagship publication.
+- **Dual-Variant Category Hubs (`topic.html`):**
+  - **Variant A:** Category hub layout with featured hero banner and full feed.
+  - **Variant B:** Compact sub-product leaf layout with direct feed and cross-category tags.
+- **Component-Driven Story Reader (`article.html`):** Dynamic 9-block layout engine (`feature-drop`, `editorial`, `changelog`).
+- **Interactive Material 3 Snapping Carousel:** Touch and mouse-wheel carousel featuring organic SVG shape masks (4-leaf clover, squircle, scalloped cloud, rounded diamond).
+- **Automated Cloud Backend:**
+  - Form submissions automatically stream into **Google Sheets** (`Sheet1!B8:F`).
+  - Real-time KPI summary recalculations (`Total Responses`, `Would Use Orbit`, `Interest Rate (%)`).
+  - **Instant User Welcome Email:** Sends a personalized welcome confirmation with their target goal.
+  - **Instant Admin Lead Alert:** Notifies the team on every new signup.
 
 ---
 
-## 🌐 Running Locally
-Simply open `index.html` in any modern web browser:
+## 📂 Project Structure
+
+```
+Orbit Launch Page/
+├── index.html                  # Main editorial landing page & waitlist registration
+├── topic.html                  # Dynamic dual-variant category/subtopic explorer
+├── article.html                # Modular story reader with 9 component blocks
+├── research.html               # Dedicated deep-dive research hub
+├── articles.js                 # Central headless CMS data store
+├── article-blocks.css          # Block styles for article layouts
+├── related-carousel.css        # Snapping carousel styles & organic SVG clip-paths
+├── related-carousel.js         # Interactive carousel controller & progress tracker
+├── preferences-dropdown.css    # Google Blog style preferences drawer
+├── preferences-dropdown.js     # Dropdown logic & active region pill handler
+├── google-sheets-sync.gs       # Complete Google Apps Script webhook code
+└── .gitignore                  # Standard repository ignore file
+```
+
+---
+
+## 🚀 How to Run Locally
+
+Because Orbit is built with standard web technologies (HTML5, Tailwind CSS, Vanilla Modern JS), no build steps or heavy node dependencies are required.
+
+Simply open `index.html` in your web browser:
 ```bash
-# Double click index.html or serve using any static web server:
-npx serve .
-# or
+# Using VS Code Live Server, or python:
 python -m http.server 3000
 ```
+Then navigate to `http://localhost:3000`.
+
+---
+
+## 🌐 Deploy to Vercel
+
+1. Push this repository to GitHub:
+   ```bash
+   git init
+   git add .
+   git commit -m "Initial commit: Orbit Launch Page"
+   git branch -M main
+   git remote add origin https://github.com/YOUR_USERNAME/orbit.git
+   git push -u origin main
+   ```
+2. Go to [Vercel](https://vercel.com) and import the repository.
+3. Deploy! Instant global Edge CDN, free automatic SSL, and zero configuration needed.
+
+---
+
+## 📄 License
+
+MIT License. Designed and built with ❤️ by the Orbit Team.
