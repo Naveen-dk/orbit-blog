@@ -6,6 +6,19 @@
   <title>News from Orbit — A Movement Around Measurable Progress</title>
   <meta name="description" content="A movement around personal growth, goal visibility, and measurable progress. Everything revolves around your goals.">
   
+  <!-- Dynamic Route Forwarder -->
+  <script>
+    (function() {
+      const params = new URLSearchParams(window.location.search);
+      const slug = params.get('slug') || params.get('topic') || (window.location.hash ? window.location.hash.replace('#', '') : null);
+      if (slug) {
+        window.location.replace('topic.html?slug=' + encodeURIComponent(slug));
+      } else {
+        window.location.replace('topic.html?slug=innovation-ai');
+      }
+    })();
+  </script>
+  
   <!-- Google Fonts: Google Sans / Inter / Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

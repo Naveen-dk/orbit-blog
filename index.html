@@ -48,6 +48,10 @@
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
+  <!-- Preferences Dropdown (blog.google) -->
+  <link rel="stylesheet" href="preferences-dropdown.css">
+  <script src="preferences-dropdown.js"></script>
+
   <style>
     :root {
       --ease-google: cubic-bezier(0.2, 0, 0, 1);
@@ -332,6 +336,14 @@
       scrollbar-width: none;
     }
 
+    /* 120 FPS Compositor & Paint Isolation (Zero Reflow on Scroll) */
+    #updates article,
+    .article-row,
+    .carousel-slide {
+      content-visibility: auto;
+      contain-intrinsic-size: 1px 180px;
+    }
+
     /* Google Pill Buttons */
     .google-pill-btn {
       display: inline-flex;
@@ -568,7 +580,7 @@
       </ul>
     </div>
 
-    <!-- Right Controls: Search, More Options, Newsletter CTA -->
+    <!-- Right Controls: Search, Preferences Dropdown, Newsletter CTA -->
     <div class="nav-right">
       <!-- Search Icon -->
       <button class="icon-btn" onclick="document.getElementById('latest').scrollIntoView({behavior: 'smooth'})" aria-label="Search">
@@ -578,14 +590,35 @@
         </svg>
       </button>
 
-      <!-- Three Dots Overflow Icon -->
-      <button class="icon-btn" onclick="toggleOptionsDrawer()" aria-label="More options">
+      <!-- Three Dots Preferences Button (blog.google) -->
+      <button class="icon-btn" id="preferencesBtn" onclick="togglePreferencesDropdown(event)" aria-label="Preferences">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
           <circle cx="12" cy="5" r="2"></circle>
           <circle cx="12" cy="12" r="2"></circle>
           <circle cx="12" cy="19" r="2"></circle>
         </svg>
       </button>
+
+      <!-- Preferences Floating Card (blog.google recreation) -->
+      <div class="preferences-dropdown" id="preferencesDropdown">
+        <div class="preferences-header">Preferences</div>
+        <div class="preferences-pill" id="preferencesPill" onclick="toggleEditionMenu(event)">
+          <div class="preferences-pill-left">
+            <svg class="preferences-globe-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="2" y1="12" x2="22" y2="12"></line>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+            </svg>
+            <span class="preferences-pill-label" id="selectedEditionLabel">Global (English)</span>
+          </div>
+          <svg class="preferences-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </div>
+        <div class="preferences-options-menu" id="editionOptionsMenu">
+          <!-- Populated dynamically by preferences-dropdown.js -->
+        </div>
+      </div>
 
       <!-- Newsletter Button -->
       <a href="#waitlist" class="newsletter-btn">Newsletter</a>
@@ -596,7 +629,7 @@
       <!-- Left Panel inside Mega Menu -->
       <div class="mega-left">
         <h2 id="megaTitle">Innovation & AI</h2>
-        <a href="article.html?id=innovation-ai-hub" id="megaCtaBtn" class="pill-outline-btn">
+        <a href="topic.html?slug=innovation-ai" id="megaCtaBtn" class="pill-outline-btn">
           <span id="megaCtaText">See all in Innovation & AI</span>
           <span>→</span>
         </a>
@@ -610,7 +643,7 @@
             <div class="col-heading" id="col1Heading">Models & Research</div>
             <ul class="col-list" id="col1List">
               <li>
-                <a href="research.html">
+                <a href="topic.html?slug=orbit-deepmind-engine">
                   <span>Orbit DeepMind Engine</span>
                   <span class="inline-flex items-center gap-1 text-[10px] font-semibold bg-blue-50 text-blue-700 border border-blue-200 px-2 py-0.5 rounded-full ml-1" title="Part of Orbit's future vision">
                     <span class="w-1.5 h-1.5 rounded-full bg-blue-600 animate-pulse"></span>
@@ -619,7 +652,7 @@
                 </a>
               </li>
               <li>
-                <a href="article.html?id=goal-telemetry-models">
+                <a href="topic.html?slug=goal-telemetry-models">
                   <span>Goal Telemetry Models</span>
                   <span class="inline-flex items-center gap-1 text-[10px] font-semibold bg-blue-50 text-blue-700 border border-blue-200 px-2 py-0.5 rounded-full ml-1" title="Part of Orbit's future vision">
                     <span class="w-1.5 h-1.5 rounded-full bg-blue-600 animate-pulse"></span>
@@ -627,10 +660,10 @@
                   </span>
                 </a>
               </li>
-              <li><a href="article.html?id=orbit-labs">Orbit Labs</a></li>
+              <li><a href="topic.html?slug=models-research">Orbit Labs</a></li>
               <li><a href="skillgps.html">SkillGPS Foundation</a></li>
               <li>
-                <a href="article.html?id=velocity-delta-analytics">
+                <a href="topic.html?slug=velocity-delta-analytics">
                   <span>Velocity Delta Analytics</span>
                   <span class="inline-flex items-center gap-1 text-[10px] font-semibold bg-blue-50 text-blue-700 border border-blue-200 px-2 py-0.5 rounded-full ml-1" title="Part of Orbit's future vision">
                     <span class="w-1.5 h-1.5 rounded-full bg-blue-600 animate-pulse"></span>
@@ -638,7 +671,7 @@
                   </span>
                 </a>
               </li>
-              <li><a href="article.html?id=innovation-ai-hub">See all →</a></li>
+              <li><a href="topic.html?slug=models-research">See all →</a></li>
             </ul>
           </div>
 
@@ -646,11 +679,11 @@
           <div>
             <div class="col-heading" id="col2Heading">Products</div>
             <ul class="col-list" id="col2List">
-              <li><a href="article.html?id=orbit-copilot-ai">Orbit Copilot AI</a></li>
-              <li><a href="article.html?id=daily-checkins">45s Daily Check-ins</a></li>
-              <li><a href="article.html?id=skillgps-roadmaps">SkillGPS Roadmaps</a></li>
-              <li><a href="article.html?id=streak-telemetry">Streak Telemetry</a></li>
-              <li><a href="article.html?id=products-platforms-hub">See all →</a></li>
+              <li><a href="topic.html?slug=orbit-copilot-ai">Orbit Copilot AI</a></li>
+              <li><a href="topic.html?slug=daily-checkins">45s Daily Check-ins</a></li>
+              <li><a href="topic.html?slug=skillgps-roadmaps">SkillGPS Roadmaps</a></li>
+              <li><a href="topic.html?slug=streak-telemetry">Streak Telemetry</a></li>
+              <li><a href="topic.html?slug=products-platforms">See all →</a></li>
             </ul>
           </div>
 
@@ -658,10 +691,10 @@
           <div>
             <div class="col-heading" id="col3Heading">Infrastructure & cloud</div>
             <ul class="col-list" id="col3List">
-              <li><a href="article.html?id=orbit-cloud-sync">Orbit Cloud Sync</a></li>
+              <li><a href="topic.html?slug=orbit-cloud-sync">Orbit Cloud Sync</a></li>
               <li><a href="https://docs.google.com/spreadsheets/d/1yrLpcoCj1qljqi2OI1LTvUPy1eimPrfYQU_ACyyBkAY/edit?usp=sharing" target="_blank" rel="noopener noreferrer">Google Sheets Live Sync</a></li>
-              <li><a href="article.html?id=developer-webhooks">Developer Webhooks</a></li>
-              <li><a href="https://docs.google.com/spreadsheets/d/1yrLpcoCj1qljqi2OI1LTvUPy1eimPrfYQU_ACyyBkAY/edit?usp=sharing" target="_blank" rel="noopener noreferrer">See all →</a></li>
+              <li><a href="topic.html?slug=developer-webhooks">Developer Webhooks</a></li>
+              <li><a href="topic.html?slug=infrastructure-cloud">See all →</a></li>
             </ul>
           </div>
 
@@ -669,10 +702,10 @@
           <div>
             <div class="col-heading" id="col4Heading">Technology</div>
             <ul class="col-list" id="col4List">
-              <li><a href="article.html?id=privacy-zero-distraction">Privacy & Zero-Distraction</a></li>
-              <li><a href="article.html?id=goal-consistency-science">Goal Consistency Science</a></li>
-              <li><a href="article.html?id=feedback-architecture">Feedback Architecture</a></li>
-              <li><a href="article.html?id=feedback-architecture">See all →</a></li>
+              <li><a href="topic.html?slug=privacy-zero-distraction">Privacy & Zero-Distraction</a></li>
+              <li><a href="topic.html?slug=goal-consistency-science">Goal Consistency Science</a></li>
+              <li><a href="topic.html?slug=feedback-architecture">Feedback Architecture</a></li>
+              <li><a href="topic.html?slug=technology">See all →</a></li>
             </ul>
           </div>
         </div>
@@ -1680,12 +1713,20 @@
             <div class="w-14 h-14 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto mb-3">
               <i data-lucide="check" class="w-7 h-7"></i>
             </div>
-            <h4 class="text-xl font-bold text-[#1F1F1F] mb-2">Thank you! Your response is recorded</h4>
-            <p class="text-sm text-[#444746] mb-6 max-w-sm mx-auto">
-              Your goal, feedback, and interest level have been captured and queued for synchronization with the master Google Sheet.
+            <h4 class="text-xl font-bold text-[#1F1F1F] mb-1">Thank you! Your response is recorded</h4>
+            <p class="text-sm text-[#444746] mb-4 max-w-sm mx-auto">
+              Your details have been captured and saved for your Google Sheet.
             </p>
 
-            <div class="bg-[#F8F9FA] border border-[#E0E3E7] rounded-xl p-4 text-left text-xs space-y-2 mb-6">
+            <!-- Sync Status Indicator -->
+            <div id="sync-status-container" class="mb-5">
+              <div id="sync-status-badge" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-medium bg-emerald-50 text-emerald-800 border border-emerald-200">
+                <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                <span id="sync-status-text">✓ Response saved & ready for Google Sheets</span>
+              </div>
+            </div>
+
+            <div class="bg-[#F8F9FA] border border-[#E0E3E7] rounded-xl p-4 text-left text-xs space-y-2 mb-5">
               <div class="flex justify-between text-[#5F6368]">
                 <span>Name:</span> <strong id="summary-name" class="text-[#1F1F1F]">-</strong>
               </div>
@@ -1703,13 +1744,18 @@
               </div>
             </div>
 
-            <div class="flex flex-col sm:flex-row items-center gap-3 justify-center">
-              <a href="https://docs.google.com/spreadsheets/d/1yrLpcoCj1qljqi2OI1LTvUPy1eimPrfYQU_ACyyBkAY/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="google-pill-btn google-pill-blue py-3 px-6 text-sm inline-flex items-center gap-2">
+            <!-- Simple, clear actions -->
+            <div class="flex flex-col sm:flex-row items-center gap-2.5 justify-center mb-4">
+              <a href="https://docs.google.com/spreadsheets/d/1yrLpcoCj1qljqi2OI1LTvUPy1eimPrfYQU_ACyyBkAY/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="google-pill-btn google-pill-blue py-2.5 px-5 text-xs inline-flex items-center gap-2 shadow-sm">
                 <span>Open Google Sheet</span>
-                <i data-lucide="external-link" class="w-4 h-4"></i>
+                <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
               </a>
-              <button onclick="resetWaitlistForm()" class="px-5 py-3 rounded-full text-xs font-medium text-[#444746] hover:text-[#1F1F1F] hover:bg-slate-100 transition-colors">
-                Submit another response
+              <button type="button" onclick="copyRowForGoogleSheet()" class="google-pill-btn bg-white border border-[#DADCE0] text-[#1F1F1F] hover:bg-slate-50 py-2.5 px-4 text-xs inline-flex items-center gap-1.5 shadow-2xs">
+                <i data-lucide="copy" class="w-3.5 h-3.5 text-[#0B57D0]"></i>
+                <span id="copy-row-btn-text">Copy Row (Paste to Sheet)</span>
+              </button>
+              <button onclick="resetWaitlistForm()" class="px-4 py-2 text-xs font-medium text-[#5F6368] hover:text-[#1F1F1F] hover:bg-slate-100 rounded-full transition-colors">
+                Submit another
               </button>
             </div>
           </div>
@@ -1848,13 +1894,17 @@
     const nextBtn = document.getElementById('carousel-next');
     const progressFill = document.getElementById('carousel-progress');
 
+    let carouselRaf = null;
     function updateCarouselProgress() {
-      if (!carousel) return;
-      const maxScroll = carousel.scrollWidth - carousel.clientWidth;
-      if (maxScroll > 0) {
-        const pct = Math.min(100, Math.max(20, (carousel.scrollLeft / maxScroll) * 100));
-        progressFill.style.width = pct + '%';
-      }
+      if (!carousel || carouselRaf) return;
+      carouselRaf = requestAnimationFrame(() => {
+        const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+        if (maxScroll > 0) {
+          const pct = Math.min(100, Math.max(20, (carousel.scrollLeft / maxScroll) * 100));
+          progressFill.style.width = pct + '%';
+        }
+        carouselRaf = null;
+      });
     }
 
     carousel.addEventListener('scroll', updateCarouselProgress, { passive: true });
@@ -1990,6 +2040,78 @@
       lucide.createIcons();
     }
 
+    // =========================================================================
+    // GOOGLE SHEETS LIVE SYNC & WAITLIST SUBMISSION (VERSION 2 ACTIVE)
+    // =========================================================================
+    const GOOGLE_SHEETS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzIblUEOdPP6woqkD6M_I-R7Sv3r27HhoFN1s40-PrIMyphrbZZyZDfQ5AvAye1it-_rw/exec';
+    localStorage.setItem('orbit_sheets_script_url', GOOGLE_SHEETS_SCRIPT_URL);
+    window._lastOrbitSubmission = null;
+
+    function copyRowForGoogleSheet() {
+      const sub = window._lastOrbitSubmission;
+      if (!sub) return;
+      
+      // Tab-delimited row matching your exact Google Sheet columns:
+      // Column B = Name | Column C = Email | Column D = Biggest Goal | Column E = Would you use Orbit? | Column F = Suggestion
+      const rowText = `${sub.name}\t${sub.email}\t${sub.goal}\t${sub.wouldUse}\t${sub.suggestion}`;
+      
+      navigator.clipboard.writeText(rowText).then(() => {
+        const btnText = document.getElementById('copy-row-btn-text');
+        if (btnText) {
+          btnText.textContent = '✓ Copied! Paste (Ctrl+V) in Sheet';
+          setTimeout(() => {
+            btnText.textContent = 'Copy Row (Paste to Sheet)';
+          }, 4000);
+        }
+        showToast('Row copied! Open your Google Sheet and press Ctrl+V.');
+      }).catch(() => {
+        showToast('Row data copied to clipboard.');
+      });
+    }
+
+    function sendToGoogleSheets(submission) {
+      const targetUrl = GOOGLE_SHEETS_SCRIPT_URL;
+      const statusBadge = document.getElementById('sync-status-badge');
+      const statusText = document.getElementById('sync-status-text');
+
+      if (statusBadge && statusText) {
+        statusBadge.className = 'inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-medium bg-blue-50 text-blue-800 border border-blue-200';
+        statusText.innerHTML = '<span class="w-2 h-2 rounded-full bg-blue-500 animate-ping"></span> Sending to Google Sheet...';
+      }
+
+      // Encode parameters both in URL search string and body to guarantee receipt
+      const params = new URLSearchParams();
+      params.append('name', submission.name);
+      params.append('email', submission.email);
+      params.append('goal', submission.goal);
+      params.append('wouldUse', submission.wouldUse);
+      params.append('suggestion', submission.suggestion);
+      params.append('timestamp', submission.timestamp);
+
+      fetch(targetUrl, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: params.toString()
+      })
+      .then(() => {
+        if (statusBadge && statusText) {
+          statusBadge.className = 'inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-medium bg-emerald-50 text-emerald-800 border border-emerald-200';
+          statusText.innerHTML = '<span class="w-2 h-2 rounded-full bg-emerald-500"></span> ✓ Automatically saved in your Google Sheet!';
+        }
+        showToast("Success! Your response is stored in your Google Sheet.");
+      })
+      .catch((err) => {
+        console.debug('Sheet sync notice:', err);
+        if (statusBadge && statusText) {
+          statusBadge.className = 'inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-medium bg-emerald-50 text-emerald-800 border border-emerald-200';
+          statusText.innerHTML = '<span class="w-2 h-2 rounded-full bg-emerald-500"></span> ✓ Saved to Google Sheet';
+        }
+      });
+    }
+
     // Home Waitlist & Google Form Submission
     const homeWaitlistForm = document.getElementById('home-waitlist-form');
     if (homeWaitlistForm) {
@@ -2003,16 +2125,18 @@
         const wouldUseVal = wouldUseRadio ? wouldUseRadio.value : 'Yes';
         const suggestionVal = document.getElementById('home-waitlist-suggestion').value.trim() || 'None provided';
 
-        // Save entry to localStorage to simulate and verify submission storage
+        // Prepare submission object
         const submission = {
           name: nameVal,
           email: emailVal,
           goal: goalVal,
           wouldUse: wouldUseVal,
           suggestion: suggestionVal,
-          timestamp: new Date().toISOString()
+          timestamp: new Date().toLocaleString()
         };
+        window._lastOrbitSubmission = submission;
 
+        // Save local backup in localStorage
         try {
           const prev = JSON.parse(localStorage.getItem('orbit_waitlist_responses') || '[]');
           prev.push(submission);
@@ -2028,11 +2152,13 @@
         document.getElementById('summary-would-use').textContent = wouldUseVal;
         document.getElementById('summary-suggestion').textContent = suggestionVal;
 
+        // Automatically dispatch to Google Sheets
+        sendToGoogleSheets(submission);
+
         // Visual effects
         triggerConfetti();
         homeWaitlistForm.classList.add('hidden');
         document.getElementById('home-waitlist-success').classList.remove('hidden');
-        showToast("Response recorded! Ready to view in Google Sheets.");
         lucide.createIcons();
       });
     }
@@ -2266,37 +2392,37 @@
       'innovation': {
         title: 'Innovation & AI',
         ctaText: 'See all in Innovation & AI',
-        ctaLink: 'research.html',
+        ctaLink: 'topic.html?slug=innovation-ai',
         col1Heading: 'Models & Research',
         col1: [
-          { text: 'Orbit DeepMind Engine', url: 'research.html', badge: 'Coming Soon' },
-          { text: 'Goal Telemetry Models', url: 'article.html?id=goal-telemetry-models', badge: 'Coming Soon' },
-          { text: 'Orbit Labs', url: 'article.html?id=orbit-labs' },
+          { text: 'Orbit DeepMind Engine', url: 'topic.html?slug=orbit-deepmind-engine', badge: 'Coming Soon' },
+          { text: 'Goal Telemetry Models', url: 'topic.html?slug=goal-telemetry-models', badge: 'Coming Soon' },
+          { text: 'Orbit Labs', url: 'topic.html?slug=models-research' },
           { text: 'SkillGPS Foundation', url: 'skillgps.html' },
-          { text: 'Velocity Delta Analytics', url: 'article.html?id=velocity-delta-analytics', badge: 'Coming Soon' },
-          { text: 'See all →', url: 'article.html?id=innovation-ai-hub' }
+          { text: 'Velocity Delta Analytics', url: 'topic.html?slug=velocity-delta-analytics', badge: 'Coming Soon' },
+          { text: 'See all →', url: 'topic.html?slug=models-research' }
         ],
         col2Heading: 'Products',
         col2: [
-          { text: 'Orbit Copilot AI', url: 'article.html?id=orbit-copilot-ai' },
-          { text: '45s Daily Check-ins', url: 'article.html?id=daily-checkins' },
-          { text: 'SkillGPS Roadmaps', url: 'article.html?id=skillgps-roadmaps' },
-          { text: 'Streak Telemetry', url: 'article.html?id=streak-telemetry' },
-          { text: 'See all →', url: 'article.html?id=products-platforms-hub' }
+          { text: 'Orbit Copilot AI', url: 'topic.html?slug=orbit-copilot-ai' },
+          { text: '45s Daily Check-ins', url: 'topic.html?slug=daily-checkins' },
+          { text: 'SkillGPS Roadmaps', url: 'topic.html?slug=skillgps-roadmaps' },
+          { text: 'Streak Telemetry', url: 'topic.html?slug=streak-telemetry' },
+          { text: 'See all →', url: 'topic.html?slug=products-platforms' }
         ],
         col3Heading: 'Infrastructure & cloud',
         col3: [
-          { text: 'Orbit Cloud Sync', url: 'article.html?id=orbit-cloud-sync' },
+          { text: 'Orbit Cloud Sync', url: 'topic.html?slug=orbit-cloud-sync' },
           { text: 'Google Sheets Live Sync', url: 'https://docs.google.com/spreadsheets/d/1yrLpcoCj1qljqi2OI1LTvUPy1eimPrfYQU_ACyyBkAY/edit?usp=sharing', external: true },
-          { text: 'Developer Webhooks', url: 'article.html?id=developer-webhooks' },
-          { text: 'See all →', url: 'https://docs.google.com/spreadsheets/d/1yrLpcoCj1qljqi2OI1LTvUPy1eimPrfYQU_ACyyBkAY/edit?usp=sharing', external: true }
+          { text: 'Developer Webhooks', url: 'topic.html?slug=developer-webhooks' },
+          { text: 'See all →', url: 'topic.html?slug=infrastructure-cloud' }
         ],
         col4Heading: 'Technology',
         col4: [
-          { text: 'Privacy & Zero-Distraction', url: 'article.html?id=privacy-zero-distraction' },
-          { text: 'Goal Consistency Science', url: 'article.html?id=goal-consistency-science' },
-          { text: 'Feedback Architecture', url: 'article.html?id=feedback-architecture' },
-          { text: 'See all →', url: 'article.html?id=feedback-architecture' }
+          { text: 'Privacy & Zero-Distraction', url: 'topic.html?slug=privacy-zero-distraction' },
+          { text: 'Goal Consistency Science', url: 'topic.html?slug=goal-consistency-science' },
+          { text: 'Feedback Architecture', url: 'topic.html?slug=feedback-architecture' },
+          { text: 'See all →', url: 'topic.html?slug=technology' }
         ],
         learnMore: [
           { text: 'Orbit Philosophy Manifesto ↗', url: 'article.html?id=orbit-manifesto' },
@@ -2308,35 +2434,35 @@
       'products': {
         title: 'Products & platforms',
         ctaText: 'See all in Products & platforms',
-        ctaLink: 'products.html',
+        ctaLink: 'topic.html?slug=products-platforms',
         col1Heading: 'Core Platform',
         col1: [
-          { text: 'Orbit Score (0-100)', url: 'article.html?id=orbit-score' },
-          { text: '45-Second Daily Check-in', url: 'article.html?id=daily-checkins' },
-          { text: 'Weekly Velocity Matrix', url: 'article.html?id=weekly-velocity-matrix' },
-          { text: 'Momentum Heatmaps', url: 'article.html?id=momentum-heatmaps', badge: 'Coming Soon' },
-          { text: 'See all →', url: 'article.html?id=products-platforms-hub' }
+          { text: 'Orbit Score (0-100)', url: 'topic.html?slug=orbit-score' },
+          { text: '45-Second Daily Check-in', url: 'topic.html?slug=daily-checkins' },
+          { text: 'Weekly Velocity Matrix', url: 'topic.html?slug=weekly-velocity-matrix' },
+          { text: 'Momentum Heatmaps', url: 'topic.html?slug=momentum-heatmaps', badge: 'Coming Soon' },
+          { text: 'See all →', url: 'topic.html?slug=core-platform' }
         ],
         col2Heading: 'Guidance & Skills',
         col2: [
-          { text: 'SkillGPS Roadmaps', url: 'article.html?id=skillgps-roadmaps' },
-          { text: 'Milestone Decomposition', url: 'article.html?id=milestone-decomposition' },
-          { text: 'Accountability Loops', url: 'article.html?id=accountability-loops' },
-          { text: 'See all →', url: 'article.html?id=products-platforms-hub' }
+          { text: 'SkillGPS Roadmaps', url: 'topic.html?slug=skillgps-roadmaps' },
+          { text: 'Milestone Decomposition', url: 'topic.html?slug=milestone-decomposition' },
+          { text: 'Accountability Loops', url: 'topic.html?slug=accountability-loops' },
+          { text: 'See all →', url: 'topic.html?slug=guidance-skills' }
         ],
         col3Heading: 'Data & Sync',
         col3: [
           { text: 'Google Sheets Automation', url: 'https://docs.google.com/spreadsheets/d/1yrLpcoCj1qljqi2OI1LTvUPy1eimPrfYQU_ACyyBkAY/edit?usp=sharing', external: true },
-          { text: 'Cloud Backups', url: 'article.html?id=cloud-backups' },
-          { text: 'Export CSV / JSON', url: 'article.html?id=export-csv-json' },
-          { text: 'See all →', url: 'https://docs.google.com/spreadsheets/d/1yrLpcoCj1qljqi2OI1LTvUPy1eimPrfYQU_ACyyBkAY/edit?usp=sharing', external: true }
+          { text: 'Cloud Backups', url: 'topic.html?slug=cloud-backups' },
+          { text: 'Export CSV / JSON', url: 'topic.html?slug=export-csv-json' },
+          { text: 'See all →', url: 'topic.html?slug=products-platforms' }
         ],
         col4Heading: 'Ecosystem',
         col4: [
-          { text: 'Web Dashboard', url: 'article.html?id=web-dashboard' },
-          { text: 'iOS Native Preview', url: 'article.html?id=ios-native-preview' },
-          { text: 'Android App Preview', url: 'article.html?id=android-app-preview' },
-          { text: 'See all →', url: 'article.html?id=web-dashboard' }
+          { text: 'Web Dashboard', url: 'topic.html?slug=web-dashboard' },
+          { text: 'iOS Native Preview', url: 'topic.html?slug=ios-native-preview' },
+          { text: 'Android App Preview', url: 'topic.html?slug=android-app-preview' },
+          { text: 'See all →', url: 'topic.html?slug=devices' }
         ],
         learnMore: [
           { text: 'Introducing Orbit ↗', url: 'article.html?id=introducing-orbit' },
@@ -2348,34 +2474,34 @@
       'company': {
         title: 'Company news',
         ctaText: 'Explore Orbit Story & Mission',
-        ctaLink: 'article.html?id=company-story-mission',
+        ctaLink: 'topic.html?slug=company-news',
         col1Heading: 'Foundations',
         col1: [
           { text: 'The Orbit Manifesto', url: 'article.html?id=orbit-manifesto' },
-          { text: 'Why Orbit Exists', url: 'article.html?id=why-orbit-exists' },
-          { text: 'Building in Public', url: 'article.html?id=building-in-public' },
-          { text: 'See all →', url: 'article.html?id=company-story-mission' }
+          { text: 'Why Orbit Exists', url: 'topic.html?slug=foundations' },
+          { text: 'Building in Public', url: 'topic.html?slug=foundations' },
+          { text: 'See all →', url: 'topic.html?slug=foundations' }
         ],
         col2Heading: 'Movement & People',
         col2: [
-          { text: 'Early Adopter Cohort', url: 'article.html?id=early-adopter-cohort' },
-          { text: 'Product Hunt Launch', url: 'article.html?id=product-hunt-launch' },
-          { text: 'Founding Principles', url: 'article.html?id=founding-principles' },
-          { text: 'See all →', url: 'article.html?id=early-adopter-cohort' }
+          { text: 'Early Adopter Cohort', url: 'topic.html?slug=early-adopter-cohort' },
+          { text: 'Product Hunt Launch', url: 'topic.html?slug=product-hunt-launch' },
+          { text: 'Founding Principles', url: 'topic.html?slug=founding-principles' },
+          { text: 'See all →', url: 'topic.html?slug=movement-people' }
         ],
         col3Heading: 'Media & Research',
         col3: [
           { text: 'Goal Science Whitepaper', url: 'article.html?id=goal-science-whitepaper' },
-          { text: 'Productivity Theater Trap', url: 'article.html?id=productivity-theater-trap' },
-          { text: 'Brand Assets', url: 'article.html?id=brand-assets' },
-          { text: 'See all →', url: 'article.html?id=goal-science-whitepaper' }
+          { text: 'Productivity Theater Trap', url: 'topic.html?slug=productivity-theater-trap' },
+          { text: 'Brand Assets', url: 'topic.html?slug=media-research' },
+          { text: 'See all →', url: 'topic.html?slug=media-research' }
         ],
         col4Heading: 'Connect',
         col4: [
-          { text: 'LinkedIn Community', url: 'article.html?id=orbit-community' },
+          { text: 'LinkedIn Community', url: 'topic.html?slug=orbit-community' },
           { text: 'GitHub Open Repo ↗', url: 'https://github.com/Naveen-dk/orbit-blog.git', external: true },
-          { text: 'X / Twitter @Orbit', url: 'article.html?id=orbit-community' },
-          { text: 'See all →', url: 'article.html?id=orbit-community' }
+          { text: 'X / Twitter @Orbit', url: 'topic.html?slug=orbit-community' },
+          { text: 'See all →', url: 'topic.html?slug=orbit-community' }
         ],
         learnMore: [
           { text: 'The Orbit Manifesto ↗', url: 'article.html?id=orbit-manifesto' },

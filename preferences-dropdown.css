@@ -1,0 +1,170 @@
+/* =========================================================================
+   GOOGLE BLOG PREFERENCES DROPDOWN (blog.google Recreation)
+   Pixel-perfect Material 3 surface card, globe icon, and region selector
+   ========================================================================= */
+
+.nav-right {
+  position: relative;
+}
+
+.preferences-dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  width: 310px;
+  background: #ffffff;
+  border-radius: 24px;
+  border: 1px solid #dadce0;
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.12);
+  padding: 22px 20px;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px) scale(0.98);
+  transform-origin: top right;
+  transition: opacity 180ms cubic-bezier(0.2, 0, 0, 1),
+              transform 180ms cubic-bezier(0.2, 0, 0, 1),
+              visibility 180ms;
+}
+
+.preferences-dropdown.open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+.preferences-header {
+  font-family: 'Google Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: #1f1f1f;
+  margin-bottom: 14px;
+  letter-spacing: -0.01em;
+}
+
+/* Rounded Pill Selector */
+.preferences-pill {
+  width: 100%;
+  background: #f0f4f9;
+  border-radius: 18px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background-color 150ms ease, border-color 150ms ease;
+  font-family: 'Google Sans Text', 'Google Sans', -apple-system, sans-serif;
+  user-select: none;
+}
+
+.preferences-pill:hover {
+  background: #e8eaed;
+}
+
+.preferences-pill.active {
+  background: #e8f0fe;
+  border-color: #c2e7ff;
+}
+
+.preferences-pill-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.preferences-globe-icon {
+  width: 18px;
+  height: 18px;
+  color: #1f1f1f;
+  flex-shrink: 0;
+}
+
+.preferences-pill-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1f1f1f;
+  letter-spacing: -0.01em;
+}
+
+.preferences-chevron {
+  width: 16px;
+  height: 16px;
+  color: #444746;
+  transition: transform 200ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+.preferences-pill.active .preferences-chevron {
+  transform: rotate(180deg);
+}
+
+/* Expandable Regional Editions Menu */
+.preferences-options-menu {
+  max-height: 0;
+  overflow-y: auto;
+  opacity: 0;
+  transition: max-height 220ms cubic-bezier(0.2, 0, 0, 1),
+              opacity 180ms ease,
+              margin-top 180ms ease;
+  margin-top: 0;
+  border-radius: 16px;
+  scrollbar-width: thin;
+}
+
+.preferences-options-menu::-webkit-scrollbar {
+  width: 4px;
+}
+.preferences-options-menu::-webkit-scrollbar-thumb {
+  background: #dadce0;
+  border-radius: 4px;
+}
+
+.preferences-options-menu.open {
+  max-height: 220px;
+  opacity: 1;
+  margin-top: 8px;
+  background: #f8f9fa;
+  border: 1px solid #e0e3e7;
+  padding: 6px;
+}
+
+.preferences-option-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 12px;
+  border-radius: 12px;
+  font-size: 13.5px;
+  color: #1f1f1f;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  text-align: left;
+  transition: background-color 120ms ease, color 120ms ease;
+  font-family: inherit;
+}
+
+.preferences-option-item:hover {
+  background: #e8f0fe;
+  color: #0b57d0;
+}
+
+.preferences-option-item.selected {
+  font-weight: 600;
+  color: #0b57d0;
+  background: #e8f0fe;
+}
+
+.preferences-check-icon {
+  width: 14px;
+  height: 14px;
+  color: #0b57d0;
+}
+
+@media (max-width: 480px) {
+  .preferences-dropdown {
+    width: 280px;
+    right: -12px;
+  }
+}

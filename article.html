@@ -42,6 +42,18 @@
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
+  <!-- Article Modular Blocks CSS -->
+  <link rel="stylesheet" href="article-blocks.css">
+  <link rel="stylesheet" href="related-carousel.css">
+
+  <!-- Articles Dataset & Related Stories Carousel -->
+  <script src="articles.js"></script>
+  <script src="related-carousel.js"></script>
+
+  <!-- Preferences Dropdown (blog.google) -->
+  <link rel="stylesheet" href="preferences-dropdown.css">
+  <script src="preferences-dropdown.js"></script>
+
   <style>
     :root {
       --ease-google: cubic-bezier(0.2, 0, 0, 1);
@@ -405,6 +417,9 @@
 </head>
 <body class="bg-white text-[#1F1F1F]">
 
+  <!-- Top Viewport Reading Progress Scrubber Line -->
+  <div id="reading-progress" class="reading-progress"></div>
+
   <!-- Toast -->
   <div id="share-toast">
     <i data-lucide="check" class="w-4 h-4 text-emerald-400"></i>
@@ -493,7 +508,7 @@
       </ul>
     </div>
 
-    <!-- Right Controls: Search, More Options, Newsletter CTA -->
+    <!-- Right Controls: Search, Preferences Dropdown, Newsletter CTA -->
     <div class="nav-right">
       <button class="icon-btn" onclick="shareArticle()" aria-label="Share">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -502,13 +517,35 @@
         </svg>
       </button>
 
-      <button class="icon-btn" onclick="toggleMegaMenu('innovation')" aria-label="More options">
+      <!-- Three Dots Preferences Button (blog.google) -->
+      <button class="icon-btn" id="preferencesBtn" onclick="togglePreferencesDropdown(event)" aria-label="Preferences">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
           <circle cx="12" cy="5" r="2"></circle>
           <circle cx="12" cy="12" r="2"></circle>
           <circle cx="12" cy="19" r="2"></circle>
         </svg>
       </button>
+
+      <!-- Preferences Floating Card (blog.google recreation) -->
+      <div class="preferences-dropdown" id="preferencesDropdown">
+        <div class="preferences-header">Preferences</div>
+        <div class="preferences-pill" id="preferencesPill" onclick="toggleEditionMenu(event)">
+          <div class="preferences-pill-left">
+            <svg class="preferences-globe-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="2" y1="12" x2="22" y2="12"></line>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+            </svg>
+            <span class="preferences-pill-label" id="selectedEditionLabel">Global (English)</span>
+          </div>
+          <svg class="preferences-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </div>
+        <div class="preferences-options-menu" id="editionOptionsMenu">
+          <!-- Populated dynamically by preferences-dropdown.js -->
+        </div>
+      </div>
 
       <a href="index.html#waitlist" class="newsletter-btn">Newsletter</a>
     </div>
@@ -620,283 +657,77 @@
   </section>
 
   <!-- ========================================================================= -->
-  <!-- 4. ARTICLE BODY CONTENT & DEVICE MOCKUPS                                  -->
+  <!-- 4. ARTICLE BODY CONTENT & MODULAR BLOCKS                                  -->
   <!-- ========================================================================= -->
-  <article class="max-w-[820px] mx-auto px-6 py-14">
-    
-    <!-- Section 1 Headline & Paragraph -->
-    <h2 id="section1-heading" class="text-2xl md:text-[32px] font-display font-medium text-[#1F1F1F] leading-tight mb-6">
-      The Great Visibility Problem
-    </h2>
+  <div class="w-full">
+    <article id="article-root" class="article-container variant-editorial">
+      <!-- Injected via JavaScript renderArticle() -->
+    </article>
 
-    <div id="section1-body" class="text-[17px] md:text-[18px] text-[#3C4043] leading-[1.7] space-y-6 mb-12">
-      <!-- Injected via JavaScript -->
-    </div>
-
-    <!-- MOCKUP 1: Laptop Screen Mockup -->
-    <div class="my-14 rounded-[28px] bg-[#F8F9FA] border border-[#E0E3E7] p-4 sm:p-6 shadow-sm">
-      <div class="aspect-[16/10] rounded-[20px] overflow-hidden bg-[#EBF3FD] border border-slate-300 relative shadow-inner flex flex-col">
-        <!-- Mockup top bar -->
-        <div class="bg-white border-b border-slate-200 px-4 py-2.5 flex items-center justify-between text-xs text-slate-500">
-          <div class="flex items-center gap-2">
-            <span class="w-2.5 h-2.5 rounded-full bg-rose-400"></span>
-            <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
-            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
-            <span class="ml-2 font-mono text-[11px] text-slate-400">app.orbit.internal/telemetry</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <span class="px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200 font-semibold text-[10px] inline-flex items-center gap-1.5 shadow-xs">
-              <span class="w-1.5 h-1.5 rounded-full bg-blue-600 animate-pulse"></span>
-              Coming Soon • Part of Orbit's future vision
-            </span>
-            <span class="px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 font-medium text-[10px]">Active Trajectory</span>
-          </div>
-        </div>
-        <!-- Screen Content Graphic -->
-        <div class="flex-1 p-6 flex flex-col justify-between relative overflow-hidden bg-gradient-to-br from-[#F0F7FF] to-[#E2EEFE]">
-          <div class="max-w-md">
-            <div class="text-xs uppercase tracking-wider text-blue-700 font-bold mb-1 flex items-center gap-2">
-              <span>Orbit Console</span>
-              <span class="text-[9px] bg-white/80 border border-blue-200 text-blue-700 px-2 py-0.5 rounded-full font-medium">Goal Telemetry</span>
-            </div>
-            <h4 class="text-xl font-display font-bold text-slate-900">Weekly Goal Velocity Matrix</h4>
-            <p class="text-xs text-slate-600 mt-1">Real-time vector alignment answering: Am I getting closer?</p>
-          </div>
-
-          <div class="grid grid-cols-3 gap-3 my-4">
-            <div class="bg-white p-3 rounded-xl shadow-sm border border-blue-100">
-              <div class="text-[10px] text-slate-500 uppercase">Orbit Score</div>
-              <div class="text-2xl font-bold text-blue-600 font-mono">78</div>
-            </div>
-            <div class="bg-white p-3 rounded-xl shadow-sm border border-blue-100">
-              <div class="text-[10px] text-slate-500 uppercase">Consistency</div>
-              <div class="text-2xl font-bold text-emerald-600 font-mono">89%</div>
-            </div>
-            <div class="bg-white p-3 rounded-xl shadow-sm border border-blue-100">
-              <div class="text-[10px] text-slate-500 uppercase flex items-center justify-between">
-                <span>Velocity Delta</span>
-                <span class="text-[8px] bg-blue-50 text-blue-600 px-1.5 py-0.5 rounded font-semibold border border-blue-200">Coming Soon</span>
-              </div>
-              <div class="text-2xl font-bold text-sky-600 font-mono">+12%</div>
-            </div>
-          </div>
-
-          <div class="bg-white/80 p-3 rounded-xl border border-blue-100 text-xs text-slate-700 flex items-center justify-between">
-            <span>Milestone: Distributed System Architecture</span>
-            <span class="text-emerald-600 font-bold">Ahead by 5 days</span>
-          </div>
-        </div>
+    <!-- In-Article CTA Banner -->
+    <div class="max-w-[760px] mx-auto my-12 px-6">
+      <div class="p-8 md:p-10 rounded-[28px] bg-[#F0F4F9] border border-[#E0E3E7] text-center">
+        <h3 class="text-2xl font-display font-medium text-[#1F1F1F] mb-3">
+          Experience measurable progress with Orbit
+        </h3>
+        <p class="text-[15px] text-[#444746] max-w-lg mx-auto mb-6">
+          The future belongs to people who know where they're going. Orbit helps you stay on course.
+        </p>
+        <a href="index.html#waitlist" class="google-pill-btn google-pill-blue py-3 px-8 text-sm inline-flex items-center gap-2">
+          <span>Join Early Access</span>
+          <span>→</span>
+        </a>
       </div>
     </div>
-
-    <!-- Section 2 Headline & Paragraph -->
-    <h2 id="section2-heading" class="text-2xl md:text-[32px] font-display font-medium text-[#1F1F1F] leading-tight mb-6">
-      Tracking Trajectory Instead of Checklists
-    </h2>
-
-    <div id="section2-body" class="text-[17px] md:text-[18px] text-[#3C4043] leading-[1.7] space-y-6 mb-12">
-      <!-- Injected via JavaScript -->
-    </div>
-
-    <!-- MOCKUP 2: Centered Smartphone Mockup -->
-    <div class="my-16 flex flex-col items-center justify-center">
-      <div class="w-[310px] sm:w-[330px] rounded-[48px] bg-[#121316] p-3 shadow-2xl border-4 border-slate-700 relative">
-        <div class="w-20 h-4 bg-black rounded-full mx-auto mb-2 flex items-center justify-center">
-          <div class="w-2.5 h-2.5 rounded-full bg-slate-900 border border-slate-700"></div>
-        </div>
-
-        <div class="w-full rounded-[38px] bg-white overflow-hidden border border-slate-200 min-h-[480px] flex flex-col justify-between p-4 text-slate-900 shadow-inner">
-          <div>
-            <div class="flex items-center justify-between text-xs text-slate-500 pb-3 border-b border-slate-100 mb-4">
-              <span class="font-bold">9:41</span>
-              <div class="flex items-center gap-1.5">
-                <i data-lucide="wifi" class="w-3.5 h-3.5"></i>
-                <i data-lucide="battery" class="w-3.5 h-3.5"></i>
-              </div>
-            </div>
-
-            <div class="bg-blue-50/70 p-3.5 rounded-2xl border border-blue-100 mb-4">
-              <div class="flex items-center gap-2 text-xs font-semibold text-blue-700 mb-1">
-                <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
-                <span>45-Second Daily Check-in</span>
-              </div>
-              <p class="text-xs text-slate-700 font-medium">
-                "What progress did you make today toward your Full Stack milestone?"
-              </p>
-            </div>
-
-            <div class="bg-slate-100 p-3 rounded-2xl text-xs text-slate-800 leading-relaxed mb-3">
-              "Completed GraphQL API layer and wrote integration tests for payment webhooks."
-            </div>
-
-            <div class="bg-emerald-50 border border-emerald-200 p-3 rounded-2xl text-xs text-emerald-800 leading-relaxed">
-              <div class="font-bold mb-0.5">Orbit Copilot:</div>
-              "Momentum recorded. Trajectory remains ahead of schedule by 5 days. Recovery recommended tonight."
-            </div>
-          </div>
-
-          <div class="bg-slate-100 rounded-full px-3.5 py-2 flex items-center justify-between text-xs text-slate-500 mt-6">
-            <span>Ask a question...</span>
-            <i data-lucide="mic" class="w-4 h-4 text-slate-600"></i>
-          </div>
-        </div>
-      </div>
-      <div class="text-[11px] text-slate-400 mt-3 font-mono">Orbit Native iOS & Android Experience</div>
-    </div>
-
-    <!-- Section 3 Body & Movement Quote -->
-    <div id="section3-body" class="text-[17px] md:text-[18px] text-[#3C4043] leading-[1.7] space-y-6">
-      <!-- Injected via JavaScript -->
-    </div>
-
-    <!-- CTA Section inside Article -->
-    <div class="mt-14 p-8 md:p-10 rounded-[28px] bg-[#F0F4F9] border border-[#E0E3E7] text-center">
-      <h3 class="text-2xl font-display font-medium text-[#1F1F1F] mb-3">
-        Experience measurable progress with Orbit
-      </h3>
-      <p class="text-[15px] text-[#444746] max-w-lg mx-auto mb-6">
-        The future belongs to people who know where they're going. Orbit helps you stay on course.
-      </p>
-      <a href="index.html#waitlist" class="google-pill-btn google-pill-blue py-3 px-8 text-sm">
-        Join Early Access
-      </a>
-    </div>
-
-  </article>
+  </div>
 
   <!-- ========================================================================= -->
-  <!-- 5. "RELATED STORIES" CAROUSEL                                             -->
+  <!-- 5. "RELATED STORIES" HORIZONTAL CAROUSEL (Material 3 Organic Masks)       -->
   <!-- ========================================================================= -->
-  <section class="border-t border-[#E0E3E7] bg-[#FFFFFF] py-16">
-    <div class="max-w-[1400px] mx-auto px-6">
-      
-      <h2 class="text-3xl font-display font-medium text-[#1F1F1F] mb-8">
-        Related stories
-      </h2>
+  <!-- Material 3 Organic Shape Masks -->
+  <svg width="0" height="0" style="position: absolute; pointer-events: none;">
+    <defs>
+      <!-- Shape 1: 4-Lobed Clover -->
+      <clipPath id="orbit-shape-clover" clipPathUnits="objectBoundingBox">
+        <path d="M0.5,0.04 C0.65,0.04 0.72,0.14 0.84,0.14 C0.94,0.14 0.96,0.26 0.96,0.36 C0.96,0.48 0.88,0.5 0.88,0.5 C0.88,0.5 0.96,0.52 0.96,0.64 C0.96,0.74 0.94,0.86 0.84,0.86 C0.72,0.86 0.65,0.96 0.5,0.96 C0.35,0.96 0.28,0.86 0.16,0.86 C0.06,0.86 0.04,0.74 0.04,0.64 C0.04,0.52 0.12,0.5 0.12,0.5 C0.12,0.5 0.04,0.48 0.04,0.36 C0.04,0.26 0.06,0.14 0.16,0.14 C0.28,0.14 0.35,0.04 0.5,0.04 Z" />
+      </clipPath>
 
-      <!-- Related Stories Cards Row -->
-      <div id="related-carousel" class="flex gap-6 overflow-x-auto snap-x snap-mandatory no-scrollbar pb-6 scroll-smooth">
-        
-        <!-- Story 1 -->
-        <article class="flex-none w-[280px] sm:w-[320px] snap-start rounded-[24px] bg-[#F8F9FA] border border-[#E0E3E7] p-6 flex flex-col justify-between hover:shadow-md transition-all cursor-pointer group" onclick="switchArticle('why-most-goals-fail')">
-          <div>
-            <div class="aspect-[1/1] rounded-[20px] bg-[#E8F0FE] flex items-center justify-center mb-6 overflow-hidden relative">
-              <div class="w-24 h-24 rounded-full bg-blue-600 flex items-center justify-center text-white shadow-lg">
-                <i data-lucide="eye" class="w-10 h-10"></i>
-              </div>
-            </div>
-            <div class="text-[12px] text-[#5F6368] font-medium uppercase tracking-wider mb-2">Visibility</div>
-            <h3 class="text-lg font-display font-medium text-[#1F1F1F] leading-snug group-hover:text-[#0B57D0] transition-colors mb-3">
-              Why Most Goals Fail
-            </h3>
-          </div>
-          <div class="text-[12px] text-[#5F6368] pt-4 border-t border-slate-200">
-            By Orbit Philosophy
-          </div>
-        </article>
+      <!-- Shape 2: Soft Squircle -->
+      <clipPath id="orbit-shape-squircle" clipPathUnits="objectBoundingBox">
+        <path d="M0.5,0.03 C0.85,0.03 0.97,0.15 0.97,0.5 C0.97,0.85 0.85,0.97 0.5,0.97 C0.15,0.97 0.03,0.85 0.03,0.5 C0.03,0.15 0.15,0.03 0.5,0.03 Z" />
+      </clipPath>
 
-        <!-- Story 2 -->
-        <article class="flex-none w-[280px] sm:w-[320px] snap-start rounded-[24px] bg-[#F8F9FA] border border-[#E0E3E7] p-6 flex flex-col justify-between hover:shadow-md transition-all cursor-pointer group" onclick="switchArticle('problem-with-motivation')">
-          <div>
-            <div class="aspect-[1/1] rounded-[20px] bg-[#0F172A] flex items-center justify-center mb-6 overflow-hidden relative text-white">
-              <div class="w-24 h-24 rounded-full bg-blue-500/30 flex items-center justify-center text-blue-400 border border-blue-400">
-                <i data-lucide="flame" class="w-10 h-10"></i>
-              </div>
-            </div>
-            <div class="text-[12px] text-[#5F6368] font-medium uppercase tracking-wider mb-2">Consistency</div>
-            <h3 class="text-lg font-display font-medium text-[#1F1F1F] leading-snug group-hover:text-[#0B57D0] transition-colors mb-3">
-              The Problem With Motivation
-            </h3>
-          </div>
-          <div class="text-[12px] text-[#5F6368] pt-4 border-t border-slate-200">
-            By Orbit Systems
-          </div>
-        </article>
+      <!-- Shape 3: Scalloped Cloud -->
+      <clipPath id="orbit-shape-cloud" clipPathUnits="objectBoundingBox">
+        <path d="M0.5,0.02 C0.63,0.02 0.72,0.12 0.78,0.15 C0.9,0.21 0.98,0.34 0.98,0.5 C0.98,0.66 0.9,0.79 0.78,0.85 C0.72,0.88 0.63,0.98 0.5,0.98 C0.37,0.98 0.28,0.88 0.22,0.85 C0.1,0.79 0.02,0.66 0.02,0.5 C0.02,0.34 0.1,0.21 0.22,0.15 C0.28,0.12 0.37,0.02 0.5,0.02 Z" />
+      </clipPath>
 
-        <!-- Story 3 -->
-        <article class="flex-none w-[280px] sm:w-[320px] snap-start rounded-[24px] bg-[#F8F9FA] border border-[#E0E3E7] p-6 flex flex-col justify-between hover:shadow-md transition-all cursor-pointer group" onclick="switchArticle('we-dont-need-more-goals')">
-          <div>
-            <div class="aspect-[1/1] rounded-[20px] bg-[#FAF5FF] flex items-center justify-center mb-6 overflow-hidden relative">
-              <div class="w-24 h-24 rounded-full bg-purple-600 flex items-center justify-center text-white shadow-lg">
-                <i data-lucide="refresh-cw" class="w-10 h-10"></i>
-              </div>
-            </div>
-            <div class="text-[12px] text-[#5F6368] font-medium uppercase tracking-wider mb-2">Feedback Loops</div>
-            <h3 class="text-lg font-display font-medium text-[#1F1F1F] leading-snug group-hover:text-[#0B57D0] transition-colors mb-3">
-              We Don't Need More Goals
-            </h3>
-          </div>
-          <div class="text-[12px] text-[#5F6368] pt-4 border-t border-slate-200">
-            By Direction Systems
-          </div>
-        </article>
+      <!-- Shape 4: Rounded Diamond -->
+      <clipPath id="orbit-shape-diamond" clipPathUnits="objectBoundingBox">
+        <path d="M0.5,0.02 C0.68,0.02 0.98,0.32 0.98,0.5 C0.98,0.68 0.68,0.98 0.5,0.98 C0.32,0.98 0.02,0.68 0.02,0.5 C0.02,0.32 0.32,0.02 0.5,0.02 Z" />
+      </clipPath>
+    </defs>
+  </svg>
 
-        <!-- Story 4 -->
-        <article class="flex-none w-[280px] sm:w-[320px] snap-start rounded-[24px] bg-[#F8F9FA] border border-[#E0E3E7] p-6 flex flex-col justify-between hover:shadow-md transition-all cursor-pointer group" onclick="switchArticle('orbit-score')">
-          <div>
-            <div class="aspect-[1/1] rounded-[20px] bg-[#0B57D0] flex items-center justify-center mb-6 overflow-hidden relative text-white">
-              <div class="w-24 h-24 rounded-full bg-white/20 flex items-center justify-center text-white shadow-lg font-mono text-3xl font-bold">
-                78
-              </div>
-            </div>
-            <div class="text-[12px] text-[#5F6368] font-medium uppercase tracking-wider mb-2">Core Platform</div>
-            <h3 class="text-lg font-display font-medium text-[#1F1F1F] leading-snug group-hover:text-[#0B57D0] transition-colors mb-3">
-              The Orbit Score (0-100)
-            </h3>
-          </div>
-          <div class="text-[12px] text-[#5F6368] pt-4 border-t border-slate-200">
-            By Orbit Telemetry
-          </div>
-        </article>
+  <section class="orbit-related-section border-t border-[#E0E3E7] pt-12">
+    <h2 class="orbit-related-heading">Related stories</h2>
 
-        <!-- Story 5 -->
-        <article class="flex-none w-[280px] sm:w-[320px] snap-start rounded-[24px] bg-[#F8F9FA] border border-[#E0E3E7] p-6 flex flex-col justify-between hover:shadow-md transition-all cursor-pointer group" onclick="switchArticle('orbit-deepmind-engine')">
-          <div>
-            <div class="aspect-[1/1] rounded-[20px] bg-[#EEF2FF] flex items-center justify-center mb-6 overflow-hidden relative">
-              <div class="w-24 h-24 rounded-full bg-indigo-600 flex items-center justify-center text-white shadow-lg">
-                <i data-lucide="cpu" class="w-10 h-10"></i>
-              </div>
-            </div>
-            <div class="text-[12px] text-indigo-600 font-semibold uppercase tracking-wider mb-2">Coming Soon</div>
-            <h3 class="text-lg font-display font-medium text-[#1F1F1F] leading-snug group-hover:text-[#0B57D0] transition-colors mb-3">
-              Orbit DeepMind Engine
-            </h3>
-          </div>
-          <div class="text-[12px] text-[#5F6368] pt-4 border-t border-slate-200">
-            By Research Team
-          </div>
-        </article>
+    <div class="orbit-carousel-track" id="orbit-related-track">
+      <!-- Injected dynamically via initOrbitRelatedCarousel() -->
+    </div>
 
-        <!-- Story 6 -->
-        <article class="flex-none w-[280px] sm:w-[320px] snap-start rounded-[24px] bg-[#F8F9FA] border border-[#E0E3E7] p-6 flex flex-col justify-between hover:shadow-md transition-all cursor-pointer group" onclick="switchArticle('orbit-manifesto')">
-          <div>
-            <div class="aspect-[1/1] rounded-[20px] bg-[#E8F0FE] flex items-center justify-center mb-6 overflow-hidden relative">
-              <div class="w-24 h-24 rounded-full bg-blue-600 flex items-center justify-center text-white shadow-lg">
-                <i data-lucide="sparkles" class="w-10 h-10"></i>
-              </div>
-            </div>
-            <div class="text-[12px] text-[#5F6368] font-medium uppercase tracking-wider mb-2">Core Declaration</div>
-            <h3 class="text-lg font-display font-medium text-[#1F1F1F] leading-snug group-hover:text-[#0B57D0] transition-colors mb-3">
-              The Orbit Manifesto
-            </h3>
-          </div>
-          <div class="text-[12px] text-[#5F6368] pt-4 border-t border-slate-200">
-            By Orbit Founding Team
-          </div>
-        </article>
-
-      </div>
-
-      <!-- Controls under Related Stories -->
-      <div class="flex items-center gap-4 mt-6">
-        <button id="related-prev" class="circle-nav-btn" aria-label="Previous Related Story">
-          <i data-lucide="chevron-left" class="w-5 h-5"></i>
+    <div class="orbit-carousel-controls">
+      <div class="orbit-carousel-buttons">
+        <button class="orbit-nav-btn" id="orbit-prev-btn" aria-label="Previous stories" disabled>
+          ‹
         </button>
-        <button id="related-next" class="circle-nav-btn" aria-label="Next Related Story">
-          <i data-lucide="chevron-right" class="w-5 h-5"></i>
+        <button class="orbit-nav-btn" id="orbit-next-btn" aria-label="Next stories">
+          ›
         </button>
       </div>
-
+      <div class="orbit-progress-track">
+        <div class="orbit-progress-fill" id="orbit-progress-fill"></div>
+      </div>
     </div>
   </section>
 
@@ -934,37 +765,37 @@
       'innovation': {
         title: 'Innovation & AI',
         ctaText: 'See all in Innovation & AI',
-        ctaLink: 'research.html',
+        ctaLink: 'topic.html?slug=innovation-ai',
         col1Heading: 'Models & Research',
         col1: [
-          { text: 'Orbit DeepMind Engine', url: 'research.html', badge: 'Coming Soon' },
-          { text: 'Goal Telemetry Models', url: 'article.html?id=goal-telemetry-models', badge: 'Coming Soon' },
-          { text: 'Orbit Labs', url: 'article.html?id=orbit-labs' },
-          { text: 'SkillGPS Foundation', url: 'article.html?id=skillgps-foundation' },
-          { text: 'Velocity Delta Analytics', url: 'article.html?id=velocity-delta-analytics', badge: 'Coming Soon' },
-          { text: 'See all →', url: 'article.html?id=innovation-ai-hub' }
+          { text: 'Orbit DeepMind Engine', url: 'topic.html?slug=orbit-deepmind-engine', badge: 'Coming Soon' },
+          { text: 'Goal Telemetry Models', url: 'topic.html?slug=goal-telemetry-models', badge: 'Coming Soon' },
+          { text: 'Orbit Labs', url: 'topic.html?slug=models-research' },
+          { text: 'SkillGPS Foundation', url: 'skillgps.html' },
+          { text: 'Velocity Delta Analytics', url: 'topic.html?slug=velocity-delta-analytics', badge: 'Coming Soon' },
+          { text: 'See all →', url: 'topic.html?slug=models-research' }
         ],
         col2Heading: 'Products',
         col2: [
-          { text: 'Orbit Copilot AI', url: 'article.html?id=orbit-copilot-ai' },
-          { text: '45s Daily Check-ins', url: 'article.html?id=daily-checkins' },
-          { text: 'SkillGPS Roadmaps', url: 'article.html?id=skillgps-roadmaps' },
-          { text: 'Streak Telemetry', url: 'article.html?id=streak-telemetry' },
-          { text: 'See all →', url: 'article.html?id=products-platforms-hub' }
+          { text: 'Orbit Copilot AI', url: 'topic.html?slug=orbit-copilot-ai' },
+          { text: '45s Daily Check-ins', url: 'topic.html?slug=daily-checkins' },
+          { text: 'SkillGPS Roadmaps', url: 'topic.html?slug=skillgps-roadmaps' },
+          { text: 'Streak Telemetry', url: 'topic.html?slug=streak-telemetry' },
+          { text: 'See all →', url: 'topic.html?slug=products-platforms' }
         ],
         col3Heading: 'Infrastructure & cloud',
         col3: [
-          { text: 'Orbit Cloud Sync', url: 'article.html?id=orbit-cloud-sync' },
+          { text: 'Orbit Cloud Sync', url: 'topic.html?slug=orbit-cloud-sync' },
           { text: 'Google Sheets Live Sync', url: 'https://docs.google.com/spreadsheets/d/1yrLpcoCj1qljqi2OI1LTvUPy1eimPrfYQU_ACyyBkAY/edit?usp=sharing', external: true },
-          { text: 'Developer Webhooks', url: 'article.html?id=developer-webhooks' },
-          { text: 'See all →', url: 'https://docs.google.com/spreadsheets/d/1yrLpcoCj1qljqi2OI1LTvUPy1eimPrfYQU_ACyyBkAY/edit?usp=sharing', external: true }
+          { text: 'Developer Webhooks', url: 'topic.html?slug=developer-webhooks' },
+          { text: 'See all →', url: 'topic.html?slug=infrastructure-cloud' }
         ],
         col4Heading: 'Technology',
         col4: [
-          { text: 'Privacy & Zero-Distraction', url: 'article.html?id=privacy-zero-distraction' },
-          { text: 'Goal Consistency Science', url: 'article.html?id=goal-consistency-science' },
-          { text: 'Feedback Architecture', url: 'article.html?id=feedback-architecture' },
-          { text: 'See all →', url: 'article.html?id=feedback-architecture' }
+          { text: 'Privacy & Zero-Distraction', url: 'topic.html?slug=privacy-zero-distraction' },
+          { text: 'Goal Consistency Science', url: 'topic.html?slug=goal-consistency-science' },
+          { text: 'Feedback Architecture', url: 'topic.html?slug=feedback-architecture' },
+          { text: 'See all →', url: 'topic.html?slug=technology' }
         ],
         learnMore: [
           { text: 'Orbit Philosophy Manifesto ↗', url: 'article.html?id=orbit-manifesto' },
@@ -976,35 +807,35 @@
       'products': {
         title: 'Products & platforms',
         ctaText: 'See all in Products & platforms',
-        ctaLink: 'products.html',
+        ctaLink: 'topic.html?slug=products-platforms',
         col1Heading: 'Core Platform',
         col1: [
-          { text: 'Orbit Score (0-100)', url: 'article.html?id=orbit-score' },
-          { text: '45-Second Daily Check-in', url: 'article.html?id=daily-checkins' },
-          { text: 'Weekly Velocity Matrix', url: 'article.html?id=weekly-velocity-matrix' },
-          { text: 'Momentum Heatmaps', url: 'article.html?id=momentum-heatmaps', badge: 'Coming Soon' },
-          { text: 'See all →', url: 'article.html?id=products-platforms-hub' }
+          { text: 'Orbit Score (0-100)', url: 'topic.html?slug=orbit-score' },
+          { text: '45-Second Daily Check-in', url: 'topic.html?slug=daily-checkins' },
+          { text: 'Weekly Velocity Matrix', url: 'topic.html?slug=weekly-velocity-matrix' },
+          { text: 'Momentum Heatmaps', url: 'topic.html?slug=momentum-heatmaps', badge: 'Coming Soon' },
+          { text: 'See all →', url: 'topic.html?slug=core-platform' }
         ],
         col2Heading: 'Guidance & Skills',
         col2: [
-          { text: 'SkillGPS Roadmaps', url: 'article.html?id=skillgps-roadmaps' },
-          { text: 'Milestone Decomposition', url: 'article.html?id=milestone-decomposition' },
-          { text: 'Accountability Loops', url: 'article.html?id=accountability-loops' },
-          { text: 'See all →', url: 'article.html?id=products-platforms-hub' }
+          { text: 'SkillGPS Roadmaps', url: 'topic.html?slug=skillgps-roadmaps' },
+          { text: 'Milestone Decomposition', url: 'topic.html?slug=milestone-decomposition' },
+          { text: 'Accountability Loops', url: 'topic.html?slug=accountability-loops' },
+          { text: 'See all →', url: 'topic.html?slug=guidance-skills' }
         ],
         col3Heading: 'Data & Sync',
         col3: [
           { text: 'Google Sheets Automation', url: 'https://docs.google.com/spreadsheets/d/1yrLpcoCj1qljqi2OI1LTvUPy1eimPrfYQU_ACyyBkAY/edit?usp=sharing', external: true },
-          { text: 'Cloud Backups', url: 'article.html?id=cloud-backups' },
-          { text: 'Export CSV / JSON', url: 'article.html?id=export-csv-json' },
-          { text: 'See all →', url: 'https://docs.google.com/spreadsheets/d/1yrLpcoCj1qljqi2OI1LTvUPy1eimPrfYQU_ACyyBkAY/edit?usp=sharing', external: true }
+          { text: 'Cloud Backups', url: 'topic.html?slug=cloud-backups' },
+          { text: 'Export CSV / JSON', url: 'topic.html?slug=export-csv-json' },
+          { text: 'See all →', url: 'topic.html?slug=products-platforms' }
         ],
         col4Heading: 'Ecosystem',
         col4: [
-          { text: 'Web Dashboard', url: 'article.html?id=web-dashboard' },
-          { text: 'iOS Native Preview', url: 'article.html?id=ios-native-preview' },
-          { text: 'Android App Preview', url: 'article.html?id=android-app-preview' },
-          { text: 'See all →', url: 'article.html?id=web-dashboard' }
+          { text: 'Web Dashboard', url: 'topic.html?slug=web-dashboard' },
+          { text: 'iOS Native Preview', url: 'topic.html?slug=ios-native-preview' },
+          { text: 'Android App Preview', url: 'topic.html?slug=android-app-preview' },
+          { text: 'See all →', url: 'topic.html?slug=devices' }
         ],
         learnMore: [
           { text: 'Introducing Orbit ↗', url: 'article.html?id=introducing-orbit' },
@@ -1016,34 +847,34 @@
       'company': {
         title: 'Company news',
         ctaText: 'Explore Orbit Story & Mission',
-        ctaLink: 'article.html?id=company-story-mission',
+        ctaLink: 'topic.html?slug=company-news',
         col1Heading: 'Foundations',
         col1: [
           { text: 'The Orbit Manifesto', url: 'article.html?id=orbit-manifesto' },
-          { text: 'Why Orbit Exists', url: 'article.html?id=why-orbit-exists' },
-          { text: 'Building in Public', url: 'article.html?id=building-in-public' },
-          { text: 'See all →', url: 'article.html?id=company-story-mission' }
+          { text: 'Why Orbit Exists', url: 'topic.html?slug=foundations' },
+          { text: 'Building in Public', url: 'topic.html?slug=foundations' },
+          { text: 'See all →', url: 'topic.html?slug=foundations' }
         ],
         col2Heading: 'Movement & People',
         col2: [
-          { text: 'Early Adopter Cohort', url: 'article.html?id=early-adopter-cohort' },
-          { text: 'Product Hunt Launch', url: 'article.html?id=product-hunt-launch' },
-          { text: 'Founding Principles', url: 'article.html?id=founding-principles' },
-          { text: 'See all →', url: 'article.html?id=early-adopter-cohort' }
+          { text: 'Early Adopter Cohort', url: 'topic.html?slug=early-adopter-cohort' },
+          { text: 'Product Hunt Launch', url: 'topic.html?slug=product-hunt-launch' },
+          { text: 'Founding Principles', url: 'topic.html?slug=founding-principles' },
+          { text: 'See all →', url: 'topic.html?slug=movement-people' }
         ],
         col3Heading: 'Media & Research',
         col3: [
           { text: 'Goal Science Whitepaper', url: 'article.html?id=goal-science-whitepaper' },
-          { text: 'Productivity Theater Trap', url: 'article.html?id=productivity-theater-trap' },
-          { text: 'Brand Assets', url: 'article.html?id=brand-assets' },
-          { text: 'See all →', url: 'article.html?id=goal-science-whitepaper' }
+          { text: 'Productivity Theater Trap', url: 'topic.html?slug=productivity-theater-trap' },
+          { text: 'Brand Assets', url: 'topic.html?slug=media-research' },
+          { text: 'See all →', url: 'topic.html?slug=media-research' }
         ],
         col4Heading: 'Connect',
         col4: [
-          { text: 'LinkedIn Community', url: 'article.html?id=orbit-community' },
+          { text: 'LinkedIn Community', url: 'topic.html?slug=orbit-community' },
           { text: 'GitHub Open Repo ↗', url: 'https://github.com/Naveen-dk/orbit-blog.git', external: true },
-          { text: 'X / Twitter @Orbit', url: 'article.html?id=orbit-community' },
-          { text: 'See all →', url: 'article.html?id=orbit-community' }
+          { text: 'X / Twitter @Orbit', url: 'topic.html?slug=orbit-community' },
+          { text: 'See all →', url: 'topic.html?slug=orbit-community' }
         ],
         learnMore: [
           { text: 'The Orbit Manifesto ↗', url: 'article.html?id=orbit-manifesto' },
@@ -2242,36 +2073,138 @@
     };
 
     // =========================================================================
+    // MODULAR BLOCK RENDERER
+    // Supports: lead-paragraph, section-heading, feature-callout, showcase-grid,
+    //           related-article-card, stat-highlight, pull-quote, spec-grid, changelog-list
+    // =========================================================================
+    function renderBlock(block) {
+      if (!block) return '';
+      switch (block.type) {
+        case 'lead-paragraph':
+          return `<p class="block-lead-paragraph">${block.text || ''}</p>`;
+
+        case 'section-heading':
+          return `<h2 class="article-section-title">${block.text || ''}</h2>`;
+
+        case 'feature-callout':
+          return `
+            <div class="block-feature-callout">
+              <p>${block.lead ? `<strong>${block.lead}:</strong> ` : ''}${block.text || ''}</p>
+            </div>
+          `;
+
+        case 'showcase-grid':
+          const colsClass = block.columns === 3 ? 'cols-3' : 'cols-2';
+          const itemsHtml = (block.items || []).map(item => `
+            <div class="showcase-item">
+              ${item.src ? `<img src="${item.src}" alt="${item.alt || ''}" class="showcase-img" loading="lazy">` : ''}
+              ${item.caption ? `<div class="showcase-caption">${item.caption}</div>` : ''}
+            </div>
+          `).join('');
+          return `<div class="block-showcase-grid ${colsClass}">${itemsHtml}</div>`;
+
+        case 'related-article-card':
+        case 'related-card':
+          return `
+            <a href="${block.href || '#'}" class="block-related-card">
+              <div class="related-card-content">
+                <span class="related-card-eyebrow">${block.eyebrow || 'Related Article'}</span>
+                <h4 class="related-card-title">${block.title || ''}</h4>
+                ${block.summary ? `<p class="related-card-summary">${block.summary}</p>` : ''}
+                <span class="related-card-cta">See more →</span>
+              </div>
+              ${block.thumbnail ? `
+                <img src="${block.thumbnail}" alt="${block.title || ''}" class="related-card-thumb" loading="lazy">
+              ` : ''}
+            </a>
+          `;
+
+        case 'stat-highlight':
+          return `
+            <div class="block-stat-highlight">
+              <div class="stat-number">${block.stat || block.value || ''}</div>
+              <div class="stat-text">
+                ${block.label ? `<strong>${block.label}</strong><br>` : ''}
+                ${block.description || block.desc || ''}
+              </div>
+            </div>
+          `;
+
+        case 'pull-quote':
+          return `
+            <blockquote class="block-pull-quote">
+              “${block.quote || block.text || ''}”
+              ${block.author ? `<div class="text-sm text-[#5F6368] font-normal mt-2">— ${block.author}</div>` : ''}
+            </blockquote>
+          `;
+
+        case 'spec-grid':
+          const specItems = (block.items || []).map(it => `
+            <div class="spec-card">
+              <span class="spec-label">${it.label || ''}</span>
+              <h5 class="spec-value">${it.value || ''}</h5>
+              ${it.desc ? `<p class="spec-desc">${it.desc}</p>` : ''}
+            </div>
+          `).join('');
+          return `<div class="block-spec-grid">${specItems}</div>`;
+
+        case 'changelog-list':
+          const logItems = (block.items || []).map(it => `
+            <li class="changelog-item">
+              ${it.badge ? `<span class="changelog-badge badge-${(it.badgeType || 'feature').toLowerCase()}">${it.badge}</span>` : ''}
+              <div class="changelog-item-body">
+                <strong>${it.title || ''}</strong>
+                ${it.description ? `<p>${it.description}</p>` : ''}
+              </div>
+            </li>
+          `).join('');
+          return `
+            <div class="block-changelog">
+              ${block.version ? `<div class="changelog-version-header"><span>Version ${block.version}</span> • <span>${block.date || ''}</span></div>` : ''}
+              <ul class="changelog-list">${logItems}</ul>
+            </div>
+          `;
+
+        case 'paragraph':
+        case 'text':
+        default:
+          return `<p class="text-[17px] md:text-[18px] text-[#3C4043] leading-[1.7] my-5">${block.text || ''}</p>`;
+      }
+    }
+
+    // =========================================================================
     // DYNAMIC ARTICLE RENDERER
     // =========================================================================
     function getArticleId() {
       const urlParams = new URLSearchParams(window.location.search);
-      return urlParams.get('id') || 'why-most-goals-fail';
+      return urlParams.get('slug') || urlParams.get('id') || 'why-most-goals-fail';
     }
 
     function renderArticle(id) {
-      if (id === 'orbit-deepmind-engine') {
-        window.location.replace('research.html');
-        return;
+      // Check window.ORBIT_ARTICLES first, fallback to legacy ARTICLES
+      const allArticles = window.ORBIT_ARTICLES || {};
+      let art = allArticles[id] || (typeof ARTICLES !== 'undefined' ? ARTICLES[id] : null);
+
+      if (!art) {
+        art = allArticles['why-most-goals-fail'] || (typeof ARTICLES !== 'undefined' ? ARTICLES['why-most-goals-fail'] : null);
       }
-      if (id === 'skillgps-foundation') {
-        window.location.replace('skillgps.html');
-        return;
-      }
-      const art = ARTICLES[id] || ARTICLES['why-most-goals-fail'];
-      
+      if (!art) return;
+
+      const variant = art.layoutVariant || 'editorial';
+
+      // Metadata & Headers
       document.getElementById('page-head-title').textContent = `${art.title} — News from Orbit`;
       document.getElementById('sticky-title').textContent = art.title;
       document.getElementById('article-headline').textContent = art.title;
-      document.getElementById('article-deck').textContent = art.deck;
-      document.getElementById('article-date').textContent = art.date;
-      document.getElementById('article-readtime').textContent = art.readTime;
-      document.getElementById('article-author-name').textContent = art.author;
-      document.getElementById('article-author-role').textContent = art.role;
-      document.getElementById('bread-category').textContent = art.category;
-      document.getElementById('bread-subcategory').textContent = art.subcategory;
+      document.getElementById('article-deck').textContent = art.deck || '';
+      document.getElementById('article-date').textContent = art.date || '';
+      document.getElementById('article-readtime').textContent = art.readTime || '';
+      document.getElementById('article-author-name').textContent = art.author || 'Orbit Team';
+      document.getElementById('article-author-role').textContent = art.role || 'Contributor';
+      document.getElementById('bread-category').textContent = art.category || 'Movement Essays';
+      document.getElementById('bread-subcategory').textContent = art.subcategory || 'Core Movement';
 
-      // Handle Coming Soon Badge
+      // Coming Soon Badge
       const badgeEl = document.getElementById('future-badge');
       if (art.isComingSoon) {
         badgeEl.classList.remove('hidden');
@@ -2279,11 +2212,54 @@
         badgeEl.classList.add('hidden');
       }
 
-      document.getElementById('section1-heading').textContent = art.section1Heading;
-      document.getElementById('section1-body').innerHTML = art.section1;
-      document.getElementById('section2-heading').textContent = art.section2Heading;
-      document.getElementById('section2-body').innerHTML = art.section2;
-      document.getElementById('section3-body').innerHTML = art.section3;
+      // Render Article Root & Layout Variant
+      const articleRoot = document.getElementById('article-root');
+      if (articleRoot) {
+        articleRoot.className = `article-container variant-${variant}`;
+
+        if (art.blocks && Array.isArray(art.blocks) && art.blocks.length > 0) {
+          let html = '';
+          if (variant === 'feature-drop' && art.heroImage) {
+            html += `
+              <div class="mb-10 rounded-[24px] overflow-hidden shadow-sm border border-[#E0E3E7]">
+                <img src="${art.heroImage}" alt="${art.title}" class="w-full h-auto max-h-[500px] object-cover" loading="eager">
+              </div>
+            `;
+          }
+          html += art.blocks.map(renderBlock).join('');
+          articleRoot.innerHTML = html;
+        } else {
+          // Graceful fallback for legacy 3-section articles
+          let fallbackHtml = '';
+          if (art.section1Heading) {
+            fallbackHtml += `<h2 class="article-section-title">${art.section1Heading}</h2>`;
+          }
+          if (art.section1) {
+            fallbackHtml += `<div class="space-y-6 my-6 text-[17px] md:text-[18px] text-[#3C4043] leading-[1.7]">${art.section1}</div>`;
+          }
+          if (art.section2Heading) {
+            fallbackHtml += `<h2 class="article-section-title">${art.section2Heading}</h2>`;
+          }
+          if (art.section2) {
+            fallbackHtml += `<div class="space-y-6 my-6 text-[17px] md:text-[18px] text-[#3C4043] leading-[1.7]">${art.section2}</div>`;
+          }
+          if (art.section3) {
+            fallbackHtml += `<div class="space-y-6 my-6 text-[17px] md:text-[18px] text-[#3C4043] leading-[1.7]">${art.section3}</div>`;
+          }
+          articleRoot.innerHTML = fallbackHtml;
+        }
+      }
+
+      // Reset scroll progress bars
+      const topBar = document.getElementById('reading-progress');
+      const stickyBarProgress = document.getElementById('reading-progress-bar');
+      if (topBar) topBar.style.width = '0%';
+      if (stickyBarProgress) stickyBarProgress.style.width = '0%';
+
+      // Initialize/Refresh Related Stories Carousel excluding this article
+      if (typeof initOrbitRelatedCarousel === 'function') {
+        initOrbitRelatedCarousel(id);
+      }
 
       lucide.createIcons();
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -2394,19 +2370,28 @@
     const stickyBar = document.getElementById('sticky-reading-bar');
     const progressBar = document.getElementById('reading-progress-bar');
 
+    let scrollTicking = false;
     window.addEventListener('scroll', () => {
-      const scrollY = window.scrollY;
-      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (!scrollTicking) {
+        window.requestAnimationFrame(() => {
+          const scrollY = window.scrollY;
+          const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
 
-      if (scrollY > 280) {
-        stickyBar.classList.add('visible');
-      } else {
-        stickyBar.classList.remove('visible');
-      }
+          if (scrollY > 280) {
+            stickyBar.classList.add('visible');
+          } else {
+            stickyBar.classList.remove('visible');
+          }
 
-      if (totalHeight > 0) {
-        const pct = Math.min(100, Math.max(0, (scrollY / totalHeight) * 100));
-        progressBar.style.width = pct + '%';
+          if (totalHeight > 0) {
+            const pct = Math.min(100, Math.max(0, (scrollY / totalHeight) * 100));
+            progressBar.style.width = pct + '%';
+            const topBar = document.getElementById('reading-progress');
+            if (topBar) topBar.style.width = pct + '%';
+          }
+          scrollTicking = false;
+        });
+        scrollTicking = true;
       }
     }, { passive: true });
 
@@ -2426,14 +2411,6 @@
         setTimeout(() => toast.classList.remove('show'), 3000);
       }
     }
-
-    const relCarousel = document.getElementById('related-carousel');
-    document.getElementById('related-prev').addEventListener('click', () => {
-      relCarousel.scrollBy({ left: -340, behavior: 'smooth' });
-    });
-    document.getElementById('related-next').addEventListener('click', () => {
-      relCarousel.scrollBy({ left: 340, behavior: 'smooth' });
-    });
 
     // Listen to browser forward/back buttons
     window.addEventListener('popstate', () => {
